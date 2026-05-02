@@ -3277,6 +3277,47 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@ksairi-org/react-hooks@npm:^0.1.1":
+  version: 0.1.1
+  resolution: "@ksairi-org/react-hooks@npm:0.1.1"
+  peerDependencies:
+    react: "*"
+  checksum: 10c0/1f03521508f1851deeddbc69377bba7d9e50b7120d9ba38565c69cd468bcd34e271b2b4d1874ec71417ca13742206004356a81eb8a6c59245ff7289293a3437f
+  languageName: node
+  linkType: hard
+
+"@ksairi-org/react-native-functions@npm:^0.1.1":
+  version: 0.1.1
+  resolution: "@ksairi-org/react-native-functions@npm:0.1.1"
+  peerDependencies:
+    react-native: "*"
+    react-native-reanimated: "*"
+  checksum: 10c0/fbaafd597e5732d932f93b0a2c5fa4804e1a4431fa88bdd4fbfb9fb36570efec5ed632f686ffb5159fd06a8deb29aaf3cdac6de565fa813a4e3ed0943a3cb13e
+  languageName: node
+  linkType: hard
+
+"@ksairi-org/react-native-hooks@npm:^0.1.1":
+  version: 0.1.1
+  resolution: "@ksairi-org/react-native-hooks@npm:0.1.1"
+  peerDependencies:
+    "@react-native-community/netinfo": "*"
+    react: "*"
+    react-native: "*"
+  checksum: 10c0/1b5a3e93cdf17baf29557a2320a605f079dc658cb6509442c78633b723f374b18281e3e9e000c821538b5c7f78ed36f2ae72cb25ccaaf3b60c175f9bc3586ed3
+  languageName: node
+  linkType: hard
+
+"@ksairi-org/react-native-ui-config@npm:^0.1.1":
+  version: 0.1.1
+  resolution: "@ksairi-org/react-native-ui-config@npm:0.1.1"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+    tamagui: "*"
+  checksum: 10c0/1bcb5bdea96e52ce780982b599e4c7f84eb98e16adaba00488c71cd9f40a5665639768e02d25699c58a6556cac8a9f2980342af6e812a7245d45fde3e9031ff9
+  languageName: node
+  linkType: hard
+
 "@ksairi-org/react-query-sdk@npm:^0.1.1":
   version: 0.1.1
   resolution: "@ksairi-org/react-query-sdk@npm:0.1.1"
@@ -3288,9 +3329,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ksairi-org/ui-button-animated@npm:^0.1.2":
-  version: 0.1.2
-  resolution: "@ksairi-org/ui-button-animated@npm:0.1.2"
+"@ksairi-org/ui-button-animated@npm:^0.1.5":
+  version: 0.1.5
+  resolution: "@ksairi-org/ui-button-animated@npm:0.1.5"
   peerDependencies:
     "@ksairi-org/react-native-ui-config": "*"
     "@ksairi-org/ui-touchables": "*"
@@ -3298,42 +3339,43 @@ __metadata:
     react-native: "*"
     react-native-reanimated: "*"
     tamagui: "*"
-  checksum: 10c0/6b4372a2e75bce9ddbbab56042788ac31de777afd6cd0186f4d62be4d31c823e0279807500d7eb0781b2567873a81389daebe9f544e21857bd69c0344745dd21
+  checksum: 10c0/2d3c9751e4ac0385db279f6c25ede2e5e9f0bf2e1ca28eadcfa2db8cba2478b0ed7410a3c1b2fcd2bbba477af243cd56cdb8e8330042ca26b270889e7973bf37
   languageName: node
   linkType: hard
 
-"@ksairi-org/ui-button@npm:^0.1.4":
-  version: 0.1.4
-  resolution: "@ksairi-org/ui-button@npm:0.1.4"
+"@ksairi-org/ui-button@npm:^0.1.9":
+  version: 0.1.9
+  resolution: "@ksairi-org/ui-button@npm:0.1.9"
   peerDependencies:
     react: "*"
     react-native: "*"
     tamagui: "*"
-  checksum: 10c0/133695e25f0ebd4b155941d81e3e90c0c71c03dfe0cb801cf5ac10b31682d80f6b6ace88bd7fb6b550b2f450fba021b8feb991f160fc9b582de5b74604fa3443
+  checksum: 10c0/95ef99c51b87bb38072d5b0046bcfa076e645b74ae29424ce789cf70d1a5501c50cf789f7eeed4bdeb017bdad1c5180a0009b9be1216c4718a1fc3d1ec540238
   languageName: node
   linkType: hard
 
-"@ksairi-org/ui-containers@npm:^0.1.4":
-  version: 0.1.4
-  resolution: "@ksairi-org/ui-containers@npm:0.1.4"
+"@ksairi-org/ui-containers@npm:^0.1.10":
+  version: 0.1.10
+  resolution: "@ksairi-org/ui-containers@npm:0.1.10"
   peerDependencies:
     react: "*"
     react-native: "*"
     react-native-keyboard-controller: "*"
     react-native-safe-area-context: "*"
     tamagui: "*"
-  checksum: 10c0/14339a11f042d81e7ec1b136be1d399f93d4b2cdcbfe209aaf520d64c2368082f8bc2e79ed652739828bdcef01f2d18ff8217cdc8b100a3d6e95ad10e4660f53
+  checksum: 10c0/d4ba643241bb1857bf3384e75010e317b9b2a32a088bcaa5457faf0ab36a71b1bf94046dd9cda59ec7924528d6abfcf2165033a732095071a7b780358cbf8d53
   languageName: node
   linkType: hard
 
-"@ksairi-org/ui-touchables@npm:^0.1.2":
-  version: 0.1.2
-  resolution: "@ksairi-org/ui-touchables@npm:0.1.2"
+"@ksairi-org/ui-touchables@npm:^0.1.4":
+  version: 0.1.4
+  resolution: "@ksairi-org/ui-touchables@npm:0.1.4"
   peerDependencies:
+    "@ksairi-org/react-native-hooks": "*"
     react: "*"
     react-native: "*"
     tamagui: "*"
-  checksum: 10c0/61cb4a54ab065059e480b554f5195b6c40d11075ce26c1a000e364373b02c13070363af2e16b3e0944af8972d2233f1acad735f64f1c9045f046a56dbcd7a6ec
+  checksum: 10c0/47251909b7091653dc40c514e1011ab09fcc14ca05fc6bb42e7674f38943016239604aef3cc242f85fe39080156fdedc840ccac6eaab8856702b02db777175a9
   languageName: node
   linkType: hard
 
@@ -4168,6 +4210,26 @@ __metadata:
     "@types/react":
       optional: true
   checksum: 10c0/9f98fdaba008dfc58050de60a77670b885792df473cf82c1cef8daee919a5dd5a77d270209f5f0b0abfaac78cb1627396e3ff56c81b735be550409426fe8b040
+  languageName: node
+  linkType: hard
+
+"@react-native-community/hooks@npm:^3.0.0":
+  version: 3.1.0
+  resolution: "@react-native-community/hooks@npm:3.1.0"
+  peerDependencies:
+    react: ">=17.0.2"
+    react-native: ">=0.65"
+  checksum: 10c0/937a1a0677796203839563b8086a96ff73b5171b16816bacac297695ac053253becfde33ea256c8e00998d1f0a3a7eff0185c1787a614ac1cecb10e7af156a69
+  languageName: node
+  linkType: hard
+
+"@react-native-community/netinfo@npm:^11.4.1":
+  version: 11.5.2
+  resolution: "@react-native-community/netinfo@npm:11.5.2"
+  peerDependencies:
+    react: "*"
+    react-native: ">=0.59"
+  checksum: 10c0/d5301d7d8b363753b6980f5d17dc47ad4933fc46e4010aceb937c0f673b35a6648f259df930b2b48d99344a90ff7a187344486100c4874462d88545f1647bef5
   languageName: node
   linkType: hard
 
@@ -14523,16 +14585,22 @@ __metadata:
     "@commitlint/config-conventional": "npm:^20.5.0"
     "@expo/log-box": "npm:^55.0.11"
     "@expo/vector-icons": "npm:^15.0.3"
+    "@ksairi-org/react-hooks": "npm:^0.1.1"
+    "@ksairi-org/react-native-functions": "npm:^0.1.1"
+    "@ksairi-org/react-native-hooks": "npm:^0.1.1"
+    "@ksairi-org/react-native-ui-config": "npm:^0.1.1"
     "@ksairi-org/react-query-sdk": "npm:^0.1.1"
-    "@ksairi-org/ui-button": "npm:^0.1.4"
-    "@ksairi-org/ui-button-animated": "npm:^0.1.2"
-    "@ksairi-org/ui-containers": "npm:^0.1.4"
-    "@ksairi-org/ui-touchables": "npm:^0.1.2"
+    "@ksairi-org/ui-button": "npm:^0.1.9"
+    "@ksairi-org/ui-button-animated": "npm:^0.1.5"
+    "@ksairi-org/ui-containers": "npm:^0.1.10"
+    "@ksairi-org/ui-touchables": "npm:^0.1.4"
     "@lingui/cli": "npm:^6.0.0"
     "@lingui/core": "npm:^6.0.0"
     "@lingui/format-po": "npm:^6.0.0"
     "@lingui/macro": "npm:^5.9.5"
     "@lingui/react": "npm:^6.0.0"
+    "@react-native-community/hooks": "npm:^3.0.0"
+    "@react-native-community/netinfo": "npm:^11.4.1"
     "@react-native-firebase/analytics": "npm:^24.0.0"
     "@react-native-firebase/app": "npm:^24.0.0"
     "@react-native-firebase/messaging": "npm:^24.0.0"

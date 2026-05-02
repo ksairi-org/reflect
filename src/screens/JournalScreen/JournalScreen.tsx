@@ -119,7 +119,7 @@ export default function JournalScreen() {
             onPress={handleSave}
             disabled={!hasContent}
             loading={createMutation.isPending}
-            backgroundColor={hasContent ? '$accentBackground' : '$color3'}
+            background={hasContent ? '$accentBackground' : '$color3'}
             pressStyle={{ opacity: 0.75 }}
             borderRadius="$4"
             mb="$8">
