@@ -1,35 +1,38 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
-
-import { HapticTab } from '@/components/haptic-tab';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Colors } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
+import { Tabs } from 'expo-router'
+import React from 'react'
+import { HapticTab } from '@atoms'
+import { IconSymbol } from '@atoms'
+import { useTheme } from 'tamagui'
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
+  const theme = useTheme()
 
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+        tabBarActiveTintColor: theme.accentBackground.val,
+        tabBarInactiveTintColor: theme.color8.val,
+        tabBarStyle: {
+          backgroundColor: theme.color1.val,
+          borderTopColor: theme.borderColor.val,
+        },
         headerShown: false,
         tabBarButton: HapticTab,
       }}>
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+          title: 'Journal',
+          tabBarIcon: ({ color }) => <IconSymbol size={26} name="pencil.and.outline" color={color} />,
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="reflections"
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+          title: 'Reflections',
+          tabBarIcon: ({ color }) => <IconSymbol size={26} name="books.vertical.fill" color={color} />,
         }}
       />
     </Tabs>
-  );
+  )
 }

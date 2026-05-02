@@ -1,0 +1,8 @@
+{
+  "languages": [
+    {
+      "language": "typescript",
+      "command": ["./node_modules/.bin/typescript-language-server", "--stdio"]
+    }
+  ]
+}

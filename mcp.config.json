@@ -1,0 +1,32 @@
+{
+  "doppler": {
+    "project": "mobile",
+    "config": "stg"
+  },
+  "database": {
+    "schema": "api"
+  },
+  "components": {
+    "atoms": "src/components/atoms",
+    "molecules": "src/components/molecules",
+    "organisms": "src/components/organisms",
+    "screens": "src/screens"
+  },
+  "libs": [],
+  "router": "expo-router",
+  "routesDir": "app",
+  "orval": {
+    "sdkLib": "src/api/generated"
+  },
+  "i18n": {
+    "localesDir": "src/i18n/locales",
+    "sourceLocale": "en",
+    "targetLocales": ["es"],
+    "sourceGlobs": [],
+    "catalogFormat": "po"
+  },
+  "firebase": {
+    "serviceAccountPath": "./firebase-service-account.json",
+    "deviceTokensTable": "device_tokens"
+  }
+}

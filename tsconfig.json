@@ -2,10 +2,36 @@
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
     "strict": true,
+    "types": ["node"],
+    "typeRoots": ["./node_modules/@types"],
+    "rootDir": ".",
+    "baseUrl": ".",
+    "ignoreDeprecations": "5.0",
     "paths": {
-      "@/*": [
-        "./*"
-      ]
+      "@/*": ["./*"],
+      "@default-tamagui-config": ["src/theme/tamagui.config.ts"],
+      "@screens": ["src/screens/index.ts"],
+      "@screens/*": ["src/screens/*"],
+      "@utils": ["src/utils/index.ts"],
+      "@utils/*": ["src/utils/*"],
+      "@atoms": ["src/components/atoms/index.ts"],
+      "@atoms/*": ["src/components/atoms/*"],
+      "@molecules": ["src/components/molecules/index.ts"],
+      "@molecules/*": ["src/components/molecules/*"],
+      "@organisms": ["src/components/organisms/index.ts"],
+      "@organisms/*": ["src/components/organisms/*"],
+      "@theme": ["src/theme/index.ts"],
+      "@theme/*": ["src/theme/*"],
+      "@analytics": ["src/services/analytics/index.ts"],
+      "@firebase-messaging": ["src/services/firebase-messaging/index.ts"],
+      "@stores": ["src/stores/index.ts"],
+      "@stores/*": ["src/stores/*"],
+      "@constants": ["src/constants/index.ts"],
+      "@constants/*": ["src/constants/*"],
+      "@hooks": ["src/hooks/index.ts"],
+      "@hooks/*": ["src/hooks/*"],
+      "@i18n": ["src/i18n/index.ts"],
+      "@i18n/*": ["src/i18n/*"]
     }
   },
   "include": [
