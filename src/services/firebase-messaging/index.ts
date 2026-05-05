@@ -1,4 +1,10 @@
-import { getMessaging, AuthorizationStatus } from '@react-native-firebase/messaging'
+import {
+  getMessaging,
+  AuthorizationStatus,
+  requestPermission,
+  getToken,
+  onMessage,
+} from '@react-native-firebase/messaging'
 import { getApp } from '@react-native-firebase/app'
 import * as ExpoNotifications from 'expo-notifications'
 
@@ -18,29 +24,29 @@ export async function requestNotificationPermission(): Promise<boolean> {
   const { status } = await ExpoNotifications.requestPermissionsAsync()
   if (status !== 'granted') return false
 
-  const authStatus = await messaging.requestPermission()
-  const enabled =
+  const authStatus = await requestPermission(messaging)
+  return (
     authStatus === AuthorizationStatus.AUTHORIZED ||
     authStatus === AuthorizationStatus.PROVISIONAL
-  return enabled
+  )
 }
 
 export async function getFCMToken(): Promise<string | null> {
   try {
-    const token = await messaging.getToken()
-    return token
+    return await getToken(messaging)
   } catch {
     return null
   }
 }
 
 export function subscribeToForegroundMessages(
-  onMessage: (title: string, body: string) => void,
+  onMessageCallback: (title: string, body: string) => void,
 ): () => void {
-  return messaging.onMessage(async remoteMessage => {
-    const title = remoteMessage.notification?.title ?? 'Reflect'
-    const body = remoteMessage.notification?.body ?? ''
-    onMessage(title, body)
+  return onMessage(messaging, async remoteMessage => {
+    onMessageCallback(
+      remoteMessage.notification?.title ?? 'Reflect',
+      remoteMessage.notification?.body ?? '',
+    )
   })
 }
 
