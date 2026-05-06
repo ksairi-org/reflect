@@ -12,9 +12,9 @@ const tamaguiConfig = createTamagui({
   tokens: createTokens({
     ...defaultConfig.tokens,
     color: themes.light,
-    size: sizes,
-    space: sizes,
-    radius,
+    size: { ...defaultConfig.tokens.size, ...sizes },
+    space: { ...defaultConfig.tokens.space, ...sizes },
+    radius: { ...defaultConfig.tokens.radius, ...radius },
   }),
   settings: {
     allowedStyleValues: 'somewhat-strict',
