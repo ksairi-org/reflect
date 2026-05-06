@@ -1,4 +1,12 @@
+import * as Sentry from '@sentry/react-native'
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native'
+
+Sentry.init({
+  dsn: process.env.EXPO_PUBLIC_SENTRY_DSN,
+  environment: __DEV__ ? 'development' : 'production',
+  tracesSampleRate: __DEV__ ? 0 : 0.2,
+  enabled: !__DEV__,
+})
 import { Stack } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
 import 'react-native-reanimated'
@@ -51,7 +59,7 @@ function RootLayoutNav() {
   )
 }
 
-export default function RootLayout() {
+function RootLayout() {
   const fontsLoaded = useCustomFonts()
   const colorScheme = useColorScheme() ?? 'light'
   const isOSThemeDark = colorScheme === 'dark'
@@ -74,3 +82,5 @@ export default function RootLayout() {
     </QueryClientProvider>
   )
 }
+
+export default Sentry.wrap(RootLayout)
