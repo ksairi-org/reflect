@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { YStack, XStack, Input, Spinner } from 'tamagui'
-import { DisplayLg, BodySm, LabelSm, LabelLg } from '@atoms'
+import { DisplayLg, BodySm, LabelSm, LabelLg } from '@fonts'
 import { Containers , KeyboardScrollView } from '@ksairi-org/ui-containers'
 import { Trans, useLingui } from '@lingui/react/macro'
 import { BaseTouchable } from '@ksairi-org/ui-touchables'

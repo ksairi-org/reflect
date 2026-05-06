@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useFocusEffect } from 'expo-router'
 import { ScrollView, YStack, XStack, Spinner } from 'tamagui'
-import { DisplayLg, BodySm, LabelMd, LabelLg } from '@atoms'
+import { DisplayLg, BodySm, LabelMd, LabelLg } from '@fonts'
 import { Trans } from '@lingui/react/macro'
 import { SizingAnimatedButton } from '@ksairi-org/ui-button-animated'
 import { Containers } from '@ksairi-org/ui-containers'

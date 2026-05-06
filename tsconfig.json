@@ -17,6 +17,7 @@
       "@utils/*": ["src/utils/*"],
       "@atoms": ["src/components/atoms/index.ts"],
       "@atoms/*": ["src/components/atoms/*"],
+      "@fonts": ["src/components/atoms/typography/index.ts"],
       "@molecules": ["src/components/molecules/index.ts"],
       "@molecules/*": ["src/components/molecules/*"],
       "@organisms": ["src/components/organisms/index.ts"],
