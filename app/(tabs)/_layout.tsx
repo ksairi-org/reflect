@@ -2,6 +2,7 @@ import { Tabs } from 'expo-router'
 import React from 'react'
 import { HapticTab, BaseIcon } from '@atoms'
 import { useTheme } from 'tamagui'
+import { sizes } from '@theme'
 
 export default function TabLayout() {
   const theme = useTheme()
@@ -22,14 +23,14 @@ export default function TabLayout() {
         name="index"
         options={{
           title: 'Journal',
-          tabBarIcon: ({ color }) => <BaseIcon iconName="iconPen" width={26} height={26} color={color} />,
+          tabBarIcon: ({ color }) => <BaseIcon iconName="iconPen" width={sizes.lg} height={sizes.lg} color={color} />,
         }}
       />
       <Tabs.Screen
         name="reflections"
         options={{
           title: 'Reflections',
-          tabBarIcon: ({ color }) => <BaseIcon iconName="iconBook" width={26} height={26} color={color} />,
+          tabBarIcon: ({ color }) => <BaseIcon iconName="iconBook" width={sizes.lg} height={sizes.lg} color={color} />,
         }}
       />
     </Tabs>
