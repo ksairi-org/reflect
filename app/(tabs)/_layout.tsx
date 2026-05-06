@@ -22,14 +22,14 @@ export default function TabLayout() {
         name="index"
         options={{
           title: 'Journal',
-          tabBarIcon: ({ color }) => <BaseIcon iconName="iconPen" size={26} color={color} />,
+          tabBarIcon: ({ color }) => <BaseIcon iconName="iconPen" width={26} height={26} color={color} />,
         }}
       />
       <Tabs.Screen
         name="reflections"
         options={{
           title: 'Reflections',
-          tabBarIcon: ({ color }) => <BaseIcon iconName="iconBook" size={26} color={color} />,
+          tabBarIcon: ({ color }) => <BaseIcon iconName="iconBook" width={26} height={26} color={color} />,
         }}
       />
     </Tabs>
