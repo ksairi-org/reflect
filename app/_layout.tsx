@@ -1,4 +1,5 @@
 import * as Sentry from '@sentry/react-native'
+import { setupSentry } from '@sentry'
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native'
 import { Stack } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
@@ -20,12 +21,7 @@ import { SplashView } from '@ksairi-org/react-native-splash-view'
 import { themes } from '@theme'
 import splash from '../assets/animations/splash.riv'
 
-Sentry.init({
-  dsn: process.env.EXPO_PUBLIC_SENTRY_DSN,
-  environment: process.env.EXPO_PUBLIC_ENV ?? 'stg',
-  tracesSampleRate: __DEV__ ? 0 : 0.2,
-  enabled: !__DEV__,
-})
+setupSentry(!__DEV__)
 
 const queryClient = new QueryClient()
 
