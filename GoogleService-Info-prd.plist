@@ -9,7 +9,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.reflect</string>
+	<string>com.reflect.prod</string>
 	<key>PROJECT_ID</key>
 	<string>reflect-8e62d</string>
 	<key>STORAGE_BUCKET</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:205855484334:ios:82d73d657698f68812003f</string>
+	<string>1:205855484334:ios:8b2849a0d9f9f8e212003f</string>
 </dict>
 </plist>

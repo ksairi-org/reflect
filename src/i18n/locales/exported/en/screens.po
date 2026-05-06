@@ -17,6 +17,14 @@ msgstr ""
 msgid "Already have an account? Sign in"
 msgstr ""
 
+#: src/screens/SignInScreen/SignInScreen.tsx
+msgid "Apple sign-in failed: no identity token"
+msgstr ""
+
+#: src/screens/SignInScreen/SignInScreen.tsx
+msgid "Apple sign-in is not configured for Android"
+msgstr ""
+
 #: src/screens/JournalScreen/JournalScreen.tsx
 msgid "Cancel"
 msgstr ""
@@ -43,6 +51,10 @@ msgstr ""
 
 #: src/screens/SignInScreen/SignInScreen.tsx
 msgid "Email"
+msgstr ""
+
+#: src/screens/SignInScreen/SignInScreen.tsx
+msgid "Google sign-in failed: no identity token"
 msgstr ""
 
 #: src/screens/JournalScreen/JournalScreen.tsx
