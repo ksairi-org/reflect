@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { YStack, XStack, Text, Input, Spinner } from 'tamagui'
+import { YStack, XStack, Input, Spinner } from 'tamagui'
+import { DisplayLg, BodySm, LabelSm, LabelLg } from '@atoms'
 import { Containers , KeyboardScrollView } from '@ksairi-org/ui-containers'
 import { Trans, useLingui } from '@lingui/react/macro'
 import { BaseTouchable } from '@ksairi-org/ui-touchables'
@@ -36,20 +37,14 @@ export default function SignInScreen() {
         contentContainerStyle={{ flexGrow: 1, justifyContent: 'center', padding: sizes.lg }}
         keyboardShouldPersistTaps="handled">
         <YStack gap="$0">
-          <Text
-            fontFamily="$heading"
-            fontSize="$9"
-            fontWeight="700"
-            color="$color12"
-            letterSpacing={-0.5}
-            mb="$2">
+          <DisplayLg color="$color12" letterSpacing={-0.5} mb="$2">
             reflect
-          </Text>
-          <Text fontSize="$2" color="$color9" mb="$8">
+          </DisplayLg>
+          <BodySm color="$color9" mb="$8">
             {mode === 'sign-in'
               ? <Trans>Welcome back.</Trans>
               : <Trans>Create your account.</Trans>}
-          </Text>
+          </BodySm>
 
           <Input
             value={email}
@@ -81,9 +76,9 @@ export default function SignInScreen() {
           />
 
           {error && (
-            <Text color="$red10" fontSize="$1" mb="$3">
+            <LabelSm color="$red10" mb="$3">
               {error}
-            </Text>
+            </LabelSm>
           )}
 
           <BaseTouchable
@@ -96,22 +91,21 @@ export default function SignInScreen() {
             mt="$2">
             {loading
               ? <Spinner color={isReady ? '$accentColor' : '$color8'} />
-              : <Text color={isReady ? '$accentColor' : '$color8'} fontWeight="600" fontSize="$2">
+              : <LabelLg color={isReady ? '$accentColor' : '$color8'}>
                   {mode === 'sign-in' ? <Trans>Sign in</Trans> : <Trans>Create account</Trans>}
-                </Text>
+                </LabelLg>
             }
           </BaseTouchable>
 
           <XStack justify="center" mt="$5">
-            <Text
+            <BodySm
               color="$accentBackground"
-              fontSize="$2"
               onPress={() => { setMode(m => m === 'sign-in' ? 'sign-up' : 'sign-in'); setError(null) }}
               pressStyle={{ opacity: 0.7 }}>
               {mode === 'sign-in'
                 ? <Trans>Don&apos;t have an account? Sign up</Trans>
                 : <Trans>Already have an account? Sign in</Trans>}
-            </Text>
+            </BodySm>
           </XStack>
         </YStack>
       </KeyboardScrollView>

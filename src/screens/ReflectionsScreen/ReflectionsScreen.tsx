@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useFocusEffect } from 'expo-router'
-import { ScrollView, YStack, XStack, Text, Spinner } from 'tamagui'
+import { ScrollView, YStack, XStack, Spinner } from 'tamagui'
+import { DisplayLg, BodySm, LabelMd, LabelLg } from '@atoms'
 import { Trans } from '@lingui/react/macro'
 import { SizingAnimatedButton } from '@ksairi-org/ui-button-animated'
 import { Containers } from '@ksairi-org/ui-containers'
@@ -85,9 +86,9 @@ export default function ReflectionsScreen() {
     <Containers.Screen shouldAutoResize={false}>
       <ScrollView>
         <YStack p="$5">
-          <Text fontSize="$9" fontWeight="700" color="$color12" letterSpacing={-0.5} mb="$6">
+          <DisplayLg color="$color12" letterSpacing={-0.5} mb="$6">
             <Trans>Reflections</Trans>
-          </Text>
+          </DisplayLg>
 
           {loading && !entries.length && (
             <YStack items="center" mt="$10">
@@ -96,21 +97,20 @@ export default function ReflectionsScreen() {
           )}
 
           {!loading && !entries.length && (
-            <Text color="$color8" fontSize="$2" text="center" mt="$14">
+            <BodySm color="$color8" text="center" mt="$14">
               <Trans>No entries yet. Start writing in the Journal tab.</Trans>
-            </Text>
+            </BodySm>
           )}
 
           {groups.map(group => (
             <YStack key={group.label} mb="$7">
-              <Text
-                fontSize="$1"
+              <LabelMd
                 color="$color8"
                 textTransform="uppercase"
                 letterSpacing={0.9}
                 mb="$3">
                 {group.label}
-              </Text>
+              </LabelMd>
               {group.items.map(entry => (
                 <YStack
                   key={entry.id}
@@ -120,12 +120,12 @@ export default function ReflectionsScreen() {
                   mb="$2"
                   borderWidth={1}
                   borderColor="$borderColor">
-                  <Text fontSize="$2" color="$color12">
+                  <BodySm color="$color12">
                     {entry.content}
-                  </Text>
-                  <Text fontSize="$1" color="$color8" mt="$2">
+                  </BodySm>
+                  <LabelMd color="$color8" mt="$2">
                     {formatTime(entry.created_at)}
-                  </Text>
+                  </LabelMd>
                 </YStack>
               ))}
             </YStack>
@@ -133,26 +133,24 @@ export default function ReflectionsScreen() {
 
           {/* Notifications demo */}
           <YStack mt="$6" bg="$color2" rounded="$4" p="$4" borderWidth={1} borderColor="$borderColor">
-            <Text fontSize="$1" color="$color8" textTransform="uppercase" letterSpacing={0.9} mb="$3">
+            <LabelMd color="$color8" textTransform="uppercase" letterSpacing={0.9} mb="$3">
               <Trans>Push notifications</Trans>
-            </Text>
+            </LabelMd>
 
             <XStack items="center" justify="space-between" mb="$3">
-              <Text fontSize="$2" color="$color11">
+              <BodySm color="$color11">
                 <Trans>Permission</Trans>
-              </Text>
-              <Text
-                fontSize="$1"
-                fontWeight="600"
+              </BodySm>
+              <LabelMd
                 color={notifPermission === null ? '$color8' : notifPermission ? '$green10' : '$red10'}>
                 {notifPermission === null ? '—' : notifPermission ? 'Granted' : 'Denied'}
-              </Text>
+              </LabelMd>
             </XStack>
 
             {fcmToken && (
-              <Text fontSize="$1" color="$color8" mb="$3" numberOfLines={1}>
+              <LabelMd color="$color8" mb="$3" numberOfLines={1}>
                 {fcmToken.slice(0, 24)}…
-              </Text>
+              </LabelMd>
             )}
 
             <SizingAnimatedButton
@@ -163,11 +161,11 @@ export default function ReflectionsScreen() {
               spinnerBackgroundColor="$color3"
               spinnerPieceColor="$accentColor"
               height={40}>
-              <Text color={notifPermission ? '$accentColor' : '$color8'} fontWeight="600" fontSize="$2">
+              <LabelLg color={notifPermission ? '$accentColor' : '$color8'}>
                 {scheduled
                   ? <Trans>Scheduled! (5 s)</Trans>
                   : <Trans>Send test notification</Trans>}
-              </Text>
+              </LabelLg>
             </SizingAnimatedButton>
           </YStack>
         </YStack>

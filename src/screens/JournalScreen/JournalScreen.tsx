@@ -1,7 +1,8 @@
 import React, { useState, useRef, type ComponentRef } from 'react'
 import { Alert } from 'react-native'
 import { useFocusEffect } from 'expo-router'
-import { YStack, XStack, Text, TextArea, Spinner } from 'tamagui'
+import { YStack, XStack, TextArea, Spinner } from 'tamagui'
+import { DisplayLg, BodySm, LabelMd, LabelLg } from '@atoms'
 import { Trans, useLingui } from '@lingui/react/macro'
 import { BaseTouchable } from '@ksairi-org/ui-touchables'
 import { CTAButton } from '@ksairi-org/ui-button'
@@ -48,13 +49,13 @@ function EntryCard({ entry, onDelete }: EntryCardProps) {
 
   return (
     <YStack bg="$color2" rounded="$4" p="$4" mb="$3" borderWidth={1} borderColor="$borderColor">
-      <Text fontSize="$2" color="$color12" mb="$3">
+      <BodySm color="$color12" mb="$3">
         {entry.content}
-      </Text>
+      </BodySm>
       <XStack justify="space-between" items="center">
-        <Text fontSize="$1" color="$color8">{formatTime(entry.created_at)}</Text>
+        <LabelMd color="$color8">{formatTime(entry.created_at)}</LabelMd>
         <BaseTouchable onPress={confirmDelete} hitSlop={{ top: sizes.sm, bottom: sizes.sm, left: sizes.sm, right: sizes.sm }}>
-          <Text fontSize="$1" color="$red10"><Trans>Delete</Trans></Text>
+          <LabelMd color="$red10"><Trans>Delete</Trans></LabelMd>
         </BaseTouchable>
       </XStack>
     </YStack>
@@ -93,12 +94,12 @@ export default function JournalScreen() {
         contentContainerStyle={{ padding: sizes.lg }}
         keyboardShouldPersistTaps="handled">
         <YStack>
-          <Text fontSize="$1" color="$color8" mb="$1" textTransform="uppercase" letterSpacing={0.9}>
+          <LabelMd color="$color8" mb="$1" textTransform="uppercase" letterSpacing={0.9}>
             {formatDateHeading(new Date().toISOString())}
-          </Text>
-          <Text fontSize="$9" fontWeight="700" color="$color12" letterSpacing={-0.5} mb="$6">
+          </LabelMd>
+          <DisplayLg color="$color12" letterSpacing={-0.5} mb="$6">
             <Trans>Journal</Trans>
-          </Text>
+          </DisplayLg>
 
           <YStack bg="$color2" rounded="$4" borderWidth={1} borderColor="$borderColor" mb="$4">
             <TextArea
@@ -123,9 +124,9 @@ export default function JournalScreen() {
             pressStyle={{ opacity: 0.75 }}
             borderRadius="$4"
             mb="$8">
-            <Text color={hasContent ? '$accentColor' : '$color8'} fontWeight="600" fontSize="$2">
+            <LabelLg color={hasContent ? '$accentColor' : '$color8'}>
               <Trans>Save entry</Trans>
-            </Text>
+            </LabelLg>
           </CTAButton>
 
           {loading && !todayEntries.length && (
@@ -136,9 +137,9 @@ export default function JournalScreen() {
 
           {todayEntries.length > 0 && (
             <YStack>
-              <Text fontSize="$1" color="$color8" textTransform="uppercase" letterSpacing={0.9} mb="$3">
+              <LabelMd color="$color8" textTransform="uppercase" letterSpacing={0.9} mb="$3">
                 <Trans>Today · {todayEntries.length} {todayEntries.length === 1 ? 'entry' : 'entries'}</Trans>
-              </Text>
+              </LabelMd>
               {todayEntries.map(entry => (
                 <EntryCard key={entry.id} entry={entry} onDelete={(id) => deleteMutation.mutate(id)} />
               ))}
