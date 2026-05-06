@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { Animated, StyleSheet } from 'react-native'
 import Rive from 'rive-react-native'
 
@@ -12,18 +12,18 @@ export function SplashOverlay({ source, backgroundColor = '#F5F0E8', fadeOutDura
   const opacity = useRef(new Animated.Value(1)).current
   const [visible, setVisible] = useState(true)
 
-  const fadeOut = () => {
+  const fadeOut = useCallback(() => {
     Animated.timing(opacity, {
       toValue: 0,
       duration: fadeOutDuration,
       useNativeDriver: true,
     }).start(() => setVisible(false))
-  }
+  }, [fadeOutDuration, opacity])
 
   useEffect(() => {
     const timeout = setTimeout(fadeOut, 3000)
     return () => clearTimeout(timeout)
-  }, [])
+  }, [fadeOut])
 
   if (!visible) return null
 
