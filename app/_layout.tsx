@@ -15,7 +15,7 @@ import {
   subscribeToForegroundMessages,
 } from '@firebase-messaging'
 import { useEffect } from 'react'
-import { SplashView } from '@ksairi-org/react-native-splash-view'
+import { SplashOverlay } from '@atoms/SplashOverlay'
 import splash from '../assets/animations/splash.riv'
 
 const queryClient = new QueryClient()
@@ -61,12 +61,7 @@ export default function RootLayout() {
           </ThemeProvider>
         </TamaguiProvider>
       </LinguiClientProvider>
-      <SplashView
-        style={{ backgroundColor: '#F5F0E8' }}
-        source={splash}
-        fadeOutDuration={600}
-        fadeOutDelay={0}
-      />
+      <SplashOverlay source={splash} />
     </QueryClientProvider>
   )
 }
