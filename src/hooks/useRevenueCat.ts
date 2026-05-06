@@ -14,7 +14,7 @@ const useRevenueCat = () => {
       .catch(() => setIsLoading(false))
 
     Purchases.addCustomerInfoUpdateListener(setCustomerInfo)
-    return () => Purchases.removeCustomerInfoUpdateListener(setCustomerInfo)
+    return () => { Purchases.removeCustomerInfoUpdateListener(setCustomerInfo) }
   }, [])
 
   const isPro = customerInfo?.entitlements.active[PRO_ENTITLEMENT] !== undefined
