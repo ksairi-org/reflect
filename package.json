@@ -49,7 +49,8 @@
   "dependencies": {
     "@expo-google-fonts/dm-sans": "^0.4.2",
     "@expo-google-fonts/lora": "^0.4.2",
-    "@expo/log-box": "^55.0.11",
+    "@expo/dom-webview": "^55.0.6",
+    "@expo/log-box": "^55.0.12",
     "@expo/vector-icons": "^15.0.3",
     "@hookform/resolvers": "^5.2.2",
     "@invertase/react-native-apple-authentication": "^2.5.1",

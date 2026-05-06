@@ -2031,17 +2031,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@expo/dom-webview@npm:^55.0.5":
-  version: 55.0.5
-  resolution: "@expo/dom-webview@npm:55.0.5"
-  peerDependencies:
-    expo: "*"
-    react: "*"
-    react-native: "*"
-  checksum: 10c0/d5904a55bbc1a5489e64e754e4161d230b674cc1a3c3e73a604b52c7f9be0c9d6bcd26caf79106118f9d50576b97ff0121545017a5b6547d0046207075feee84
-  languageName: node
-  linkType: hard
-
 "@expo/dom-webview@npm:^55.0.6":
   version: 55.0.6
   resolution: "@expo/dom-webview@npm:55.0.6"
@@ -2177,7 +2166,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@expo/log-box@npm:55.0.12":
+"@expo/log-box@npm:55.0.12, @expo/log-box@npm:^55.0.12":
   version: 55.0.12
   resolution: "@expo/log-box@npm:55.0.12"
   dependencies:
@@ -2190,22 +2179,6 @@ __metadata:
     react: "*"
     react-native: "*"
   checksum: 10c0/41a47d16450a3a70450876382650ab82a92986ca83d9994c11bae89973885349fd6b653338718a3aa2ad79afcec757a715a59ffd5e3b65d858772e9c2be0c29d
-  languageName: node
-  linkType: hard
-
-"@expo/log-box@npm:^55.0.11":
-  version: 55.0.11
-  resolution: "@expo/log-box@npm:55.0.11"
-  dependencies:
-    "@expo/dom-webview": "npm:^55.0.5"
-    anser: "npm:^1.4.9"
-    stacktrace-parser: "npm:^0.1.10"
-  peerDependencies:
-    "@expo/dom-webview": ^55.0.5
-    expo: "*"
-    react: "*"
-    react-native: "*"
-  checksum: 10c0/8a4b53b87def9b4dad0f00821d20f749138431047129c11d5d49217d193745eb080efd51442e97809c2c1f5785ee9282cfc57c09e991a3d02bb1c210b479663f
   languageName: node
   linkType: hard
 
@@ -15240,7 +15213,8 @@ __metadata:
     "@commitlint/config-conventional": "npm:^20.5.0"
     "@expo-google-fonts/dm-sans": "npm:^0.4.2"
     "@expo-google-fonts/lora": "npm:^0.4.2"
-    "@expo/log-box": "npm:^55.0.11"
+    "@expo/dom-webview": "npm:^55.0.6"
+    "@expo/log-box": "npm:^55.0.12"
     "@expo/vector-icons": "npm:^15.0.3"
     "@hookform/resolvers": "npm:^5.2.2"
     "@invertase/react-native-apple-authentication": "npm:^2.5.1"
