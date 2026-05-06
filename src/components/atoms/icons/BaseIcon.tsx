@@ -12,7 +12,7 @@ type IconName = keyof typeof svgImports
 
 type BaseIconProps = {
   iconName: IconName
-  color?: ColorTokens
+  color?: ColorTokens | string
   width?: number
   height?: number
   autoScaleBasedOnScreenDimensions?: boolean
@@ -50,7 +50,10 @@ const BaseIcon = ({
       maxFontScaleToApply,
     })
 
-  const calculatedColor = useColorTokenValue(color)
+  const tokenColor = useColorTokenValue(
+    typeof color === 'string' && !color.startsWith('$') ? undefined : (color as ColorTokens)
+  )
+  const calculatedColor = typeof color === 'string' && !color.startsWith('$') ? color : tokenColor
 
   return (
     <SvgXml
