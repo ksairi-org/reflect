@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import { AppState, Platform, StyleSheet } from 'react-native'
-import { YStack, XStack, Input, Spinner } from 'tamagui'
+import { AppState, Platform } from 'react-native'
+import { YStack, XStack, Input, Spinner, styled } from 'tamagui'
 import { DisplayLg, BodySm, LabelSm, LabelLg } from '@fonts'
 import { Containers, KeyboardScrollView } from '@ksairi-org/ui-containers'
 import { Trans, useLingui } from '@lingui/react/macro'
@@ -26,15 +26,14 @@ import {
 
 type Mode = 'sign-in' | 'sign-up'
 
-const styles = StyleSheet.create({
-  appleButton: {
-    width: '100%',
-    height: 45,
-  },
-  googleButton: {
-    width: '100%',
-    height: 45,
-  },
+const StyledAppleButton = styled(AppleButton, {
+  width: '100%',
+  height: sizes.xl,
+})
+
+const StyledGoogleButton = styled(GoogleSigninButton, {
+  width: '100%',
+  height: sizes.xl,
 })
 
 AppState.addEventListener('change', (state) => {
@@ -71,8 +70,7 @@ export default function SignInScreen() {
       prevAppState.current = nextState
     })
     return () => subscription.remove()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [handleAppleSignIn])
 
   async function handleSubmit() {
     setError(null)
@@ -253,14 +251,12 @@ export default function SignInScreen() {
           </BaseTouchable>
 
           <YStack gap="$3" mt="$6" opacity={socialLoading ? 0.6 : 1}>
-            <AppleButton
+            <StyledAppleButton
               buttonStyle={AppleButtonStyle.BLACK}
               buttonType={AppleButtonType.SIGN_IN}
-              style={styles.appleButton}
               onPress={handleAppleSignIn}
             />
-            <GoogleSigninButton
-              style={styles.googleButton}
+            <StyledGoogleButton
               onPress={handleGoogleSignIn}
             />
           </YStack>
