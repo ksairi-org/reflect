@@ -20,6 +20,7 @@
 ## Always do
 
 - Run `tsc --noEmit` after every change — zero errors before done
+- Run `yarn doctor` before store builds — catches duplicate native modules before wasting EAS build time
 - Wrap user-visible strings: `<Trans>` in JSX, `` t`…` `` for props (import from `@lingui/react/macro`)
 - Keep files under 500 lines
 - One `import` statement per module path

@@ -1,9 +1,14 @@
+import { Platform } from 'react-native'
 import Purchases, { LOG_LEVEL } from 'react-native-purchases'
 
 const configureRevenueCat = () => {
-  const apiKey = process.env.EXPO_PUBLIC_RC_API_KEY
+  const apiKey =
+    Platform.OS === 'android' && process.env.EXPO_PUBLIC_RC_ANDROID_API_KEY
+      ? process.env.EXPO_PUBLIC_RC_ANDROID_API_KEY
+      : process.env.EXPO_PUBLIC_RC_API_KEY
+
   if (!apiKey) {
-    console.warn('[RevenueCat] EXPO_PUBLIC_RC_API_KEY is not set — IAP will not work')
+    console.warn('[RevenueCat] RC API key is not set — IAP will not work')
     return
   }
 

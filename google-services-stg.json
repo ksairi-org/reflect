@@ -7,12 +7,25 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:205855484334:android:3597ee0d9db4d97912003f",
+        "mobilesdk_app_id": "1:205855484334:android:f04b6ae7d100872312003f",
         "android_client_info": {
           "package_name": "com.reflect.prod"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "205855484334-f1tp6n6h1kuditdnmojf6714s7aifu7k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.reflect.prod",
+            "certificate_hash": "5df4b81902f9c9b96d1fa47557acf92643d3e419"
+          }
+        },
+        {
+          "client_id": "205855484334-ropg87ru864ftsd2jhtmd3lsvse7u02p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDbIEBROgQhT2cf0LyNbISuHlxcO_2L-iU"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "205855484334-ropg87ru864ftsd2jhtmd3lsvse7u02p.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "205855484334-od3gp8431328p3ssnhtso5svlmkvrhgs.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.reflect.prod"
+              }
+            }
+          ]
         }
       }
     },
@@ -31,7 +56,20 @@
           "package_name": "com.reflect.stg"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "205855484334-p3chot3i675ps09kfpvho2m1irjqfo21.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.reflect.stg",
+            "certificate_hash": "b8a47c92d21c356b7fd0fb151695ab367de25d86"
+          }
+        },
+        {
+          "client_id": "205855484334-ropg87ru864ftsd2jhtmd3lsvse7u02p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDbIEBROgQhT2cf0LyNbISuHlxcO_2L-iU"
@@ -39,7 +77,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "205855484334-ropg87ru864ftsd2jhtmd3lsvse7u02p.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "205855484334-od3gp8431328p3ssnhtso5svlmkvrhgs.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.reflect.prod"
+              }
+            }
+          ]
         }
       }
     }

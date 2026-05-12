@@ -14,7 +14,6 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   ios: {
     supportsTablet: true,
     bundleIdentifier: process.env.APP_IDENTIFIER ?? "com.reflect.prod",
-    buildNumber: "1",
     googleServicesFile: process.env.GOOGLE_SERVICES_INFOPLIST_PATH,
     infoPlist: {
       UIBackgroundModes: ["fetch", "remote-notification"],
@@ -22,7 +21,6 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     },
     entitlements: {
       "aps-environment": "production",
-      "com.apple.developer.sign-in-with-apple": "enabled" as const,
       ...(process.env.EXPO_PUBLIC_APPLE_MERCHANT_ID
         ? { "com.apple.developer.in-app-payments": [process.env.EXPO_PUBLIC_APPLE_MERCHANT_ID] }
         : {}),
@@ -30,7 +28,6 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   },
   android: {
     package: process.env.APP_IDENTIFIER ?? "com.reflect.prod",
-    versionCode: 1,
     adaptiveIcon: {
       foregroundImage: "./assets/images/adaptive-icon.png",
       backgroundColor: "#F5F0E8",

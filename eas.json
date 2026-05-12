@@ -1,7 +1,7 @@
 {
   "cli": {
     "version": ">= 16.0.0",
-    "appVersionSource": "local"
+    "appVersionSource": "remote"
   },
   "build": {
     "development": {
@@ -22,12 +22,35 @@
     }
   },
   "submit": {
-    "prd": {
+    "stg": {
       "ios": {
-        "appleId": "marianoksairi@gmail.com"
+        "appleId": "marianoksairi@gmail.com",
+        "ascAppId": "6767603859"
       },
       "android": {
-        "serviceAccountKeyPath": "./google-service-account.json",
+        "serviceAccountKeyPath": "./eas-service-account.json",
+        "track": "internal",
+        "releaseStatus": "draft"
+      }
+    },
+    "prd-internal": {
+      "ios": {
+        "appleId": "marianoksairi@gmail.com",
+        "ascAppId": "6767607183"
+      },
+      "android": {
+        "serviceAccountKeyPath": "./eas-service-account.json",
+        "track": "internal",
+        "releaseStatus": "draft"
+      }
+    },
+    "prd": {
+      "ios": {
+        "appleId": "marianoksairi@gmail.com",
+        "ascAppId": "6767607183"
+      },
+      "android": {
+        "serviceAccountKeyPath": "./eas-service-account.json",
         "track": "production"
       }
     }

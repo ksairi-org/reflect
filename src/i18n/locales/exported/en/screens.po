@@ -53,6 +53,14 @@ msgstr ""
 msgid "Email"
 msgstr ""
 
+#: src/screens/ReflectionsScreen/ReflectionsScreen.tsx
+msgid "Export"
+msgstr ""
+
+#: src/screens/ReflectionsScreen/ReflectionsScreen.tsx
+msgid "Export ✦"
+msgstr ""
+
 #: src/screens/SignInScreen/SignInScreen.tsx
 msgid "Google sign-in failed: no identity token"
 msgstr ""

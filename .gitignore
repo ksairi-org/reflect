@@ -52,7 +52,7 @@ src/i18n/locales/compiled/
 # Firebase service account key (has admin privileges — never commit)
 *firebase-adminsdk*.json
 # Google Play service account key (sensitive — store in CI secrets, never commit)
-google-service-account.json
+eas-service-account.json
 
 # EAS local build artifacts
 build-*.tar.gz
