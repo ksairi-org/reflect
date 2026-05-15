@@ -6,6 +6,7 @@ import {
   onMessage,
 } from '@react-native-firebase/messaging'
 import { getApp } from '@react-native-firebase/app'
+import * as Device from 'expo-device'
 import * as ExpoNotifications from 'expo-notifications'
 
 ExpoNotifications.setNotificationHandler({
@@ -21,6 +22,8 @@ ExpoNotifications.setNotificationHandler({
 const messaging = getMessaging(getApp())
 
 export async function requestNotificationPermission(): Promise<boolean> {
+  if (!Device.isDevice) return false
+
   const { status } = await ExpoNotifications.requestPermissionsAsync()
   if (status !== 'granted') return false
 
@@ -32,9 +35,12 @@ export async function requestNotificationPermission(): Promise<boolean> {
 }
 
 export async function getFCMToken(): Promise<string | null> {
+  if (!Device.isDevice) return null
+
   try {
     return await getToken(messaging)
-  } catch {
+  } catch (e) {
+    console.warn('[FCM token] Failed to get token:', e)
     return null
   }
 }

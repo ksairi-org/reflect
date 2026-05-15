@@ -17,6 +17,10 @@
 - Log PII in Sentry tags or breadcrumbs
 - Log PII or payment data in analytics events — use opaque internal IDs only
 
+## Database migrations
+
+- Every `CREATE TABLE` migration must include explicit GRANTs (`anon`, `authenticated`, `service_role`) and `enable row level security` — Supabase drops auto-grants for new tables from 2026-05-30 (new projects) / 2026-10-30 (existing projects). The `database-specialist` agent and `generate_migration` tool add this boilerplate automatically.
+
 ## Always do
 
 - Run `tsc --noEmit` after every change — zero errors before done

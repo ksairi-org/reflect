@@ -9,7 +9,7 @@ const ExpoSecureStoreAdapter = {
 };
 
 export const supabase = createClient(
-  process.env.EXPO_PUBLIC_SUPABASE_PUBLISHABLE_KEY!,
+  process.env.EXPO_PUBLIC_SERVER_URL!,
   process.env.EXPO_PUBLIC_SUPABASE_API_KEY!,
   {
     auth: {

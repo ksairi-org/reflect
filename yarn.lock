@@ -3509,14 +3509,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ksairi-org/react-native-splash-view@npm:0.1.3":
-  version: 0.1.3
-  resolution: "@ksairi-org/react-native-splash-view@npm:0.1.3"
+"@ksairi-org/react-native-splash-view@npm:0.1.7":
+  version: 0.1.7
+  resolution: "@ksairi-org/react-native-splash-view@npm:0.1.7"
   peerDependencies:
     expo-splash-screen: "*"
     react: "*"
     react-native: "*"
-  checksum: 10c0/443702d84a187012df1235125555ccb71cf4f2a2e9e984a9528eda33c63d30d56d60d02d18613f855f4df5425cab367ac74a6cacaad7ea490e58374f1880dffb
+  checksum: 10c0/fc3904e921c81a42004cfa59726cb5d857c9128824a09e25a16b42020474d6333dfe5ce1b439cad94b79faa356e27975fb8da606c88bdb0a39ea11b670ae42f7
   languageName: node
   linkType: hard
 
@@ -10571,6 +10571,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"expo-device@npm:~55.0.17":
+  version: 55.0.17
+  resolution: "expo-device@npm:55.0.17"
+  dependencies:
+    ua-parser-js: "npm:^0.7.33"
+  peerDependencies:
+    expo: "*"
+  checksum: 10c0/e0821b311fe0262a01063bf4fa9cb4ae73a8ab319322096e00c435123018c77cab484b0c8ee08534be8382af4aecdf646283d54f6c1000cd108c1d4da7f0c770
+  languageName: node
+  linkType: hard
+
 "expo-doctor@npm:1.18.21":
   version: 1.18.21
   resolution: "expo-doctor@npm:1.18.21"
@@ -15217,7 +15228,7 @@ __metadata:
     "@ksairi-org/react-native-auth-google": "npm:^0.1.1"
     "@ksairi-org/react-native-functions": "npm:^0.1.1"
     "@ksairi-org/react-native-hooks": "npm:^0.1.1"
-    "@ksairi-org/react-native-splash-view": "npm:0.1.3"
+    "@ksairi-org/react-native-splash-view": "npm:0.1.7"
     "@ksairi-org/react-native-ui-config": "npm:^0.1.3"
     "@ksairi-org/react-query-sdk": "npm:^0.1.2"
     "@ksairi-org/ui-button": "npm:^0.1.11"
@@ -15266,6 +15277,7 @@ __metadata:
     expo-build-properties: "npm:~55.0.14"
     expo-constants: "npm:~55.0.16"
     expo-dev-client: "npm:~55.0.33"
+    expo-device: "npm:~55.0.17"
     expo-doctor: "npm:1.18.21"
     expo-font: "npm:~55.0.7"
     expo-haptics: "npm:~55.0.14"
@@ -16864,6 +16876,15 @@ __metadata:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: 10c0/ad09fdf7a756814dce65bc60c1657b40d44451346858eea230e10f2e95a289d9183b6e32e5c11e95acc0ccc214b4f36289dcad4bf1886b0adb84d711d336a430
+  languageName: node
+  linkType: hard
+
+"ua-parser-js@npm:^0.7.33":
+  version: 0.7.41
+  resolution: "ua-parser-js@npm:0.7.41"
+  bin:
+    ua-parser-js: script/cli.js
+  checksum: 10c0/b134bc0d8da10c76e07740a0ade61c193fd4c4d120ba2cb2530e26931f6b550dd60b6e801d8891f6d9c23dfebadf5590294739069edff94396f173cc8cc5767e
   languageName: node
   linkType: hard
 

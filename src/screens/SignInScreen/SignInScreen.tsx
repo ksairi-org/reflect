@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import { AppState, Platform } from 'react-native'
-import { YStack, XStack, Input, Spinner, styled } from 'tamagui'
+import { AppState, Platform, StyleSheet } from 'react-native'
+import { YStack, XStack, Input, Spinner } from 'tamagui'
 import { DisplayLg, BodySm, LabelSm, LabelLg } from '@fonts'
 import { Containers, KeyboardScrollView } from '@ksairi-org/ui-containers'
 import { Trans, useLingui } from '@lingui/react/macro'
@@ -12,8 +12,6 @@ import {
   appleAuth,
   appleAuthAndroid,
   AppleButton,
-  AppleButtonStyle,
-  AppleButtonType,
 } from '@invertase/react-native-apple-authentication'
 
 import {
@@ -26,14 +24,8 @@ import {
 
 type Mode = 'sign-in' | 'sign-up'
 
-const StyledAppleButton = styled(AppleButton, {
-  width: '100%',
-  height: sizes.xl,
-})
-
-const StyledGoogleButton = styled(GoogleSigninButton, {
-  width: '100%',
-  height: sizes.xl,
+const socialButtonStyle = StyleSheet.create({
+  button: { width: '100%', height: sizes.xl },
 })
 
 AppState.addEventListener('change', (state) => {
@@ -251,12 +243,16 @@ export default function SignInScreen() {
           </BaseTouchable>
 
           <YStack gap="$3" mt="$6" opacity={socialLoading ? 0.6 : 1}>
-            <StyledAppleButton
-              buttonStyle={AppleButtonStyle.BLACK}
-              buttonType={AppleButtonType.SIGN_IN}
-              onPress={handleAppleSignIn}
-            />
-            <StyledGoogleButton
+            {Platform.OS === 'ios' && appleAuth.isSupported && (
+              <AppleButton
+                style={socialButtonStyle.button}
+                buttonStyle={AppleButton.Style.BLACK}
+                buttonType={AppleButton.Type.SIGN_IN}
+                onPress={handleAppleSignIn}
+              />
+            )}
+            <GoogleSigninButton
+              style={socialButtonStyle.button}
               onPress={handleGoogleSignIn}
             />
           </YStack>
