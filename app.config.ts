@@ -1,7 +1,8 @@
 import type { ConfigContext, ExpoConfig } from "expo/config";
 
-const SPLASH_BG = "#F5F0E8";
 const SPLASH_IMAGE = "./assets/images/splash.png";
+const SPLASH_BG_LIGHT = "#F5F0E8";
+const SPLASH_BG_DARK = "#110f0e";
 
 export default ({ config }: ConfigContext): ExpoConfig => ({
   ...config,
@@ -33,7 +34,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     package: process.env.APP_IDENTIFIER ?? "com.reflect.prod",
     adaptiveIcon: {
       foregroundImage: "./assets/images/adaptive-icon.png",
-      backgroundColor: SPLASH_BG,
+      backgroundColor: SPLASH_BG_LIGHT,
     },
     predictiveBackGestureEnabled: false,
     googleServicesFile: process.env.GOOGLE_SERVICES_JSON_PATH,
@@ -47,14 +48,15 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     [
       "expo-splash-screen",
       {
+        backgroundColor: SPLASH_BG_LIGHT,
+        image: SPLASH_IMAGE,
+        dark: {
+          backgroundColor: SPLASH_BG_DARK,
+        },
         ios: {
-          backgroundColor: SPLASH_BG,
-          image: SPLASH_IMAGE,
           enableFullScreenImage_legacy: true,
         },
         android: {
-          backgroundColor: SPLASH_BG,
-          image: SPLASH_IMAGE,
           imageWidth: 288,
         },
       },
