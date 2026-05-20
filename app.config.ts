@@ -3,6 +3,10 @@ import type { ConfigContext, ExpoConfig } from "expo/config";
 const SPLASH_IMAGE = "./assets/images/splash.png";
 const SPLASH_BG_LIGHT = "#F5F0E8";
 const SPLASH_BG_DARK = "#110f0e";
+// 288dp is the Android 12+ maximum for windowSplashScreenAnimatedIcon — the system
+// clips the icon to a circle at this size. Must match animationViewStyle in _layout.tsx
+// so the Rive animation starts at the same visual size as the native splash icon.
+const ANDROID_SPLASH_SIZE = 288;
 
 export default ({ config }: ConfigContext): ExpoConfig => ({
   ...config,
@@ -57,7 +61,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
           enableFullScreenImage_legacy: true,
         },
         android: {
-          imageWidth: 288,
+          imageWidth: ANDROID_SPLASH_SIZE,
         },
       },
     ],

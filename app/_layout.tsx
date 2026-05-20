@@ -80,6 +80,8 @@ function RootLayout() {
       <SplashView
         source={splash}
         style={getSplashStyle(isOSThemeDark)}
+        // 288dp matches imageWidth in app.config.ts — Android 12+ maximum before the icon clips.
+        // Keeps Rive start frame visually aligned with the native splash icon for a seamless transition.
         animationViewStyle={Platform.OS === "android" ? { width: 288, height: 288, alignSelf: "center" } : undefined}
         fadeOutDelay={1500}
         fadeOutDuration={500}
