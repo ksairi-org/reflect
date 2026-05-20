@@ -58,6 +58,8 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
           backgroundColor: SPLASH_BG_DARK,
         },
         ios: {
+          // Full-screen legacy mode — no size constraint; image fills the screen.
+          // No imageWidth needed: iOS Rive animation also fills full screen via Fit.Contain.
           enableFullScreenImage_legacy: true,
         },
         android: {
