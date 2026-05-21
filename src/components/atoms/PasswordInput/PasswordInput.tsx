@@ -17,7 +17,7 @@ type PasswordInputProps = {
 
 export type PasswordInputHandle = { focus: () => void }
 
-export const PasswordInput = forwardRef<PasswordInputHandle, PasswordInputProps>(({
+export const PasswordInput = forwardRef<PasswordInputHandle, PasswordInputProps>(function PasswordInput({
   value,
   onChangeText,
   placeholder,
