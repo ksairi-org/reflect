@@ -43,7 +43,7 @@ export const PasswordInput = forwardRef<PasswordInputHandle, PasswordInputProps>
   return (
     <XStack
       position="relative"
-      width="100%"
+      alignSelf="stretch"
       mb={mbValue as number}
       borderRadius="$4"
       borderWidth={1}
