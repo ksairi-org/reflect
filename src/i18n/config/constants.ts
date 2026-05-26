@@ -6,6 +6,7 @@ const locales: Record<string, string> = {
   'pt-BR': 'Português (Brasil)',
   fr: 'Français',
   id: 'Bahasa Indonesia',
+  ar: 'العربية',
 }
 
 const defaultFallbackLocale: Locale['languageTag'] = 'en'

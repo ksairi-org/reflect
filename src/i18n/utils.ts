@@ -7,6 +7,7 @@ import * as esMessages from './locales/compiled/es'
 import * as ptBRMessages from './locales/compiled/pt-BR'
 import * as frMessages from './locales/compiled/fr'
 import * as idMessages from './locales/compiled/id'
+import * as arMessages from './locales/compiled/ar'
 
 const messagesByLocale: Record<string, Messages> = {
   en: enMessages.messages,
@@ -14,6 +15,7 @@ const messagesByLocale: Record<string, Messages> = {
   'pt-BR': ptBRMessages.messages,
   fr: frMessages.messages,
   id: idMessages.messages,
+  ar: arMessages.messages,
 }
 
 function isI18nLocale(value: string | null | undefined): value is Locale['languageTag'] {
