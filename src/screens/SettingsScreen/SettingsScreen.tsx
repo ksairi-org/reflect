@@ -35,7 +35,6 @@ export function SettingsScreen() {
   const { enabled: reminderEnabled, hour: reminderHour, loading: reminderLoading, toggle: toggleReminder, updateTime } = useReminder()
   const [notifPermission, setNotifPermission] = useState<NotificationPermissionStatus | null>(null)
   const [fcmToken, setFcmToken] = useState<string | null>(null)
-  const [fcmTestState, setFcmTestState] = useState<'idle' | 'sending' | 'sent'>('idle')
   const [showTimePicker, setShowTimePicker] = useState(false)
   const openedSettings = useRef(false)
 
@@ -84,13 +83,6 @@ export function SettingsScreen() {
     }
     openedSettings.current = true
     await Linking.openSettings()
-  }
-
-  async function handleFcmTest() {
-    if (!fcmToken) return
-    setFcmTestState('sending')
-    await supabase.functions.invoke('send-test-push', { body: { fcm_token: fcmToken } })
-    setFcmTestState('sent')
   }
 
   function handleSignOut() {
@@ -259,21 +251,6 @@ export function SettingsScreen() {
                 </XStack>
               </BaseTouchable>
 
-              {__DEV__ && fcmToken ? (
-                <SizingAnimatedButton
-                  onPress={handleFcmTest}
-                  disabled={fcmTestState === 'sending'}
-                  loading={fcmTestState === 'sending'}
-                  backgroundColor="$surface-subtle"
-                  spinnerBackgroundColor="$surface-subtle"
-                  spinnerPieceColor="$accentColor"
-                  height={40}
-                  mt="$2">
-                  <LabelLg color="$text-secondary">
-                    {fcmTestState === 'sent' ? '✓ FCM push sent' : 'Send real FCM push (dev)'}
-                  </LabelLg>
-                </SizingAnimatedButton>
-              ) : null}
             </YStack>
 
             {/* Sign out */}
