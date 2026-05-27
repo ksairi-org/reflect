@@ -53,12 +53,13 @@ app-example
 
 # Firebase service account key (has admin privileges — never commit)
 *firebase-adminsdk*.json
+firebase-service-account.json
 # Google Play service account key (sensitive — store in CI secrets, never commit)
 eas-service-account.json
 
 # EAS local build artifacts
 build-*.tar.gz
-build-*.apk
-app-build.ipa
-app-build.aab
+*.apk
+*.ipa
+*.aab
 *.app
