@@ -11,7 +11,7 @@ import { format } from 'date-fns'
 import { getDateLocale } from '@/src/utils/date'
 import type { JournalEntry } from '@/src/types/journal'
 import { logJournalEntryCreated, logJournalEntryDeleted, logScreenView } from '@analytics'
-import { useJournalEntries, useCreateJournalEntry, useDeleteJournalEntry, useRevenueCat, useToast, useStreak } from '@hooks'
+import { useJournalEntries, useCreateJournalEntry, useDeleteJournalEntry, useRevenueCat, useToast, useStreak, getDailyPromptIndex } from '@hooks'
 
 function formatTime(iso: string) {
   return format(new Date(iso), 'h:mm a', { locale: getDateLocale() })
@@ -84,6 +84,16 @@ export function JournalScreen() {
 
   const todayEntries = entries.filter(e => isToday(e.created_at))
   const streak = useStreak(entries)
+  const prompts = [
+    t`What's on your mind?`,
+    t`What made you smile today?`,
+    t`What are you grateful for today?`,
+    t`What's one thing you want to remember about today?`,
+    t`What are you avoiding?`,
+    t`What would make today a good day?`,
+    t`How are you really feeling right now?`,
+  ]
+  const prompt = prompts[getDailyPromptIndex(prompts.length)]
   const hasContent = draft.trim().length > 0
   const remainingFree = Math.max(0, FREE_ENTRY_LIMIT - entries.length)
   const atLimit = !isPro && entries.length >= FREE_ENTRY_LIMIT
@@ -95,7 +105,7 @@ export function JournalScreen() {
     if (atLimit) {
       const purchased = await presentPaywall()
       if (!purchased) return
-      alert({ title: t`Welcome to Pro ✦`, message: t`Unlimited entries unlocked. Keep writing.`, duration: 6 })
+      alert({ title: t`Welcome to Pro ✦`, message: t`Unlimited entries unlocked. Keep writing.`, duration: 4 })
     }
     setDraft('')
     await createMutation.mutateAsync(trimmed)
@@ -127,7 +137,7 @@ export function JournalScreen() {
               ref={inputRef}
               value={draft}
               onChangeText={setDraft}
-              placeholder={t`What's on your mind?`}
+              placeholder={prompt}
               minH={sizes['3xl']}
               bg="$background0"
               borderWidth={0}

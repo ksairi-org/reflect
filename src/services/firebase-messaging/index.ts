@@ -1,17 +1,15 @@
 import {
   getMessaging,
-  AuthorizationStatus,
-  requestPermission,
   getToken,
   onMessage,
 } from '@react-native-firebase/messaging'
 import { getApp } from '@react-native-firebase/app'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import * as Device from 'expo-device'
 import * as ExpoNotifications from 'expo-notifications'
 
 ExpoNotifications.setNotificationHandler({
   handleNotification: async () => ({
-    shouldShowAlert: true,
     shouldPlaySound: true,
     shouldSetBadge: false,
     shouldShowBanner: true,
@@ -21,17 +19,20 @@ ExpoNotifications.setNotificationHandler({
 
 const messaging = getMessaging(getApp())
 
+export type NotificationPermissionStatus = 'undetermined' | 'granted' | 'denied'
+
+export async function getNotificationPermissionStatus(): Promise<NotificationPermissionStatus> {
+  if (!Device.isDevice) return 'denied'
+  const { status } = await ExpoNotifications.getPermissionsAsync()
+  if (status === 'granted') return 'granted'
+  if (status === 'undetermined') return 'undetermined'
+  return 'denied'
+}
+
 export async function requestNotificationPermission(): Promise<boolean> {
   if (!Device.isDevice) return false
-
   const { status } = await ExpoNotifications.requestPermissionsAsync()
-  if (status !== 'granted') return false
-
-  const authStatus = await requestPermission(messaging)
-  return (
-    authStatus === AuthorizationStatus.AUTHORIZED ||
-    authStatus === AuthorizationStatus.PROVISIONAL
-  )
+  return status === 'granted'
 }
 
 export async function getFCMToken(): Promise<string | null> {
@@ -66,8 +67,6 @@ export async function scheduleLocalNotification(title: string, body: string, del
 const REMINDER_NOTIF_ID_KEY = '@reflect/reminder_notif_id'
 
 export async function scheduleDailyReminder(hour: number, minute: number): Promise<void> {
-  const AsyncStorage = (await import('@react-native-async-storage/async-storage')).default
-
   const existingId = await AsyncStorage.getItem(REMINDER_NOTIF_ID_KEY)
   if (existingId) {
     await ExpoNotifications.cancelScheduledNotificationAsync(existingId)
@@ -90,7 +89,6 @@ export async function scheduleDailyReminder(hour: number, minute: number): Promi
 }
 
 export async function cancelDailyReminder(): Promise<void> {
-  const AsyncStorage = (await import('@react-native-async-storage/async-storage')).default
   const id = await AsyncStorage.getItem(REMINDER_NOTIF_ID_KEY)
   if (id) {
     await ExpoNotifications.cancelScheduledNotificationAsync(id)

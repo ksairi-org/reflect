@@ -70,6 +70,12 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     ],
     "expo-router",
     [
+      "expo-dev-client",
+      {
+        launchMode: "launcher",
+      },
+    ],
+    [
       "@sentry/react-native/expo",
       {
         organization: process.env.SENTRY_ORG,

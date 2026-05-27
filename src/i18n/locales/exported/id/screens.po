@@ -6,6 +6,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: @lingui/cli\n"
 "Language: id\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
 
 #: src/screens/JournalScreen/JournalScreen.tsx
 msgid "{remainingFree} free entries left — upgrade to keep writing"
@@ -48,6 +54,18 @@ msgstr "Periksa email Anda"
 msgid "Confirm password"
 msgstr "Konfirmasi kata sandi"
 
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+#~ msgid "Connect"
+#~ msgstr "Hubungkan"
+
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+#~ msgid "Connected"
+#~ msgstr "Terhubung"
+
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+#~ msgid "Connected accounts"
+#~ msgstr "Akun yang terhubung"
+
 #: src/screens/SignInScreen/SignInScreen.tsx
 msgid "Create account"
 msgstr "Buat akun"
@@ -72,6 +90,10 @@ msgstr "Hapus"
 msgid "Delete entry?"
 msgstr "Hapus entri?"
 
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+msgid "Denied — tap to open Settings"
+msgstr "Ditolak — ketuk untuk membuka Pengaturan"
+
 #: src/screens/SignInScreen/SignInScreen.tsx
 msgid "Don't have an account? Sign up"
 msgstr "Belum punya akun? Daftar"
@@ -81,8 +103,16 @@ msgid "Email"
 msgstr "Email"
 
 #: src/screens/SettingsScreen/SettingsScreen.tsx
+msgid "Enable"
+msgstr "Aktifkan"
+
+#: src/screens/SettingsScreen/SettingsScreen.tsx
 msgid "Enable notifications in Settings to use reminders."
 msgstr "Aktifkan notifikasi di Pengaturan untuk menggunakan pengingat."
+
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+#~ msgid "Error"
+#~ msgstr ""
 
 #: src/screens/ReflectionsScreen/ReflectionsScreen.tsx
 msgid "Export"
@@ -95,6 +125,14 @@ msgstr "Ekspor ✦"
 #: src/screens/SignInScreen/SignInScreen.tsx
 msgid "Google sign-in failed: no identity token"
 msgstr "Gagal masuk dengan Google: tidak ada token identitas"
+
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+msgid "Granted"
+msgstr "Diberikan"
+
+#: src/screens/JournalScreen/JournalScreen.tsx
+msgid "How are you really feeling right now?"
+msgstr "Bagaimana perasaanmu sebenarnya saat ini?"
 
 #: src/screens/JournalScreen/JournalScreen.tsx
 msgid "Journal"
@@ -152,10 +190,6 @@ msgstr "Simpan entri"
 msgid "Save entry ✦"
 msgstr "Simpan entri ✦"
 
-#: src/screens/SettingsScreen/SettingsScreen.tsx
-msgid "Scheduled! (5 s)"
-msgstr "Dijadwalkan! (5 d)"
-
 #: src/screens/ReflectionsScreen/ReflectionsScreen.tsx
 msgid "Search entries…"
 msgstr "Cari entri…"
@@ -163,10 +197,6 @@ msgstr "Cari entri…"
 #: src/screens/SettingsScreen/SettingsScreen.tsx
 msgid "Select reminder time"
 msgstr "Pilih waktu pengingat"
-
-#: src/screens/SettingsScreen/SettingsScreen.tsx
-msgid "Send test notification"
-msgstr "Kirim notifikasi uji"
 
 #: src/screens/SettingsScreen/SettingsScreen.tsx
 msgid "Settings"
@@ -225,8 +255,28 @@ msgid "Welcome to Pro ✦"
 msgstr "Selamat datang di Pro ✦"
 
 #: src/screens/JournalScreen/JournalScreen.tsx
+msgid "What are you avoiding?"
+msgstr "Apa yang sedang kamu hindari?"
+
+#: src/screens/JournalScreen/JournalScreen.tsx
+msgid "What are you grateful for today?"
+msgstr "Apa yang kamu syukuri hari ini?"
+
+#: src/screens/JournalScreen/JournalScreen.tsx
+msgid "What made you smile today?"
+msgstr "Apa yang membuatmu tersenyum hari ini?"
+
+#: src/screens/JournalScreen/JournalScreen.tsx
+msgid "What would make today a good day?"
+msgstr "Apa yang akan membuat hari ini menjadi hari yang baik?"
+
+#: src/screens/JournalScreen/JournalScreen.tsx
 msgid "What's on your mind?"
 msgstr "Apa yang ada di pikiran Anda?"
+
+#: src/screens/JournalScreen/JournalScreen.tsx
+msgid "What's one thing you want to remember about today?"
+msgstr "Satu hal apa yang ingin kamu ingat dari hari ini?"
 
 #: src/screens/JournalScreen/JournalScreen.tsx
 msgid "You've used all free entries. Tap Save to unlock unlimited writing ✦"

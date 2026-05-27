@@ -12,6 +12,10 @@ export function computeStreak(entries: JournalEntry[]): number {
   let streak = 0
   const cursor = new Date()
 
+  if (!daysWithEntry.has(dayKey(cursor))) {
+    cursor.setDate(cursor.getDate() - 1)
+  }
+
   while (daysWithEntry.has(dayKey(cursor))) {
     streak++
     cursor.setDate(cursor.getDate() - 1)

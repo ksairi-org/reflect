@@ -12,12 +12,9 @@ import tamaguiConfig from "@default-tamagui-config";
 import { LinguiClientProvider } from "@i18n";
 import { useAuthSession, useCustomFonts } from "@hooks";
 import { EnvBadge } from "@atoms";
-import {
-  requestNotificationPermission,
-  getFCMToken,
-  subscribeToForegroundMessages,
-} from "@firebase-messaging";
+import { subscribeToForegroundMessages } from "@firebase-messaging";
 import { useEffect } from "react";
+import { useToast } from "@hooks";
 import { SplashView } from "@ksairi-org/react-native-splash-view";
 import { themes } from "@theme";
 import { configureRevenueCat } from "@revenue-cat";
@@ -39,13 +36,11 @@ export const unstable_settings = {
 
 function RootLayoutNav() {
   useAuthSession();
+  const { notification } = useToast();
 
   useEffect(() => {
-    requestNotificationPermission().then((granted) => {
-      if (granted) getFCMToken().then((token) => token && console.log("[FCM token]", token));
-    });
     const unsubscribe = subscribeToForegroundMessages((title, body) => {
-      console.log("[FCM foreground]", title, body);
+      notification({ title, message: body });
     });
     return unsubscribe;
   }, []);
@@ -83,7 +78,9 @@ function RootLayout() {
         // Android: 288dp matches imageWidth in app.config.ts — Android 12+ maximum before the icon clips.
         // Keeps Rive start frame visually aligned with the native splash icon for a seamless transition.
         // iOS: undefined — splash fills the full screen (enableFullScreenImage_legacy), Rive does the same via Fit.Contain.
-        animationViewStyle={Platform.OS === "android" ? { width: 288, height: 288, alignSelf: "center" } : undefined}
+        animationViewStyle={
+          Platform.OS === "android" ? { width: 288, height: 288, alignSelf: "center" } : undefined
+        }
         fadeOutDelay={1500}
         fadeOutDuration={500}
       />

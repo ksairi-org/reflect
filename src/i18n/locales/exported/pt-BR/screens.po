@@ -54,6 +54,18 @@ msgstr "Verifique seu e-mail"
 msgid "Confirm password"
 msgstr "Confirmar senha"
 
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+#~ msgid "Connect"
+#~ msgstr "Conectar"
+
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+#~ msgid "Connected"
+#~ msgstr "Conectado"
+
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+#~ msgid "Connected accounts"
+#~ msgstr "Contas conectadas"
+
 #: src/screens/SignInScreen/SignInScreen.tsx
 msgid "Create account"
 msgstr "Criar conta"
@@ -78,6 +90,10 @@ msgstr "Excluir"
 msgid "Delete entry?"
 msgstr "Excluir entrada?"
 
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+msgid "Denied — tap to open Settings"
+msgstr "Negado — toque para abrir Configurações"
+
 #: src/screens/SignInScreen/SignInScreen.tsx
 msgid "Don't have an account? Sign up"
 msgstr "Não tem uma conta? Cadastre-se"
@@ -87,8 +103,16 @@ msgid "Email"
 msgstr "E-mail"
 
 #: src/screens/SettingsScreen/SettingsScreen.tsx
+msgid "Enable"
+msgstr "Ativar"
+
+#: src/screens/SettingsScreen/SettingsScreen.tsx
 msgid "Enable notifications in Settings to use reminders."
 msgstr "Ative as notificações em Configurações para usar lembretes."
+
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+#~ msgid "Error"
+#~ msgstr ""
 
 #: src/screens/ReflectionsScreen/ReflectionsScreen.tsx
 msgid "Export"
@@ -101,6 +125,14 @@ msgstr "Exportar ✦"
 #: src/screens/SignInScreen/SignInScreen.tsx
 msgid "Google sign-in failed: no identity token"
 msgstr "Falha ao entrar com Google: sem token de identidade"
+
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+msgid "Granted"
+msgstr "Concedido"
+
+#: src/screens/JournalScreen/JournalScreen.tsx
+msgid "How are you really feeling right now?"
+msgstr "Como você realmente está se sentindo agora?"
 
 #: src/screens/JournalScreen/JournalScreen.tsx
 msgid "Journal"
@@ -158,10 +190,6 @@ msgstr "Salvar entrada"
 msgid "Save entry ✦"
 msgstr "Salvar entrada ✦"
 
-#: src/screens/SettingsScreen/SettingsScreen.tsx
-msgid "Scheduled! (5 s)"
-msgstr "Agendado! (5 s)"
-
 #: src/screens/ReflectionsScreen/ReflectionsScreen.tsx
 msgid "Search entries…"
 msgstr "Buscar entradas…"
@@ -169,10 +197,6 @@ msgstr "Buscar entradas…"
 #: src/screens/SettingsScreen/SettingsScreen.tsx
 msgid "Select reminder time"
 msgstr "Selecionar horário do lembrete"
-
-#: src/screens/SettingsScreen/SettingsScreen.tsx
-msgid "Send test notification"
-msgstr "Enviar notificação de teste"
 
 #: src/screens/SettingsScreen/SettingsScreen.tsx
 msgid "Settings"
@@ -231,8 +255,28 @@ msgid "Welcome to Pro ✦"
 msgstr "Bem-vindo ao Pro ✦"
 
 #: src/screens/JournalScreen/JournalScreen.tsx
+msgid "What are you avoiding?"
+msgstr "O que você está evitando?"
+
+#: src/screens/JournalScreen/JournalScreen.tsx
+msgid "What are you grateful for today?"
+msgstr "Pelo que você é grato hoje?"
+
+#: src/screens/JournalScreen/JournalScreen.tsx
+msgid "What made you smile today?"
+msgstr "O que te fez sorrir hoje?"
+
+#: src/screens/JournalScreen/JournalScreen.tsx
+msgid "What would make today a good day?"
+msgstr "O que faria de hoje um bom dia?"
+
+#: src/screens/JournalScreen/JournalScreen.tsx
 msgid "What's on your mind?"
 msgstr "O que está pensando?"
+
+#: src/screens/JournalScreen/JournalScreen.tsx
+msgid "What's one thing you want to remember about today?"
+msgstr "Qual é uma coisa que você quer lembrar de hoje?"
 
 #: src/screens/JournalScreen/JournalScreen.tsx
 msgid "You've used all free entries. Tap Save to unlock unlimited writing ✦"

@@ -17,6 +17,12 @@ type AlertOptions = {
   duration?: number
 }
 
+type NotificationOptions = {
+  title: string
+  message?: string
+  duration?: number
+}
+
 export function useToast() {
   function toast({ title, message, preset = 'done', duration = 5 }: ToastOptions) {
     if (Platform.OS === 'android') {
@@ -42,5 +48,24 @@ export function useToast() {
     }
   }
 
-  return { toast, alert }
+  function notification({ title, message, duration = 4 }: NotificationOptions) {
+    if (Platform.OS === 'android') {
+      ToastAndroid.showWithGravity(
+        message ? `${title} — ${message}` : title,
+        ToastAndroid.LONG,
+        ToastAndroid.TOP,
+      )
+    } else {
+      Burnt.toast({
+        title,
+        message,
+        preset: 'custom',
+        icon: { ios: { name: 'bell.fill', color: '#007AFF' } },
+        duration,
+        from: 'top',
+      })
+    }
+  }
+
+  return { toast, alert, notification }
 }

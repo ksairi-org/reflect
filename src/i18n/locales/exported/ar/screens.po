@@ -6,6 +6,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: @lingui/cli\n"
 "Language: ar\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
 
 #: src/screens/JournalScreen/JournalScreen.tsx
 msgid "{remainingFree} free entries left — upgrade to keep writing"
@@ -48,6 +54,18 @@ msgstr "تحقّق من بريدك الإلكتروني"
 msgid "Confirm password"
 msgstr "تأكيد كلمة المرور"
 
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+#~ msgid "Connect"
+#~ msgstr "ربط"
+
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+#~ msgid "Connected"
+#~ msgstr "مرتبط"
+
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+#~ msgid "Connected accounts"
+#~ msgstr "الحسابات المرتبطة"
+
 #: src/screens/SignInScreen/SignInScreen.tsx
 msgid "Create account"
 msgstr "إنشاء حساب"
@@ -72,6 +90,10 @@ msgstr "حذف"
 msgid "Delete entry?"
 msgstr "حذف التسجيل؟"
 
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+msgid "Denied — tap to open Settings"
+msgstr "مرفوضة — اضغط لفتح الإعدادات"
+
 #: src/screens/SignInScreen/SignInScreen.tsx
 msgid "Don't have an account? Sign up"
 msgstr "ليس لديك حساب؟ سجّل"
@@ -81,8 +103,16 @@ msgid "Email"
 msgstr "البريد الإلكتروني"
 
 #: src/screens/SettingsScreen/SettingsScreen.tsx
+msgid "Enable"
+msgstr "تفعيل"
+
+#: src/screens/SettingsScreen/SettingsScreen.tsx
 msgid "Enable notifications in Settings to use reminders."
 msgstr "فعّل الإشعارات في الإعدادات لاستخدام التذكيرات."
+
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+#~ msgid "Error"
+#~ msgstr ""
 
 #: src/screens/ReflectionsScreen/ReflectionsScreen.tsx
 msgid "Export"
@@ -95,6 +125,14 @@ msgstr "تصدير ✦"
 #: src/screens/SignInScreen/SignInScreen.tsx
 msgid "Google sign-in failed: no identity token"
 msgstr "فشل تسجيل الدخول بـ Google: لا يوجد رمز هوية"
+
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+msgid "Granted"
+msgstr "ممنوحة"
+
+#: src/screens/JournalScreen/JournalScreen.tsx
+msgid "How are you really feeling right now?"
+msgstr "كيف تشعر حقاً الآن؟"
 
 #: src/screens/JournalScreen/JournalScreen.tsx
 msgid "Journal"
@@ -152,10 +190,6 @@ msgstr "حفظ التسجيل"
 msgid "Save entry ✦"
 msgstr "حفظ التسجيل ✦"
 
-#: src/screens/SettingsScreen/SettingsScreen.tsx
-msgid "Scheduled! (5 s)"
-msgstr "تمت الجدولة! (5 ث)"
-
 #: src/screens/ReflectionsScreen/ReflectionsScreen.tsx
 msgid "Search entries…"
 msgstr "البحث في التسجيلات…"
@@ -163,10 +197,6 @@ msgstr "البحث في التسجيلات…"
 #: src/screens/SettingsScreen/SettingsScreen.tsx
 msgid "Select reminder time"
 msgstr "اختر وقت التذكير"
-
-#: src/screens/SettingsScreen/SettingsScreen.tsx
-msgid "Send test notification"
-msgstr "إرسال إشعار تجريبي"
 
 #: src/screens/SettingsScreen/SettingsScreen.tsx
 msgid "Settings"
@@ -225,8 +255,28 @@ msgid "Welcome to Pro ✦"
 msgstr "مرحباً بك في Pro ✦"
 
 #: src/screens/JournalScreen/JournalScreen.tsx
+msgid "What are you avoiding?"
+msgstr "ما الذي تتجنبه؟"
+
+#: src/screens/JournalScreen/JournalScreen.tsx
+msgid "What are you grateful for today?"
+msgstr "على ماذا تشكر اليوم؟"
+
+#: src/screens/JournalScreen/JournalScreen.tsx
+msgid "What made you smile today?"
+msgstr "ما الذي جعلك تبتسم اليوم؟"
+
+#: src/screens/JournalScreen/JournalScreen.tsx
+msgid "What would make today a good day?"
+msgstr "ما الذي سيجعل اليوم يوماً جيداً؟"
+
+#: src/screens/JournalScreen/JournalScreen.tsx
 msgid "What's on your mind?"
 msgstr "ما الذي يدور في ذهنك؟"
+
+#: src/screens/JournalScreen/JournalScreen.tsx
+msgid "What's one thing you want to remember about today?"
+msgstr "ما الشيء الواحد الذي تريد أن تتذكره من اليوم؟"
 
 #: src/screens/JournalScreen/JournalScreen.tsx
 msgid "You've used all free entries. Tap Save to unlock unlimited writing ✦"
