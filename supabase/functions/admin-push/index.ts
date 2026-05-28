@@ -72,7 +72,7 @@ Deno.serve(async (req) => {
 
   const secret = req.headers.get('X-Admin-Secret')
   if (!ADMIN_SECRET || secret !== ADMIN_SECRET) {
-    return new Response('Unauthorized', { status: 401, headers: CORS_HEADERS })
+    return new Response('Unauthorized', { status: 403, headers: CORS_HEADERS })
   }
 
   const body = await req.json() as {
