@@ -80,6 +80,10 @@
   const secretEl = document.getElementById('secret')
   secretEl.value = localStorage.getItem('reflect_admin_secret') || ''
 
+  document.getElementById('user_id').addEventListener('input', function() {
+    this.dataset.userId = ''
+  })
+
   function setEnv(e) {
     env = e
     document.getElementById('btn-stg').classList.toggle('active', e === 'stg')
@@ -92,6 +96,9 @@
     users = []
     document.getElementById('user-table').style.display = 'none'
     document.getElementById('list-btn').textContent = 'Load users'
+    const targetEl = document.getElementById('user_id')
+    targetEl.value = ''
+    targetEl.dataset.userId = ''
   }
 
   async function loadUsers() {
@@ -136,7 +143,7 @@
       if (u.updated_at > byUser[u.user_id].updated_at) byUser[u.user_id].updated_at = u.updated_at
     })
     table.innerHTML = Object.values(byUser).map(u => `
-      <div class="user-row${u.user_id === selected ? ' selected' : ''}" onclick="selectUser('${u.user_id}')">
+      <div class="user-row${u.user_id === selected || u.email === document.getElementById('user_id').value.trim() ? ' selected' : ''}" onclick="selectUser('${u.user_id}', '${u.email}')">
         <div>
           <div class="user-email">${u.email}</div>
           <div class="user-token">${u.count} device${u.count !== 1 ? 's' : ''}</div>
@@ -147,8 +154,10 @@
     table.style.display = 'block'
   }
 
-  function selectUser(userId) {
-    document.getElementById('user_id').value = userId
+  function selectUser(userId, email) {
+    const el = document.getElementById('user_id')
+    el.value = email
+    el.dataset.userId = userId
     renderUsers()
   }
 
@@ -172,7 +181,8 @@
     const body = document.getElementById('body').value.trim()
     if (!title || !body) { showResult(false, 'Title and message are required.'); return }
 
-    const user_id = document.getElementById('user_id').value.trim() || undefined
+    const targetEl = document.getElementById('user_id')
+    const user_id = targetEl.dataset.userId || targetEl.value.trim() || undefined
 
     const btn = document.getElementById('send-btn')
     btn.disabled = true
