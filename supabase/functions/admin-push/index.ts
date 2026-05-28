@@ -132,8 +132,17 @@ Deno.serve(async (req) => {
   const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
   let query = supabase.from('device_tokens').select('fcm_token, user_id')
   if (user_id) {
-    if (UUID_RE.test(user_id)) query = query.eq('user_id', user_id)
-    else query = query.eq('fcm_token', user_id)
+    if (user_id.includes('@')) {
+      const { data: { users: authUsers }, error: authError } = await supabase.auth.admin.listUsers({ perPage: 1000 })
+      if (authError) return new Response(authError.message, { status: 500, headers: CORS_HEADERS })
+      const match = authUsers.find((u) => u.email === user_id)
+      if (!match) return new Response(`No user found with email ${user_id}`, { status: 404, headers: CORS_HEADERS })
+      query = query.eq('user_id', match.id)
+    } else if (UUID_RE.test(user_id)) {
+      query = query.eq('user_id', user_id)
+    } else {
+      query = query.eq('fcm_token', user_id)
+    }
   }
 
   const { data: devices, error } = await query
