@@ -37,7 +37,7 @@ async function sendPush(
   accessToken: string,
   title: string,
   body: string,
-): Promise<{ ok: boolean; error?: string }> {
+): Promise<{ ok: boolean; unregistered?: boolean; error?: string }> {
   const res = await fetch(
     `https://fcm.googleapis.com/v1/projects/${FIREBASE_PROJECT_ID}/messages:send`,
     {
@@ -58,7 +58,8 @@ async function sendPush(
   )
   if (!res.ok) {
     const err = await res.text()
-    return { ok: false, error: err }
+    const unregistered = err.includes('UNREGISTERED') || res.status === 404
+    return { ok: false, unregistered, error: err }
   }
   return { ok: true }
 }
@@ -142,9 +143,16 @@ Deno.serve(async (req) => {
     devices.map((d) => sendPush(d.fcm_token, accessToken, title, msgBody)),
   )
 
+  const staleTokens = devices
+    .filter((_, i) => results[i].status === 'fulfilled' && (results[i] as PromiseFulfilledResult<{ ok: boolean; unregistered?: boolean }>).value.unregistered)
+    .map((d) => d.fcm_token)
+  if (staleTokens.length > 0) {
+    await supabase.from('device_tokens').delete().in('fcm_token', staleTokens)
+  }
+
   const sent = results.filter((r) => r.status === 'fulfilled' && r.value.ok).length
   const errors = results.flatMap((r, i) => {
-    if (r.status === 'fulfilled' && !r.value.ok) return [`${devices[i].user_id}: ${r.value.error}`]
+    if (r.status === 'fulfilled' && !r.value.ok && !r.value.unregistered) return [`${devices[i].user_id}: ${r.value.error}`]
     if (r.status === 'rejected') return [`${devices[i].user_id}: ${r.reason}`]
     return []
   })

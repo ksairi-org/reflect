@@ -46,8 +46,8 @@ function matchesReminderTime(now: Date, timezone: string, hour: number, minute: 
   return localHour === hour && localMinute === minute
 }
 
-async function sendPush(fcmToken: string, accessToken: string): Promise<void> {
-  await fetch(`https://fcm.googleapis.com/v1/projects/${FIREBASE_PROJECT_ID}/messages:send`, {
+async function sendPush(fcmToken: string, accessToken: string): Promise<{ unregistered?: boolean }> {
+  const res = await fetch(`https://fcm.googleapis.com/v1/projects/${FIREBASE_PROJECT_ID}/messages:send`, {
     method: 'POST',
     headers: {
       'Authorization': `Bearer ${accessToken}`,
@@ -62,6 +62,11 @@ async function sendPush(fcmToken: string, accessToken: string): Promise<void> {
       },
     }),
   })
+  if (!res.ok) {
+    const err = await res.text()
+    return { unregistered: err.includes('UNREGISTERED') || res.status === 404 }
+  }
+  return {}
 }
 
 Deno.serve(async () => {
@@ -89,7 +94,14 @@ Deno.serve(async () => {
   if (!due.length) return new Response('ok — no reminders due now')
 
   const accessToken = await getFirebaseAccessToken()
-  await Promise.all(due.map(d => sendPush(d.fcm_token, accessToken)))
+  const results = await Promise.all(due.map(d => sendPush(d.fcm_token, accessToken)))
+
+  const staleTokens = due
+    .filter((_, i) => results[i].unregistered)
+    .map(d => d.fcm_token)
+  if (staleTokens.length > 0) {
+    await supabase.from('device_tokens').delete().in('fcm_token', staleTokens)
+  }
 
   return new Response(`Sent ${due.length} reminder(s)`)
 })
