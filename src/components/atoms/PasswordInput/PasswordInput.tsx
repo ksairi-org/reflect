@@ -1,8 +1,20 @@
 import React, { useState, useRef, useImperativeHandle, forwardRef } from 'react'
-import { StyleSheet, TextInput } from 'react-native'
-import { XStack, useTheme, getTokenValue } from 'tamagui'
+import { Input, XStack, useTheme, getTokenValue, styled } from 'tamagui'
 import { BaseTouchable } from '@ksairi-org/ui-touchables'
 import { Feather } from '@expo/vector-icons'
+
+const PasswordField = styled(Input, {
+  flex: 1,
+  size: '$4',
+  bg: '$background0',
+  borderWidth: 0,
+  color: '$text-emphasis',
+  placeholderTextColor: '$placeholderColor',
+  focusStyle: {
+    borderWidth: 0,
+    outlineWidth: 0,
+  },
+})
 
 type PasswordInputProps = {
   value: string
@@ -29,7 +41,7 @@ export const PasswordInput = forwardRef<PasswordInputHandle, PasswordInputProps>
 }, ref) => {
   const [visible, setVisible] = useState(false)
   const [focused, setFocused] = useState(false)
-  const inputRef = useRef<TextInput>(null)
+  const inputRef = useRef<React.ElementRef<typeof Input>>(null)
   const theme = useTheme()
 
   useImperativeHandle(ref, () => ({
@@ -50,7 +62,7 @@ export const PasswordInput = forwardRef<PasswordInputHandle, PasswordInputProps>
       borderColor={focused ? '$accentBackground' : '$borderColor'}
       bg="$surface-card"
       overflow="hidden">
-      <TextInput
+      <PasswordField
         ref={inputRef}
         value={value}
         onChangeText={onChangeText}
@@ -59,11 +71,10 @@ export const PasswordInput = forwardRef<PasswordInputHandle, PasswordInputProps>
         onSubmitEditing={onSubmitEditing}
         returnKeyType={returnKeyType}
         placeholder={placeholder}
-        placeholderTextColor={theme['text-placeholder'].val}
+        pr={44}
         secureTextEntry={!visible}
         autoComplete={autoComplete}
         autoCapitalize="none"
-        style={[styles.input, { color: theme['text-emphasis'].val }]}
       />
       <BaseTouchable
         position="absolute"
@@ -83,13 +94,3 @@ export const PasswordInput = forwardRef<PasswordInputHandle, PasswordInputProps>
 })
 
 PasswordInput.displayName = 'PasswordInput'
-
-const styles = StyleSheet.create({
-  input: {
-    flex: 1,
-    fontSize: 16,
-    paddingVertical: 12,
-    paddingHorizontal: 12,
-    paddingRight: 44,
-  },
-})
