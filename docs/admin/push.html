@@ -96,7 +96,7 @@
 
   async function loadUsers() {
     const secret = secretEl.value.trim()
-    if (!secret) { alert('Enter admin secret first.'); return }
+    if (!secret) { showResult(false, 'Enter admin secret first.'); return }
     localStorage.setItem('reflect_admin_secret', secret)
 
     const btn = document.getElementById('list-btn')
@@ -109,12 +109,12 @@
         headers: { 'Content-Type': 'application/json', 'X-Admin-Secret': secret },
         body: JSON.stringify({ action: 'list' }),
       })
-      if (!res.ok) { alert('Failed: ' + await res.text()); return }
+      if (!res.ok) { showResult(false, await res.text()); return }
       users = await res.json()
       renderUsers()
       btn.textContent = 'Refresh'
     } catch (err) {
-      alert(err.message)
+      showResult(false, err.message)
     } finally {
       btn.disabled = false
     }
