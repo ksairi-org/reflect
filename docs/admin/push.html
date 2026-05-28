@@ -132,7 +132,7 @@
       <div class="user-row${u.user_id === selectedId ? ' selected' : ''}" onclick="selectUser('${u.user_id}', '${u.fcm_token}')">
         <div>
           <div class="user-email">${u.email}</div>
-          <div class="user-token">${u.fcm_token}</div>
+          <div class="user-token">token: ${u.fcm_token}</div>
         </div>
         <div class="user-token" style="max-width:90px;text-align:right">${timeAgo(u.updated_at)}</div>
       </div>
@@ -187,11 +187,14 @@
     }
   })
 
+  let successTimer = null
   function showResult(ok, msg) {
     const el = document.getElementById('result')
     el.textContent = (ok ? '✓ ' : '✗ ') + msg
     el.className = ok ? 'success' : 'error'
     el.style.display = 'block'
+    clearTimeout(successTimer)
+    if (ok) successTimer = setTimeout(() => { el.style.display = 'none' }, 4000)
   }
 </script>
 </body>
