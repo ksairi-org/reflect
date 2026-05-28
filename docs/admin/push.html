@@ -58,9 +58,9 @@
       <textarea id="body" rows="3" placeholder="Type your notification message..."></textarea>
     </label>
     <label>
-      <span>User <em style="text-transform:none;font-style:normal;color:#555">(optional &mdash; leave blank to send to all)</em></span>
+      <span>User <em style="text-transform:none;font-style:normal;color:#555">(optional &mdash; leave blank to send to all devices)</em></span>
       <div class="user-id-row">
-        <input type="text" id="user_id" placeholder="Select from list or paste UUID" />
+        <input type="text" id="user_id" placeholder="Select from list or paste user ID" />
         <button type="button" class="list-btn" id="list-btn" onclick="loadUsers()">Load users</button>
       </div>
       <div class="user-table" id="user-table"></div>
@@ -129,10 +129,10 @@
     }
     const selectedId = document.getElementById('user_id').value.trim()
     table.innerHTML = users.map(u => `
-      <div class="user-row${u.user_id === selectedId ? ' selected' : ''}" onclick="selectUser('${u.user_id}', '${u.fcm_token}')">
+      <div class="user-row${u.user_id === selectedId ? ' selected' : ''}" onclick="selectUser('${u.user_id}')">
         <div>
           <div class="user-email">${u.email}</div>
-          <div class="user-token">token: ${u.fcm_token}</div>
+          <div class="user-token">token: ${u.fcm_token.split(':')[0]}&hellip;</div>
         </div>
         <div class="user-token" style="max-width:90px;text-align:right">${timeAgo(u.updated_at)}</div>
       </div>
@@ -140,7 +140,7 @@
     table.style.display = 'block'
   }
 
-  function selectUser(userId, token) {
+  function selectUser(userId) {
     document.getElementById('user_id').value = userId
     renderUsers()
   }
