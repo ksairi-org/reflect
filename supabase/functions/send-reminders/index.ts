@@ -56,10 +56,9 @@ async function sendPush(fcmToken: string, accessToken: string): Promise<void> {
     body: JSON.stringify({
       message: {
         token: fcmToken,
-        notification: {
-          title: 'Reflect',
-          body: "Time to jot down today's thoughts.",
-        },
+        notification: { title: 'Reflect', body: "Time to jot down today's thoughts." },
+        android: { notification: { channel_id: 'default', sound: 'default' } },
+        apns: { payload: { aps: { sound: 'default' } } },
       },
     }),
   })

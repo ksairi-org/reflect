@@ -46,7 +46,14 @@ async function sendPush(
         Authorization: `Bearer ${accessToken}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ message: { token: fcmToken, notification: { title, body } } }),
+      body: JSON.stringify({
+        message: {
+          token: fcmToken,
+          notification: { title, body },
+          android: { notification: { channel_id: 'default', sound: 'default' } },
+          apns: { payload: { aps: { sound: 'default' } } },
+        },
+      }),
     },
   )
   if (!res.ok) {
@@ -136,10 +143,14 @@ Deno.serve(async (req) => {
   )
 
   const sent = results.filter((r) => r.status === 'fulfilled' && r.value.ok).length
-  const failed = results.length - sent
+  const errors = results.flatMap((r, i) => {
+    if (r.status === 'fulfilled' && !r.value.ok) return [`${devices[i].user_id}: ${r.value.error}`]
+    if (r.status === 'rejected') return [`${devices[i].user_id}: ${r.reason}`]
+    return []
+  })
 
-  const message = failed > 0
-    ? `Sent ${sent}/${devices.length} (${failed} failed)`
+  const message = errors.length > 0
+    ? `Sent ${sent}/${devices.length} (${errors.length} failed)\n${errors.join('\n')}`
     : `Sent to ${sent} device${sent !== 1 ? 's' : ''}`
 
   return new Response(message, { status: 200, headers: CORS_HEADERS })

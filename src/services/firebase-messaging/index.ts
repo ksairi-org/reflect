@@ -7,6 +7,16 @@ import { getApp } from '@react-native-firebase/app'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import * as Device from 'expo-device'
 import * as ExpoNotifications from 'expo-notifications'
+import { Platform } from 'react-native'
+
+if (Platform.OS === 'android') {
+  ExpoNotifications.setNotificationChannelAsync('default', {
+    name: 'Reflect',
+    importance: ExpoNotifications.AndroidImportance.MAX,
+    sound: 'default',
+    vibrationPattern: [0, 250, 250, 250],
+  })
+}
 
 ExpoNotifications.setNotificationHandler({
   handleNotification: async () => ({

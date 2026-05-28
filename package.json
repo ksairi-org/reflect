@@ -1,6 +1,6 @@
 {
   "name": "reflect",
-  "main": "expo-router/entry",
+  "main": "index.js",
   "version": "1.0.1",
   "scripts": {
     "sync-env-vars": "doppler secrets substitute env.template.yaml --output .env --project mobile --config ${ENV:-stg}",
