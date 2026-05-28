@@ -53,6 +53,7 @@ export function SignInScreen() {
   const { t } = useLingui()
   const { toast } = useToast()
   const isDark = useColorScheme() === 'dark'
+
   const hasInitializedAppleSignIn = useRef(false)
   const prevAppState = useRef<string>('active')
   const passwordRef = useRef<PasswordInputHandle>(null)
@@ -263,7 +264,7 @@ export function SignInScreen() {
               size="$4"
               bg="$surface-card"
               color="$text-emphasis"
-              placeholderTextColor={theme['text-placeholder'].val}
+              placeholderTextColor="$text-placeholder"
               borderColor="$borderColor"
               borderWidth={1}
               focusStyle={{ borderColor: '$accentBackground', outlineWidth: 0 }}
