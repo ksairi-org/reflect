@@ -58,9 +58,9 @@
       <textarea id="body" rows="3" placeholder="Type your notification message..."></textarea>
     </label>
     <label>
-      <span>User <em style="text-transform:none;font-style:normal;color:#555">(optional &mdash; leave blank to send to all devices)</em></span>
+      <span>Target <em style="text-transform:none;font-style:normal;color:#555">(optional &mdash; leave blank to send to all)</em></span>
       <div class="user-id-row">
-        <input type="text" id="user_id" placeholder="Select from list or paste user ID" />
+        <input type="text" id="user_id" placeholder="Select from list, or paste user ID / raw token" />
         <button type="button" class="list-btn" id="list-btn" onclick="loadUsers()">Load users</button>
       </div>
       <div class="user-table" id="user-table"></div>
@@ -127,12 +127,19 @@
       table.style.display = 'block'
       return
     }
-    const selectedId = document.getElementById('user_id').value.trim()
-    table.innerHTML = users.map(u => `
-      <div class="user-row${u.user_id === selectedId ? ' selected' : ''}" onclick="selectUser('${u.user_id}')">
+    const selected = document.getElementById('user_id').value.trim()
+    // Group by user_id
+    const byUser = {}
+    users.forEach(u => {
+      if (!byUser[u.user_id]) byUser[u.user_id] = { email: u.email, user_id: u.user_id, count: 0, updated_at: u.updated_at }
+      byUser[u.user_id].count++
+      if (u.updated_at > byUser[u.user_id].updated_at) byUser[u.user_id].updated_at = u.updated_at
+    })
+    table.innerHTML = Object.values(byUser).map(u => `
+      <div class="user-row${u.user_id === selected ? ' selected' : ''}" onclick="selectUser('${u.user_id}')">
         <div>
           <div class="user-email">${u.email}</div>
-          <div class="user-token">token: ${u.fcm_token.split(':')[0]}&hellip;</div>
+          <div class="user-token">${u.count} device${u.count !== 1 ? 's' : ''}</div>
         </div>
         <div class="user-token" style="max-width:90px;text-align:right">${timeAgo(u.updated_at)}</div>
       </div>

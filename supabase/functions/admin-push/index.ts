@@ -129,8 +129,12 @@ Deno.serve(async (req) => {
     return new Response('title and body are required', { status: 400, headers: CORS_HEADERS })
   }
 
+  const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
   let query = supabase.from('device_tokens').select('fcm_token, user_id')
-  if (user_id) query = query.eq('user_id', user_id)
+  if (user_id) {
+    if (UUID_RE.test(user_id)) query = query.eq('user_id', user_id)
+    else query = query.eq('fcm_token', user_id)
+  }
 
   const { data: devices, error } = await query
   if (error) return new Response(error.message, { status: 500, headers: CORS_HEADERS })
