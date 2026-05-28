@@ -1,7 +1,6 @@
 import { i18n } from '@lingui/core'
 import type { Messages } from '@lingui/core'
-import type { Locale } from 'expo-localization'
-import { defaultFallbackLocale, locales } from './config/constants'
+import { defaultFallbackLocale } from './config/constants'
 import * as enMessages from './locales/compiled/en'
 import * as esMessages from './locales/compiled/es'
 import * as ptBRMessages from './locales/compiled/pt-BR'
@@ -18,12 +17,17 @@ const messagesByLocale: Record<string, Messages> = {
   ar: arMessages.messages,
 }
 
-function isI18nLocale(value: string | null | undefined): value is Locale['languageTag'] {
-  return value ? Object.keys(locales).includes(value) : false
+function resolveLocale(value: string | null | undefined): string {
+  if (!value) return defaultFallbackLocale
+  if (Object.keys(messagesByLocale).includes(value)) return value
+  // e.g. 'pt-PT' → try 'pt-BR'; 'zh-Hant-TW' → try 'zh'
+  const languageCode = value.split('-')[0]
+  const match = Object.keys(messagesByLocale).find(key => key.split('-')[0] === languageCode)
+  return match ?? defaultFallbackLocale
 }
 
 export function setI18nLocale(locale: string) {
-  const validLocale = isI18nLocale(locale) ? locale : defaultFallbackLocale
+  const validLocale = resolveLocale(locale)
   const messages = messagesByLocale[validLocale] ?? messagesByLocale[defaultFallbackLocale]
   i18n.loadAndActivate({ locale: validLocale, messages })
 }
