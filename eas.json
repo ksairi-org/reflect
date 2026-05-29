@@ -30,6 +30,12 @@
         "simulator": true
       }
     },
+    "preview-apk": {
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk"
+      }
+    },
     "prd": {
       "autoIncrement": true
     }
