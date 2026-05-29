@@ -5,6 +5,11 @@ on:
     branches:
       - stg
       - main
+    paths:
+      - 'package.json'
+      - 'yarn.lock'
+      - 'app.config.ts'
+      - 'eas.json'
   workflow_dispatch:
     inputs:
       environment:
