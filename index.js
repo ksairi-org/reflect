@@ -3,15 +3,17 @@ import * as ExpoNotifications from 'expo-notifications'
 import { Platform } from 'react-native'
 
 // Must be registered at module level before React mounts.
-// Handles FCM messages when the app is in background or killed state.
+// FCM automatically displays notification-payload messages — only handle data-only messages here.
 messaging().setBackgroundMessageHandler(async remoteMessage => {
-  const title = remoteMessage.notification?.title ?? 'Reflect'
-  const body = remoteMessage.notification?.body ?? ''
+  if (remoteMessage.notification) return
+
+  const title = remoteMessage.data?.title
+  const body = remoteMessage.data?.body
   if (!title && !body) return
 
   if (Platform.OS === 'android') {
     await ExpoNotifications.scheduleNotificationAsync({
-      content: { title, body, sound: 'default' },
+      content: { title: title ?? 'Reflect', body: body ?? '' },
       trigger: null,
     })
   }

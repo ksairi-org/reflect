@@ -13,7 +13,6 @@ if (Platform.OS === 'android') {
   ExpoNotifications.setNotificationChannelAsync('default', {
     name: 'Reflect',
     importance: ExpoNotifications.AndroidImportance.MAX,
-    sound: 'default',
     vibrationPattern: [0, 250, 250, 250],
   })
 }
