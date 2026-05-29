@@ -1,4 +1,4 @@
-import { withGradleProperties } from "@expo/config-plugins";
+import { withGradleProperties, withProjectBuildGradle } from "@expo/config-plugins";
 import type { ConfigContext, ExpoConfig } from "expo/config";
 
 const SPLASH_IMAGE = "./assets/images/splash.png";
@@ -120,19 +120,29 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     },
   };
 
-  // expo-updates reads rootProject["kspVersion"] (no prefix) to select the KSP version
-  // compatible with the Kotlin version. expo-build-properties writes android.kotlinVersion
-  // (with prefix), which expo-updates cannot read. Writing kspVersion directly ensures
-  // the correct KSP version is used instead of falling back to the 1.9.x default.
-  // expo-build-properties writes android.kotlinVersion (prefixed), but expo-updates reads
-  // rootProject["kotlinVersion"] (no prefix) and rootProject["kspVersion"]. Write both
-  // unprefixed so expo-updates picks the correct KSP version instead of the 1.9.x fallback.
-  return withGradleProperties(baseConfig, (cfg) => {
-    cfg.modResults = cfg.modResults.filter(
+  // expo-updates uses KSP (Kotlin Symbol Processing) for Room. It reads rootProject["kspVersion"]
+  // in its buildscript block to select the compatible KSP version. expo-build-properties writes
+  // android.kotlinVersion (prefixed), which expo-updates cannot see from its buildscript context.
+  // Fix: pin both kspVersion and kotlinVersion as unprefixed gradle.properties entries, AND pin
+  // the KSP classpath in the root build.gradle so the correct version is on the root classpath
+  // before any subproject buildscript is evaluated.
+  const KSP_VERSION = "2.0.21-1.0.28";
+  let cfg = withGradleProperties(baseConfig, (c) => {
+    c.modResults = c.modResults.filter(
       (item) => item.key !== "kspVersion" && item.key !== "kotlinVersion",
     );
-    cfg.modResults.push({ type: "property", key: "kotlinVersion", value: "2.0.21" });
-    cfg.modResults.push({ type: "property", key: "kspVersion", value: "2.0.21-1.0.28" });
-    return cfg;
+    c.modResults.push({ type: "property", key: "kotlinVersion", value: "2.0.21" });
+    c.modResults.push({ type: "property", key: "kspVersion", value: KSP_VERSION });
+    return c;
   });
+  cfg = withProjectBuildGradle(cfg, (c) => {
+    if (!c.modResults.contents.includes("symbol-processing-gradle-plugin")) {
+      c.modResults.contents = c.modResults.contents.replace(
+        /classpath\('com\.facebook\.react:react-native-gradle-plugin'\)/,
+        `classpath('com.facebook.react:react-native-gradle-plugin')\n        classpath('com.google.devtools.ksp:symbol-processing-gradle-plugin:${KSP_VERSION}')`,
+      );
+    }
+    return c;
+  });
+  return cfg;
 };
