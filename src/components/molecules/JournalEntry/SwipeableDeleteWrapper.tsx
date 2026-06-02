@@ -1,12 +1,15 @@
 import { useRef, useEffect, type ComponentRef, type ReactNode } from 'react'
 import { Alert } from 'react-native'
 import { useLingui } from '@lingui/react/macro'
-import { BaseTouchable } from '@ksairi-org/ui-touchables'
+import { BaseTouchable, type TouchableProps } from '@ksairi-org/ui-touchables'
 import { Ionicons } from '@expo/vector-icons'
 import ReanimatedSwipeable from 'react-native-gesture-handler/ReanimatedSwipeable'
 import { logJournalEntryDeleted } from '@analytics'
 import { useSwipeableStore } from '@/src/stores'
-const DeleteAction = ({ onPress, mb }: { onPress: () => void; mb: string }) => (
+
+type MbProp = TouchableProps['mb']
+
+const DeleteAction = ({ onPress, mb }: { onPress: () => void; mb: MbProp }) => (
   <BaseTouchable
     onPress={onPress}
     bg="$red10"
@@ -23,7 +26,7 @@ interface SwipeableDeleteWrapperProps {
   entryId: string
   onDelete: (id: string) => void
   closeKey: number
-  mb?: string
+  mb?: MbProp
   children: ReactNode
 }
 
