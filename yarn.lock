@@ -11003,7 +11003,7 @@ __metadata:
 
 "expo-updates@patch:expo-updates@npm%3A55.0.24#~/.yarn/patches/expo-updates-npm-55.0.24-60b199fba2.patch":
   version: 55.0.24
-  resolution: "expo-updates@patch:expo-updates@npm%3A55.0.24#~/.yarn/patches/expo-updates-npm-55.0.24-60b199fba2.patch::version=55.0.24&hash=a72719"
+  resolution: "expo-updates@patch:expo-updates@npm%3A55.0.24#~/.yarn/patches/expo-updates-npm-55.0.24-60b199fba2.patch::version=55.0.24&hash=f629aa"
   dependencies:
     "@expo/code-signing-certificates": "npm:^0.0.6"
     "@expo/plist": "npm:^0.5.4"
@@ -11025,7 +11025,7 @@ __metadata:
     react-native: "*"
   bin:
     expo-updates: bin/cli.js
-  checksum: 10c0/875d4dd72fefd387cfec31af1e458679a59a1fbe5ca101f7ffd30894d5e410b655687b3af5a636e467bbd36f74bbbb46c6e07a6a6e0e70fd09ef7c286d5811d1
+  checksum: 10c0/d3d7ddea2e8c3f3bcf794a265ba3380578e195346886fa70720a7c78aff2ece57db6ad12568edc65969119beff9f80166f7abde4954992739eab0c4b663093e2
   languageName: node
   linkType: hard
 
