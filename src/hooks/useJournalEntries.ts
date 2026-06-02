@@ -31,24 +31,9 @@ const useCreateJournalEntry = () => {
       if (error) throw error
       return data as JournalEntry
     },
-    onMutate: async (content) => {
-      await queryClient.cancelQueries({ queryKey: QUERY_KEY })
-      const previous = queryClient.getQueryData<JournalEntry[]>(QUERY_KEY)
-      const optimistic: JournalEntry = {
-        id: `temp-${Date.now()}`,
-        user_id: '',
-        content,
-        is_bookmarked: false,
-        created_at: new Date().toISOString(),
-        updated_at: new Date().toISOString(),
-      }
-      queryClient.setQueryData<JournalEntry[]>(QUERY_KEY, (old) => [optimistic, ...(old ?? [])])
-      return { previous }
+    onSuccess: (newEntry) => {
+      queryClient.setQueryData<JournalEntry[]>(QUERY_KEY, (old) => [newEntry, ...(old ?? [])])
     },
-    onError: (_err, _vars, ctx) => {
-      if (ctx?.previous) queryClient.setQueryData(QUERY_KEY, ctx.previous)
-    },
-    onSettled: () => queryClient.invalidateQueries({ queryKey: QUERY_KEY }),
   })
 }
 

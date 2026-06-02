@@ -29,6 +29,18 @@ type PreferencesStoreState = {
   setTimeFormat: (format: TimeFormat) => void
 }
 
+type SwipeableStoreState = {
+  activeDragCount: number
+  startDrag: () => void
+  endDrag: () => void
+}
+
+export const useSwipeableStore = create<SwipeableStoreState>((set) => ({
+  activeDragCount: 0,
+  startDrag: () => set((s) => ({ activeDragCount: s.activeDragCount + 1 })),
+  endDrag: () => set((s) => ({ activeDragCount: Math.max(0, s.activeDragCount - 1) })),
+}))
+
 export const usePreferencesStore = create<PreferencesStoreState>()(
   persist(
     (set) => ({

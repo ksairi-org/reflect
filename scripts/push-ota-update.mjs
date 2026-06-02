@@ -10,6 +10,10 @@
 //   DIST_DIR              (optional, defaults to ./dist)
 
 import fs from 'fs'
+import { createRequire } from 'module'
+
+const require = createRequire(import.meta.url)
+const { getConfig } = require('@expo/config')
 import path from 'path'
 import crypto from 'crypto'
 
@@ -90,7 +94,7 @@ async function insertUpdate(row) {
   }
 }
 
-async function pushPlatform(platform, metadata, updateId) {
+async function pushPlatform(platform, metadata, updateId, expoConfig) {
   const platformMeta = metadata.fileMetadata?.[platform]
   if (!platformMeta?.bundle) {
     console.log(`  no ${platform} bundle in export, skipping`)
@@ -131,13 +135,13 @@ async function pushPlatform(platform, metadata, updateId) {
     runtime_version: RUNTIME_VERSION,
     launch_asset: {
       hash: sha256b64(bundleLocalPath),
-      key: 'bundle',
+      key: platformMeta.bundle,
       fileExtension: path.extname(platformMeta.bundle) || '.bundle',
       contentType: 'application/javascript',
       url: `${storageBase}/${prefix}/${platformMeta.bundle}`,
     },
     assets,
-    extra: {},
+    extra: { expoClient: expoConfig },
     active: true,
   })
 
@@ -152,10 +156,11 @@ async function main() {
     )
   }
   const metadata = JSON.parse(fs.readFileSync(metadataPath, 'utf8'))
+  const { exp: expoConfig } = getConfig(process.cwd(), { skipSDKVersionRequirement: true })
 
   // Each platform gets its own update ID so the manifest server can serve them independently
-  await pushPlatform('ios', metadata, crypto.randomUUID())
-  await pushPlatform('android', metadata, crypto.randomUUID())
+  await pushPlatform('ios', metadata, crypto.randomUUID(), expoConfig)
+  await pushPlatform('android', metadata, crypto.randomUUID(), expoConfig)
 
   console.log('\nDone.')
 }

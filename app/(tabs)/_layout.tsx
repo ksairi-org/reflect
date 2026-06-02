@@ -2,6 +2,7 @@ import { BaseIcon } from "@atoms";
 import { LabelMd } from "@fonts";
 import { BaseTouchable } from "@ksairi-org/ui-touchables";
 import { useLingui } from "@lingui/react/macro";
+import { useSwipeableStore } from "@/src/stores";
 import {
   createMaterialTopTabNavigator,
   type MaterialTopTabBarProps,
@@ -57,6 +58,7 @@ const TabBar = ({ state, descriptors, navigation }: MaterialTopTabBarProps) => {
 
 const TabLayout = () => {
   const { t } = useLingui();
+  const tabSwipeEnabled = useSwipeableStore((s) => s.activeDragCount === 0);
 
   return (
     <MaterialTopTabs
@@ -72,7 +74,7 @@ const TabLayout = () => {
         name="index"
         options={{
           title: t`Journal`,
-          swipeEnabled: false,
+          swipeEnabled: tabSwipeEnabled,
           tabBarIcon: ({ color }: { color: string }) => (
             <BaseIcon iconName="iconPen" width={sizes.lg} height={sizes.lg} color={color} />
           ),
@@ -82,7 +84,7 @@ const TabLayout = () => {
         name="reflections"
         options={{
           title: t`Reflections`,
-          swipeEnabled: false,
+          swipeEnabled: tabSwipeEnabled,
           tabBarIcon: ({ color }: { color: string }) => (
             <BaseIcon iconName="iconBook" width={sizes.lg} height={sizes.lg} color={color} />
           ),

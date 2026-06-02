@@ -1,5 +1,4 @@
-import { useState, useRef, useEffect, useCallback, type ComponentRef, type ReactNode } from 'react'
-import { Alert } from 'react-native'
+import { useState, useRef, useCallback, type ComponentRef } from 'react'
 import { useFocusEffect } from 'expo-router'
 import { ScrollView, YStack, XStack, TextArea, Spinner } from 'tamagui'
 import { DisplayLg, BodySm, LabelMd, LabelLg } from '@fonts'
@@ -11,11 +10,9 @@ import { format } from 'date-fns'
 import { getDateLocale, formatEntryTime } from '@/src/utils/date'
 import { usePreferencesStore } from '@/src/stores'
 import type { JournalEntry } from '@/src/types/journal'
-import { logJournalEntryCreated, logJournalEntryDeleted, logScreenView } from '@analytics'
+import { logJournalEntryCreated, logScreenView } from '@analytics'
 import { useJournalEntries, useCreateJournalEntry, useDeleteJournalEntry, useRevenueCat, useToast, useStreak, getDailyPromptIndex } from '@hooks'
-import Animated, { useSharedValue, useAnimatedStyle, withTiming, withDelay, cancelAnimation } from 'react-native-reanimated'
-import ReanimatedSwipeable from 'react-native-gesture-handler/ReanimatedSwipeable'
-import { Ionicons } from '@expo/vector-icons'
+import { AnimatedEntry, SwipeableDeleteWrapper } from '@molecules'
 
 const formatDateHeading = (iso: string) =>
   format(new Date(iso), 'EEEE, MMMM d', { locale: getDateLocale() })
@@ -28,40 +25,6 @@ const isToday = (iso: string) => {
     d.getDate() === now.getDate()
 }
 
-interface AnimatedEntryProps {
-  children: ReactNode
-  index: number
-  animKey: number
-}
-
-const AnimatedEntry = ({ children, index, animKey }: AnimatedEntryProps) => {
-  const tx = useSharedValue(index % 2 === 0 ? -40 : 40)
-  const opacity = useSharedValue(0)
-
-  useEffect(() => {
-    cancelAnimation(tx)
-    cancelAnimation(opacity)
-    tx.value = index % 2 === 0 ? -40 : 40
-    opacity.value = 0
-    const delay = index * 100
-    tx.value = withDelay(delay, withTiming(0, { duration: 500 }))
-    opacity.value = withDelay(delay, withTiming(1, { duration: 500 }))
-  }, [animKey])
-
-  const style = useAnimatedStyle(() => ({
-    transform: [{ translateX: tx.value }],
-    opacity: opacity.value,
-  }))
-
-  return <Animated.View style={style}>{children}</Animated.View>
-}
-
-const DeleteAction = () => (
-  <YStack bg="$red10" justify="center" items="center" width={72} mb="$3" rounded="$4">
-    <Ionicons name="trash-outline" size={22} color="white" />
-  </YStack>
-)
-
 interface EntryCardProps {
   entry: JournalEntry
   onDelete: (id: string) => void
@@ -69,40 +32,17 @@ interface EntryCardProps {
 }
 
 const EntryCard = ({ entry, onDelete, closeKey }: EntryCardProps) => {
-  const { t } = useLingui()
   const timeFormat = usePreferencesStore((s) => s.timeFormat)
-  const ref = useRef<ComponentRef<typeof ReanimatedSwipeable>>(null)
-
-  useEffect(() => {
-    if (closeKey > 0) ref.current?.reset()
-  }, [closeKey])
-
-  const handleSwipeOpen = (direction: 'left' | 'right') => {
-    if (direction !== 'right') return
-    Alert.alert(
-      t`Delete entry?`,
-      t`This cannot be undone.`,
-      [
-        { text: t`Cancel`, style: 'cancel', onPress: () => ref.current?.close() },
-        { text: t`Delete`, style: 'destructive', onPress: () => { onDelete(entry.id); logJournalEntryDeleted() } },
-      ],
-    )
-  }
 
   return (
-    <ReanimatedSwipeable
-      ref={ref}
-      renderRightActions={() => <DeleteAction />}
-      onSwipeableOpen={handleSwipeOpen}
-      rightThreshold={60}
-    >
+    <SwipeableDeleteWrapper entryId={entry.id} onDelete={onDelete} closeKey={closeKey} mb="$3">
       <YStack bg="$surface-card" rounded="$4" p="$4" mb="$3" borderWidth={1} borderColor="$borderColor">
         <BodySm color="$text-emphasis" mb="$3">
           {entry.content}
         </BodySm>
         <LabelMd color="$text-disabled">{formatEntryTime(entry.created_at, timeFormat === '24h')}</LabelMd>
       </YStack>
-    </ReanimatedSwipeable>
+    </SwipeableDeleteWrapper>
   )
 }
 

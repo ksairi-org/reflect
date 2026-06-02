@@ -12,3 +12,19 @@ msgstr ""
 "Last-Translator: \n"
 "Language-Team: \n"
 "Plural-Forms: \n"
+
+#: src/components/molecules/JournalEntry/SwipeableDeleteWrapper.tsx
+msgid "Cancel"
+msgstr ""
+
+#: src/components/molecules/JournalEntry/SwipeableDeleteWrapper.tsx
+msgid "Delete"
+msgstr ""
+
+#: src/components/molecules/JournalEntry/SwipeableDeleteWrapper.tsx
+msgid "Delete entry?"
+msgstr ""
+
+#: src/components/molecules/JournalEntry/SwipeableDeleteWrapper.tsx
+msgid "This cannot be undone."
+msgstr ""

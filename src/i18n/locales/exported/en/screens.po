@@ -49,8 +49,6 @@ msgstr ""
 msgid "Bookmarked"
 msgstr ""
 
-#: src/screens/JournalScreen/JournalScreen.tsx
-#: src/screens/ReflectionsScreen/ReflectionsScreen.tsx
 #: src/screens/SettingsScreen/SettingsScreen.tsx
 msgid "Cancel"
 msgstr ""
@@ -85,13 +83,13 @@ msgstr ""
 
 #: src/screens/JournalScreen/JournalScreen.tsx
 #: src/screens/ReflectionsScreen/ReflectionsScreen.tsx
-msgid "Delete"
-msgstr ""
+#~ msgid "Delete"
+#~ msgstr ""
 
 #: src/screens/JournalScreen/JournalScreen.tsx
 #: src/screens/ReflectionsScreen/ReflectionsScreen.tsx
-msgid "Delete entry?"
-msgstr ""
+#~ msgid "Delete entry?"
+#~ msgstr ""
 
 #: src/screens/SettingsScreen/SettingsScreen.tsx
 msgid "Denied — tap to open Settings"
@@ -142,8 +140,8 @@ msgid "How are you really feeling right now?"
 msgstr ""
 
 #: src/screens/JournalScreen/JournalScreen.tsx
-msgid "Journal"
-msgstr ""
+#~ msgid "Journal"
+#~ msgstr ""
 
 #: src/screens/SettingsScreen/SettingsScreen.tsx
 msgid "Manage subscription"
@@ -227,8 +225,8 @@ msgstr ""
 
 #: src/screens/JournalScreen/JournalScreen.tsx
 #: src/screens/ReflectionsScreen/ReflectionsScreen.tsx
-msgid "This cannot be undone."
-msgstr ""
+#~ msgid "This cannot be undone."
+#~ msgstr ""
 
 #: src/screens/SettingsScreen/SettingsScreen.tsx
 msgid "Time"

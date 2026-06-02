@@ -1,5 +1,4 @@
-import React, { useState, useRef, useEffect, useCallback, type ComponentRef, type ReactNode } from 'react'
-import { Alert } from 'react-native'
+import React, { useState, useRef, useEffect, useCallback } from 'react'
 import { useFocusEffect } from 'expo-router'
 import { ScrollView, YStack, XStack, Spinner, Input } from 'tamagui'
 import { DisplayLg, BodySm, LabelMd, LabelLg } from '@fonts'
@@ -13,12 +12,10 @@ import { format } from 'date-fns'
 import { getDateLocale, formatEntryTime } from '@/src/utils/date'
 import { usePreferencesStore } from '@/src/stores'
 import type { JournalEntry } from '@/src/types/journal'
-import { logScreenView, logJournalEntryDeleted } from '@analytics'
+import { logScreenView } from '@analytics'
 import { useJournalEntries, useToggleBookmark, useRevenueCat, useDeleteJournalEntry } from '@hooks'
 import { exportJournal } from '@export'
-import Animated, { useSharedValue, useAnimatedStyle, withTiming, withDelay, cancelAnimation } from 'react-native-reanimated'
-import ReanimatedSwipeable from 'react-native-gesture-handler/ReanimatedSwipeable'
-import { Ionicons } from '@expo/vector-icons'
+import { AnimatedEntry, SwipeableDeleteWrapper } from '@molecules'
 
 const formatDayLabel = (iso: string) => {
   const d = new Date(iso)
@@ -43,106 +40,39 @@ const groupByDay = (entries: JournalEntry[]): { label: string; items: JournalEnt
   return Array.from(map.values())
 }
 
-interface AnimatedEntryProps {
-  children: ReactNode
-  index: number
-  animKey: number
-}
-
-const AnimatedEntry = ({ children, index, animKey }: AnimatedEntryProps) => {
-  const tx = useSharedValue(index % 2 === 0 ? -40 : 40)
-  const opacity = useSharedValue(0)
-
-  useEffect(() => {
-    cancelAnimation(tx)
-    cancelAnimation(opacity)
-    tx.value = index % 2 === 0 ? -40 : 40
-    opacity.value = 0
-    const delay = index * 100
-    tx.value = withDelay(delay, withTiming(0, { duration: 500 }))
-    opacity.value = withDelay(delay, withTiming(1, { duration: 500 }))
-  }, [animKey])
-
-  const style = useAnimatedStyle(() => ({
-    transform: [{ translateX: tx.value }],
-    opacity: opacity.value,
-  }))
-
-  return <Animated.View style={style}>{children}</Animated.View>
-}
-
-const DeleteAction = () => (
-  <YStack bg="$red10" justify="center" items="center" width={72} mb="$2" rounded="$4">
-    <Ionicons name="trash-outline" size={22} color="white" />
-  </YStack>
-)
-
 interface EntryCardProps {
   entry: JournalEntry
   onToggleBookmark: (id: string, current: boolean) => void
-}
-
-const EntryCard = ({ entry, onToggleBookmark }: EntryCardProps) => {
-  const timeFormat = usePreferencesStore((s) => s.timeFormat)
-  return (
-    <YStack
-      bg="$surface-card"
-      rounded="$4"
-      p="$4"
-      mb="$2"
-      borderWidth={1}
-      borderColor="$borderColor">
-      <BodySm color="$text-emphasis">
-        {entry.content}
-      </BodySm>
-      <XStack justify="space-between" items="center" mt="$2">
-        <LabelMd color="$text-disabled">{formatEntryTime(entry.created_at, timeFormat === '24h')}</LabelMd>
-        <BaseTouchable
-          onPress={() => onToggleBookmark(entry.id, entry.is_bookmarked)}
-          hitSlop={{ top: sizes.sm, bottom: sizes.sm, left: sizes.sm, right: sizes.sm }}>
-          <LabelMd color={entry.is_bookmarked ? '$accentBackground' : '$text-disabled'}>
-            {entry.is_bookmarked ? '★' : '☆'}
-          </LabelMd>
-        </BaseTouchable>
-      </XStack>
-    </YStack>
-  )
-}
-
-interface SwipeableEntryCardProps extends EntryCardProps {
   onDelete: (id: string) => void
   closeKey: number
 }
 
-const SwipeableEntryCard = ({ entry, onToggleBookmark, onDelete, closeKey }: SwipeableEntryCardProps) => {
-  const { t } = useLingui()
-  const ref = useRef<ComponentRef<typeof ReanimatedSwipeable>>(null)
-
-  useEffect(() => {
-    if (closeKey > 0) ref.current?.reset()
-  }, [closeKey])
-
-  const handleSwipeOpen = (direction: 'left' | 'right') => {
-    if (direction !== 'right') return
-    Alert.alert(
-      t`Delete entry?`,
-      t`This cannot be undone.`,
-      [
-        { text: t`Cancel`, style: 'cancel', onPress: () => ref.current?.close() },
-        { text: t`Delete`, style: 'destructive', onPress: () => { onDelete(entry.id); logJournalEntryDeleted() } },
-      ],
-    )
-  }
-
+const EntryCard = ({ entry, onToggleBookmark, onDelete, closeKey }: EntryCardProps) => {
+  const timeFormat = usePreferencesStore((s) => s.timeFormat)
   return (
-    <ReanimatedSwipeable
-      ref={ref}
-      renderRightActions={() => <DeleteAction />}
-      onSwipeableOpen={handleSwipeOpen}
-      rightThreshold={60}
-    >
-      <EntryCard entry={entry} onToggleBookmark={onToggleBookmark} />
-    </ReanimatedSwipeable>
+    <SwipeableDeleteWrapper entryId={entry.id} onDelete={onDelete} closeKey={closeKey}>
+      <YStack
+        bg="$surface-card"
+        rounded="$4"
+        p="$4"
+        mb="$2"
+        borderWidth={1}
+        borderColor="$borderColor">
+        <BodySm color="$text-emphasis">
+          {entry.content}
+        </BodySm>
+        <XStack justify="space-between" items="center" mt="$2">
+          <LabelMd color="$text-disabled">{formatEntryTime(entry.created_at, timeFormat === '24h')}</LabelMd>
+          <BaseTouchable
+            onPress={() => onToggleBookmark(entry.id, entry.is_bookmarked)}
+            hitSlop={{ top: sizes.sm, bottom: sizes.sm, left: sizes.sm, right: sizes.sm }}>
+            <LabelMd color={entry.is_bookmarked ? '$accentBackground' : '$text-disabled'}>
+              {entry.is_bookmarked ? '★' : '☆'}
+            </LabelMd>
+          </BaseTouchable>
+        </XStack>
+      </YStack>
+    </SwipeableDeleteWrapper>
   )
 }
 
@@ -282,7 +212,7 @@ const ReflectionsScreen = () => {
               </LabelMd>
               {group.items.map((entry, idx) => (
                 <AnimatedEntry key={entry.id} index={idx} animKey={animKey}>
-                  <SwipeableEntryCard
+                  <EntryCard
                     entry={entry}
                     onToggleBookmark={(id, current) => toggleBookmarkMutation.mutate({ id, is_bookmarked: !current })}
                     onDelete={(id) => deleteMutation.mutate(id)}

@@ -75,6 +75,16 @@ Deno.serve(async (req) => {
   const runtimeVersion = req.headers.get('expo-runtime-version')
   const channel = req.headers.get('expo-channel-name') ?? 'prd'
   const currentUpdateId = req.headers.get('expo-current-update-id')
+  const failedUpdateIds = req.headers.get('expo-recent-failed-update-ids')
+  const embeddedUpdateId = req.headers.get('expo-embedded-update-id')
+
+  // Persistent debug log — written to DB so we can query anytime (remove after iOS OTA confirmed)
+  const supabaseDebug = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, { db: { schema: 'api' } })
+  supabaseDebug.from('ota_request_log').insert({
+    platform, channel, runtime_version: runtimeVersion,
+    current_update_id: currentUpdateId, embedded_update_id: embeddedUpdateId,
+    failed_update_ids: failedUpdateIds,
+  }).then(() => {/* fire-and-forget */})
 
   if (!platform || !runtimeVersion) {
     return new Response('Missing expo-platform or expo-runtime-version header', { status: 400 })
@@ -105,7 +115,7 @@ Deno.serve(async (req) => {
 
   const manifest = {
     id: update.id,
-    createdAt: new Date(update.created_at).toISOString(),
+    createdAt: new Date(update.created_at).toISOString().replace('Z', '+00:00'),
     runtimeVersion,
     assets: update.assets,
     launchAsset: update.launch_asset,

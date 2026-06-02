@@ -49,8 +49,6 @@ msgstr "Yakin ingin keluar?"
 msgid "Bookmarked"
 msgstr "Disimpan"
 
-#: src/screens/JournalScreen/JournalScreen.tsx
-#: src/screens/ReflectionsScreen/ReflectionsScreen.tsx
 #: src/screens/SettingsScreen/SettingsScreen.tsx
 msgid "Cancel"
 msgstr "Batal"
@@ -85,13 +83,13 @@ msgstr "hari berturut-turut"
 
 #: src/screens/JournalScreen/JournalScreen.tsx
 #: src/screens/ReflectionsScreen/ReflectionsScreen.tsx
-msgid "Delete"
-msgstr "Hapus"
+#~ msgid "Delete"
+#~ msgstr "Hapus"
 
 #: src/screens/JournalScreen/JournalScreen.tsx
 #: src/screens/ReflectionsScreen/ReflectionsScreen.tsx
-msgid "Delete entry?"
-msgstr "Hapus entri?"
+#~ msgid "Delete entry?"
+#~ msgstr "Hapus entri?"
 
 #: src/screens/SettingsScreen/SettingsScreen.tsx
 msgid "Denied — tap to open Settings"
@@ -142,8 +140,8 @@ msgid "How are you really feeling right now?"
 msgstr "Bagaimana perasaanmu sebenarnya saat ini?"
 
 #: src/screens/JournalScreen/JournalScreen.tsx
-msgid "Journal"
-msgstr "Jurnal"
+#~ msgid "Journal"
+#~ msgstr "Jurnal"
 
 #: src/screens/SettingsScreen/SettingsScreen.tsx
 msgid "Manage subscription"
@@ -227,8 +225,8 @@ msgstr "Langganan"
 
 #: src/screens/JournalScreen/JournalScreen.tsx
 #: src/screens/ReflectionsScreen/ReflectionsScreen.tsx
-msgid "This cannot be undone."
-msgstr "Tindakan ini tidak dapat dibatalkan."
+#~ msgid "This cannot be undone."
+#~ msgstr "Tindakan ini tidak dapat dibatalkan."
 
 #: src/screens/SettingsScreen/SettingsScreen.tsx
 msgid "Time"
