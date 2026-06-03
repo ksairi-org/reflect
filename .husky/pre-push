@@ -1,5 +1,14 @@
 #!/usr/bin/env sh
 . "$(dirname "$0")/common.sh"
 
+# Auto-commit any generated i18n files left behind by the pre-commit hook.
+# This happens when a non-i18n file is committed — the pre-commit compile step
+# is skipped, but subsequent hook runs can produce slightly different output.
+if ! git diff --quiet src/i18n/locales/; then
+  yarn lingui compile
+  git add src/i18n/locales/compiled/ src/i18n/locales/exported/
+  git commit -m "chore(i18n): recompile catalogs [generated]" --no-verify
+fi
+
 yarn check:tsc
 yarn lint
