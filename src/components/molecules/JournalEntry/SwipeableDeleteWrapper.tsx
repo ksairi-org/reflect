@@ -46,8 +46,8 @@ interface SwipeableDeleteWrapperHandle {
   open: () => void
 }
 
-const SwipeableDeleteWrapper = forwardRef<SwipeableDeleteWrapperHandle, SwipeableDeleteWrapperProps>(
-  ({ entryId, onDelete, closeKey, index, children }, ref) => {
+const SwipeableDeleteWrapper = forwardRef<SwipeableDeleteWrapperHandle, SwipeableDeleteWrapperProps>(function SwipeableDeleteWrapper(
+  { entryId, onDelete, closeKey, index, children }, ref) {
     const { t } = useLingui()
     const startDrag = useSwipeableStore((s) => s.startDrag)
     const endDrag = useSwipeableStore((s) => s.endDrag)
