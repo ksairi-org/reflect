@@ -13,7 +13,7 @@ const BADGE_LETTER_SPACING = 0.5
 const env = process.env.EXPO_PUBLIC_ENV
 
 const EnvBadge = () => {
-  const insets = useSafeAreaInsets()
+  const { top, right: rightInset } = useSafeAreaInsets()
 
   if (!env || env === 'prd' || env === 'production') return null
 
@@ -22,8 +22,8 @@ const EnvBadge = () => {
   return (
     <YStack
       position="absolute"
-      right={BADGE_RIGHT}
-      top={insets.top + BADGE_TOP_OFFSET}
+      right={BADGE_RIGHT + rightInset}
+      top={top + BADGE_TOP_OFFSET}
       zIndex={Z_INDEX_ENV_BADGE}
       pointerEvents="none">
       <YStack
