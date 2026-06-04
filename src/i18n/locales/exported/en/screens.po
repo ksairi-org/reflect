@@ -14,7 +14,15 @@ msgstr ""
 "Plural-Forms: \n"
 
 #: src/screens/JournalScreen/JournalScreen.tsx
+msgid "{remainingFree} free entries left — sign up to keep writing"
+msgstr ""
+
+#: src/screens/JournalScreen/JournalScreen.tsx
 msgid "{remainingFree} free entries left — upgrade to keep writing"
+msgstr ""
+
+#: src/screens/JournalScreen/JournalScreen.tsx
+msgid "1 free entry left — sign up to keep writing"
 msgstr ""
 
 #: src/screens/JournalScreen/JournalScreen.tsx
@@ -80,6 +88,10 @@ msgid "Confirm password"
 msgstr ""
 
 #: src/screens/SignInScreen/SignInScreen.tsx
+msgid "Continue without an account"
+msgstr ""
+
+#: src/screens/SignInScreen/SignInScreen.tsx
 msgid "Create account"
 msgstr ""
 
@@ -133,6 +145,10 @@ msgstr ""
 
 #: src/screens/ForgotPasswordScreen/ForgotPasswordScreen.tsx
 msgid "Enter your email to receive a reset link."
+msgstr ""
+
+#: src/screens/JournalScreen/JournalScreen.tsx
+msgid "Entry limit reached — sign up for Pro to keep writing"
 msgstr ""
 
 #: src/screens/JournalScreen/JournalScreen.tsx
@@ -273,6 +289,14 @@ msgstr ""
 msgid "Sign in"
 msgstr ""
 
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+msgid "Sign in for Pro ✦"
+msgstr ""
+
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+msgid "Sign in or create account"
+msgstr ""
+
 #: src/screens/SignInScreen/SignInScreen.tsx
 msgid "Sign in with Apple"
 msgstr ""
@@ -356,6 +380,10 @@ msgstr ""
 
 #: src/screens/JournalScreen/JournalScreen.tsx
 msgid "What's one thing you want to remember about today?"
+msgstr ""
+
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+msgid "You're using reflect as a guest. Sign in to sync your journal across devices and unlock Pro."
 msgstr ""
 
 #: src/screens/JournalScreen/JournalScreen.tsx

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Alert, AppState, Linking, Modal } from 'react-native'
+import { useRouter } from 'expo-router'
 import { ScrollView, YStack, XStack, Spinner, type YStackProps } from 'tamagui'
 import type { User } from '@supabase/supabase-js'
 import { GlassView, isGlassEffectAPIAvailable } from 'expo-glass-effect'
@@ -11,7 +12,7 @@ import { Trans, useLingui } from '@lingui/react/macro'
 import { FlashList } from '@shopify/flash-list'
 import * as Device from 'expo-device'
 import { supabase } from '@/src/services/supabase'
-import { usePreferencesStore } from '@/src/stores'
+import { usePreferencesStore, useSessionStore } from '@/src/stores'
 import { manageSubscriptions } from '@/src/services/revenue-cat'
 import { useRevenueCat, useToast, useReminder } from '@hooks'
 import { sizes } from '@theme'
@@ -67,6 +68,8 @@ const SettingsScreen = () => {
   const { isPro, isLoading: rcLoading, customerInfo, presentPaywall } = useRevenueCat()
   const { t } = useLingui()
   const { alert } = useToast()
+  const router = useRouter()
+  const { isAnonymous } = useSessionStore()
   const { enabled: reminderEnabled, hour: reminderHour, loading: reminderLoading, toggle: toggleReminder, updateTime } = useReminder()
   const timeFormat = usePreferencesStore((s) => s.timeFormat)
   const setTimeFormat = usePreferencesStore((s) => s.setTimeFormat)
@@ -167,7 +170,26 @@ const SettingsScreen = () => {
             </DisplayLg>
 
             {/* Account */}
-            {currentUser ? (
+            {isAnonymous ? (
+              <SettingsCard hasGlass={hasGlass}>
+                <LabelMd color="$text-disabled" textTransform="uppercase" letterSpacing={LABEL_LETTER_SPACING} mb="$3">
+                  <Trans>Account</Trans>
+                </LabelMd>
+                <BodySm color="$text-secondary" mb="$3">
+                  <Trans>You're using reflect as a guest. Sign in to sync your journal across devices and unlock Pro.</Trans>
+                </BodySm>
+                <BaseTouchable
+                  onPress={() => router.push('/sign-in')}
+                  bg="$accentBackground"
+                  rounded="$4"
+                  py="$3"
+                  items="center">
+                  <LabelLg color="$accentColor">
+                    <Trans>Sign in or create account</Trans>
+                  </LabelLg>
+                </BaseTouchable>
+              </SettingsCard>
+            ) : currentUser ? (
               <SettingsCard hasGlass={hasGlass}>
                 <LabelMd color="$text-disabled" textTransform="uppercase" letterSpacing={LABEL_LETTER_SPACING} mb="$3">
                   <Trans>Account</Trans>
@@ -222,7 +244,20 @@ const SettingsScreen = () => {
                 </BaseTouchable>
               ) : null}
 
-              {!rcLoading && !isPro ? (
+              {!rcLoading && !isPro && isAnonymous ? (
+                <BaseTouchable
+                  onPress={() => router.push('/sign-in')}
+                  bg="$accentBackground"
+                  rounded="$4"
+                  py="$3"
+                  items="center">
+                  <LabelLg color="$accentColor">
+                    <Trans>Sign in for Pro ✦</Trans>
+                  </LabelLg>
+                </BaseTouchable>
+              ) : null}
+
+              {!rcLoading && !isPro && !isAnonymous ? (
                 <SizingAnimatedButton
                   onPress={async () => {
                     const purchased = await presentPaywall()
@@ -342,19 +377,21 @@ const SettingsScreen = () => {
               </XStack>
             </SettingsCard>
 
-            {/* Sign out */}
-            <BaseTouchable
-              onPress={handleSignOut}
-              bg="$surface-card"
-              rounded="$4"
-              py="$3"
-              items="center"
-              borderWidth={1}
-              borderColor="$borderColor">
-              <LabelLg color="$red10">
-                <Trans>Sign out</Trans>
-              </LabelLg>
-            </BaseTouchable>
+            {/* Sign out / Sign in */}
+            {isAnonymous ? null : (
+              <BaseTouchable
+                onPress={handleSignOut}
+                bg="$surface-card"
+                rounded="$4"
+                py="$3"
+                items="center"
+                borderWidth={1}
+                borderColor="$borderColor">
+                <LabelLg color="$red10">
+                  <Trans>Sign out</Trans>
+                </LabelLg>
+              </BaseTouchable>
+            )}
           </YStack>
         </ScrollView>
       </YStack>

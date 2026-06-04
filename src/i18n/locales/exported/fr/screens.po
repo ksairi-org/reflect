@@ -14,8 +14,16 @@ msgstr ""
 "Plural-Forms: \n"
 
 #: src/screens/JournalScreen/JournalScreen.tsx
+msgid "{remainingFree} free entries left — sign up to keep writing"
+msgstr "{remainingFree} entrées gratuites restantes — inscrivez-vous pour continuer à écrire"
+
+#: src/screens/JournalScreen/JournalScreen.tsx
 msgid "{remainingFree} free entries left — upgrade to keep writing"
 msgstr "{remainingFree} entrées gratuites restantes — passez à Pro pour continuer"
+
+#: src/screens/JournalScreen/JournalScreen.tsx
+msgid "1 free entry left — sign up to keep writing"
+msgstr "1 entrée gratuite restante — inscrivez-vous pour continuer à écrire"
 
 #: src/screens/JournalScreen/JournalScreen.tsx
 msgid "1 free entry left — upgrade to keep writing"
@@ -80,6 +88,10 @@ msgid "Confirm password"
 msgstr "Confirmer le mot de passe"
 
 #: src/screens/SignInScreen/SignInScreen.tsx
+msgid "Continue without an account"
+msgstr "Continuer sans compte"
+
+#: src/screens/SignInScreen/SignInScreen.tsx
 msgid "Create account"
 msgstr "Créer un compte"
 
@@ -134,6 +146,10 @@ msgstr "Activez les notifications dans Réglages pour utiliser les rappels."
 #: src/screens/ForgotPasswordScreen/ForgotPasswordScreen.tsx
 msgid "Enter your email to receive a reset link."
 msgstr "Entrez votre e-mail pour recevoir un lien de réinitialisation."
+
+#: src/screens/JournalScreen/JournalScreen.tsx
+msgid "Entry limit reached — sign up for Pro to keep writing"
+msgstr "Limite d'entrées atteinte — inscrivez-vous à Pro pour continuer à écrire"
 
 #: src/screens/JournalScreen/JournalScreen.tsx
 msgid "Entry limit reached — upgrade to keep writing"
@@ -273,6 +289,14 @@ msgstr "Réglages"
 msgid "Sign in"
 msgstr "Se connecter"
 
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+msgid "Sign in for Pro ✦"
+msgstr "Se connecter pour Pro ✦"
+
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+msgid "Sign in or create account"
+msgstr "Se connecter ou créer un compte"
+
 #: src/screens/SignInScreen/SignInScreen.tsx
 msgid "Sign in with Apple"
 msgstr "Se connecter avec Apple"
@@ -357,6 +381,10 @@ msgstr "Qu'avez-vous en tête ?"
 #: src/screens/JournalScreen/JournalScreen.tsx
 msgid "What's one thing you want to remember about today?"
 msgstr "Quelle est la chose que vous voulez retenir de cette journée ?"
+
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+msgid "You're using reflect as a guest. Sign in to sync your journal across devices and unlock Pro."
+msgstr "Vous utilisez reflect en tant qu'invité. Connectez-vous pour synchroniser votre journal sur tous vos appareils et débloquer Pro."
 
 #: src/screens/JournalScreen/JournalScreen.tsx
 #~ msgid "You've used all free entries. Tap Save to unlock unlimited writing ✦"

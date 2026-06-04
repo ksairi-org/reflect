@@ -6,13 +6,16 @@ import { StatusBar } from "expo-status-bar";
 import "react-native-reanimated";
 import { KeyboardProvider } from "react-native-keyboard-controller";
 import { TamaguiProvider, styled } from "tamagui";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { queryClient } from "@/src/services/queryClient";
 import { useColorScheme, Platform } from "react-native"
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { tamaguiConfig } from "@default-tamagui-config";
 import { LinguiClientProvider } from "@i18n";
 import { useAuthSession, useCustomFonts, useToast } from "@hooks";
 import { EnvBadge } from "@atoms";
+import { AnonMergeModal } from "@molecules";
+import { useSessionStore } from "@/src/stores";
 import { subscribeToForegroundMessages } from "@firebase-messaging";
 import { useEffect } from "react";
 import { SplashView } from "@ksairi-org/react-native-splash-view";
@@ -21,8 +24,6 @@ import { configureRevenueCat } from "@revenue-cat";
 import splash from "../assets/animations/splash.riv";
 
 setupSentry(!__DEV__);
-
-const queryClient = new QueryClient();
 
 configureRevenueCat();
 
@@ -44,6 +45,7 @@ export const unstable_settings = {
 const RootLayoutNav = () => {
   useAuthSession();
   const { notification } = useToast();
+  const { pendingMerge, setPendingMerge } = useSessionStore();
 
   useEffect(() => {
     const unsubscribe = subscribeToForegroundMessages((title, body) => {
@@ -53,13 +55,23 @@ const RootLayoutNav = () => {
   }, [notification]);
 
   return (
-    <Stack>
-      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-      <Stack.Screen name="sign-in" options={{ headerShown: false }} />
-      <Stack.Screen name="forgot-password" options={{ headerShown: false }} />
-      <Stack.Screen name="reset-password" options={{ headerShown: false }} />
-      <Stack.Screen name="modal" options={{ presentation: "modal", title: "Modal" }} />
-    </Stack>
+    <>
+      <Stack>
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="sign-in" options={{ headerShown: false }} />
+        <Stack.Screen name="forgot-password" options={{ headerShown: false }} />
+        <Stack.Screen name="reset-password" options={{ headerShown: false }} />
+        <Stack.Screen name="modal" options={{ presentation: "modal", title: "Modal" }} />
+      </Stack>
+      {pendingMerge ? (
+        <AnonMergeModal
+          visible
+          localCount={pendingMerge.localCount}
+          serverCount={pendingMerge.serverCount}
+          onClose={() => setPendingMerge(null)}
+        />
+      ) : null}
+    </>
   );
 }
 

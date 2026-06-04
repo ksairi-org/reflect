@@ -1,7 +1,7 @@
 import { useState, useRef, useCallback, type ComponentRef } from 'react'
 import { View } from 'react-native'
 import { BlurTargetView } from 'expo-blur'
-import { useFocusEffect } from 'expo-router'
+import { useFocusEffect, useRouter } from 'expo-router'
 import { ScrollView, YStack, XStack, TextArea, Spinner } from 'tamagui'
 import { DisplayLg, BodySm, LabelMd, LabelLg } from '@fonts'
 import { Trans, useLingui } from '@lingui/react/macro'
@@ -10,7 +10,7 @@ import { Containers } from '@ksairi-org/ui-containers'
 import { sizes } from '@theme'
 import { format } from 'date-fns'
 import { getDateLocale, formatEntryTime } from '@/src/utils/date'
-import { usePreferencesStore, useSwipeableStore } from '@/src/stores'
+import { usePreferencesStore, useSwipeableStore, useSessionStore, useAnonymousJournalStore } from '@/src/stores'
 import type { JournalEntry } from '@/src/types/journal'
 import { logJournalEntryCreated, logScreenView } from '@analytics'
 import { useJournalEntries, useCreateJournalEntry, useDeleteJournalEntry, useRevenueCat, useToast, useStreak, getDailyPromptIndex } from '@hooks'
@@ -80,7 +80,12 @@ const JournalScreen = () => {
   }
   const blurTargetRef = useRef<View>(null)
   const hasAnimated = useRef(false)
-  const { data: entries = [], isLoading: loading, refetch } = useJournalEntries()
+  const router = useRouter()
+
+  const { isAnonymous } = useSessionStore()
+  const { entries: localEntries, addEntry: addLocalEntry, deleteEntry: deleteLocalEntry } = useAnonymousJournalStore()
+
+  const { data: serverEntries = [], isLoading: serverLoading, refetch } = useJournalEntries()
   const createMutation = useCreateJournalEntry()
   const deleteMutation = useDeleteJournalEntry()
   const { isPro, presentPaywall } = useRevenueCat()
@@ -88,16 +93,19 @@ const JournalScreen = () => {
   const { alert } = useToast()
   const inputRef = useRef<ComponentRef<typeof TextArea>>(null)
 
+  const entries = isAnonymous ? localEntries : serverEntries
+  const loading = isAnonymous ? false : serverLoading
+
   useFocusEffect(
     useCallback(() => {
       if (!hasAnimated.current) {
         hasAnimated.current = true
         setAnimKey(1)
       }
-      refetch()
+      if (!isAnonymous) refetch()
       logScreenView('Journal')
       return () => setCloseKey(k => k + 1)
-    }, [refetch])
+    }, [refetch, isAnonymous])
   )
 
   const hasOpenCard = useSwipeableStore((s) => s.activeDragCount > 0)
@@ -123,14 +131,36 @@ const JournalScreen = () => {
   const handleSave = async () => {
     const trimmed = draft.trim()
     if (!trimmed) return
+
     if (atLimit) {
+      if (isAnonymous) {
+        // Anonymous user hit the limit — send them to sign up for Pro
+        router.push('/sign-in')
+        return
+      }
       const purchased = await presentPaywall()
       if (!purchased) return
       alert({ title: t`Welcome to Pro ✦`, message: t`Unlimited entries unlocked. Keep writing.`, duration: PAYWALL_SUCCESS_ALERT_DURATION })
     }
+
     setDraft('')
+
+    if (isAnonymous) {
+      addLocalEntry(trimmed)
+      logJournalEntryCreated(trimmed.split(/\s+/).length)
+      return
+    }
+
     await createMutation.mutateAsync(trimmed)
     logJournalEntryCreated(trimmed.split(/\s+/).length)
+  }
+
+  const handleDelete = (id: string) => {
+    if (isAnonymous) {
+      deleteLocalEntry(id)
+    } else {
+      deleteMutation.mutate(id)
+    }
   }
 
   return (
@@ -189,15 +219,21 @@ const JournalScreen = () => {
 
           {showHint ? (
             <BodySm color="$text-disabled" text="center" mt="$2">
-              {remainingFree === 1
-                ? <Trans>1 free entry left — upgrade to keep writing</Trans>
-                : <Trans>{remainingFree} free entries left — upgrade to keep writing</Trans>}
+              {isAnonymous
+                ? remainingFree === 1
+                  ? <Trans>1 free entry left — sign up to keep writing</Trans>
+                  : <Trans>{remainingFree} free entries left — sign up to keep writing</Trans>
+                : remainingFree === 1
+                  ? <Trans>1 free entry left — upgrade to keep writing</Trans>
+                  : <Trans>{remainingFree} free entries left — upgrade to keep writing</Trans>}
             </BodySm>
           ) : null}
 
           {atLimit ? (
             <BodySm color="$accentBackground" text="center" mt="$2">
-              <Trans>Entry limit reached — upgrade to keep writing</Trans>
+              {isAnonymous
+                ? <Trans>Entry limit reached — sign up for Pro to keep writing</Trans>
+                : <Trans>Entry limit reached — upgrade to keep writing</Trans>}
             </BodySm>
           ) : null}
         </YStack>
@@ -220,7 +256,7 @@ const JournalScreen = () => {
                   <EntryCard
                     entry={entry}
                     index={index}
-                    onDelete={(id) => deleteMutation.mutate(id)}
+                    onDelete={handleDelete}
                     onPeek={handlePeek}
                     closeKey={closeKey}
                   />

@@ -1,7 +1,7 @@
 import { useState, useRef, useCallback } from 'react'
 import { View } from 'react-native'
 import { BlurTargetView } from 'expo-blur'
-import { useFocusEffect } from 'expo-router'
+import { useFocusEffect, useRouter } from 'expo-router'
 import { ScrollView, YStack, XStack, Spinner, Input } from 'tamagui'
 import { DisplayLg, BodySm, LabelMd, LabelLg } from '@fonts'
 import { Trans, useLingui } from '@lingui/react/macro'
@@ -12,7 +12,7 @@ import { BaseIcon } from '@atoms'
 import { sizes } from '@theme'
 import { format } from 'date-fns'
 import { getDateLocale, formatEntryTime } from '@/src/utils/date'
-import { usePreferencesStore, useSwipeableStore } from '@/src/stores'
+import { usePreferencesStore, useSwipeableStore, useSessionStore, useAnonymousJournalStore } from '@/src/stores'
 import type { JournalEntry } from '@/src/types/journal'
 import { logScreenView } from '@analytics'
 import { useJournalEntries, useToggleBookmark, useRevenueCat, useDeleteJournalEntry } from '@hooks'
@@ -96,11 +96,16 @@ const EntryCard = ({ entry, index, onToggleBookmark, onDelete, onPeek, closeKey 
 }
 
 const ReflectionsScreen = () => {
-  const { data: entries = [], isLoading: loading, refetch } = useJournalEntries()
+  const { isAnonymous } = useSessionStore()
+  const { entries: localEntries, deleteEntry: deleteLocalEntry, toggleBookmark: toggleLocalBookmark } = useAnonymousJournalStore()
+  const { data: serverEntries = [], isLoading: serverLoading, refetch } = useJournalEntries()
+  const entries = isAnonymous ? localEntries : serverEntries
+  const loading = isAnonymous ? false : serverLoading
   const { isPro, presentPaywall } = useRevenueCat()
   const toggleBookmarkMutation = useToggleBookmark()
   const deleteMutation = useDeleteJournalEntry()
   const { t } = useLingui()
+  const router = useRouter()
   const [exporting, setExporting] = useState(false)
   const [search, setSearch] = useState('')
   const [showBookmarkedOnly, setShowBookmarkedOnly] = useState(false)
@@ -121,13 +126,17 @@ const ReflectionsScreen = () => {
         hasAnimated.current = true
         setAnimKey(1)
       }
-      refetch()
+      if (!isAnonymous) refetch()
       logScreenView('Reflections')
       return () => setCloseKey(k => k + 1)
-    }, [refetch])
+    }, [refetch, isAnonymous])
   )
 
   const handleExport = async () => {
+    if (isAnonymous) {
+      router.push('/sign-in')
+      return
+    }
     if (!isPro) {
       await presentPaywall()
       return
@@ -245,8 +254,8 @@ const ReflectionsScreen = () => {
                   <EntryCard
                     entry={entry}
                     index={idx}
-                    onToggleBookmark={(id, current) => toggleBookmarkMutation.mutate({ id, is_bookmarked: !current })}
-                    onDelete={(id) => deleteMutation.mutate(id)}
+                    onToggleBookmark={(id, current) => isAnonymous ? toggleLocalBookmark(id) : toggleBookmarkMutation.mutate({ id, is_bookmarked: !current })}
+                    onDelete={(id) => isAnonymous ? deleteLocalEntry(id) : deleteMutation.mutate(id)}
                     onPeek={handlePeek}
                     closeKey={closeKey}
                   />
@@ -261,7 +270,7 @@ const ReflectionsScreen = () => {
       <EntryPeekModal
         entry={peekEntry}
         onClose={() => setPeekEntry(null)}
-        onToggleBookmark={(id: string, current: boolean) => toggleBookmarkMutation.mutate({ id, is_bookmarked: !current })}
+        onToggleBookmark={(id: string, current: boolean) => isAnonymous ? toggleLocalBookmark(id) : toggleBookmarkMutation.mutate({ id, is_bookmarked: !current })}
         blurTargetRef={blurTargetRef}
       />
     </Containers.Screen>

@@ -9,6 +9,7 @@ import { BaseTouchable } from '@ksairi-org/ui-touchables'
 import { PasswordInput, PasswordInputHandle, FormField } from '@atoms'
 import { supabase } from '@/src/services/supabase'
 import { useToast } from '@hooks'
+import { useSessionStore } from '@/src/stores'
 import { HEADING_LETTER_SPACING } from '@constants'
 import { sizes } from '@theme'
 
@@ -71,6 +72,7 @@ const SignInScreen = () => {
   const { t } = useLingui()
   const { toast } = useToast()
   const router = useRouter()
+  const { setAnonymous } = useSessionStore()
   const isDark = useColorScheme() === 'dark'
   const hasInitializedAppleSignIn = useRef(false)
   const prevAppState = useRef<string>('active')
@@ -402,6 +404,15 @@ const SignInScreen = () => {
               {mode === 'sign-in'
                 ? <Trans>Don&apos;t have an account? Sign up</Trans>
                 : <Trans>Already have an account? Sign in</Trans>}
+            </BodySm>
+          </XStack>
+
+          <XStack justify="center" mt="$4">
+            <BodySm
+              color="$text-disabled"
+              onPress={() => { setAnonymous(); router.replace('/(tabs)') }}
+              pressStyle={{ opacity: LINK_PRESS_OPACITY }}>
+              <Trans>Continue without an account</Trans>
             </BodySm>
           </XStack>
         </YStack>

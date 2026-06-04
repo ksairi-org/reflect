@@ -6,6 +6,20 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import { supabase } from '@/src/services/supabase'
 import { identifyRevenueCatUser, resetRevenueCatUser } from '@/src/services/revenue-cat'
 import { upsertDeviceToken } from '@/src/services/user-devices'
+import { useSessionStore, useAnonymousJournalStore } from '@/src/stores'
+import { queryClient } from '@/src/services/queryClient'
+import type { JournalEntry } from '@/src/types/journal'
+
+// Set before calling signOut() when the intent is to return to anonymous mode
+// rather than navigate to the sign-in screen.
+let _keepAnonymousOnSignOut = false
+
+const signOutToAnonymous = async () => {
+  _keepAnonymousOnSignOut = true
+  await supabase.auth.signOut({ scope: 'local' })
+}
+
+const FREE_ENTRY_LIMIT = 7
 
 // iOS Keychain survives app deletion; AsyncStorage does not.
 // On a fresh install, purge any stale Keychain session before restoring.
@@ -17,11 +31,32 @@ const clearStaleKeychainOnFreshInstall = async () => {
   }
 }
 
+const getServerEntryCount = async (): Promise<number> => {
+  const { count } = await supabase
+    .from('journal_entries')
+    .select('*', { count: 'exact', head: true })
+  return count ?? 0
+}
+
+const migrateEntriesToServer = async (entries: JournalEntry[], userId: string) => {
+  if (!entries.length) return
+  const rows = [...entries].reverse().map((e) => ({
+    user_id: userId,
+    content: e.content,
+    is_bookmarked: e.is_bookmarked,
+    created_at: e.created_at,
+    updated_at: e.updated_at,
+  }))
+  const { error } = await supabase.from('journal_entries').insert(rows)
+  if (error) throw error
+}
+
 const useAuthSession = () => {
   const [session, setSession] = useState<Session | null | undefined>(undefined)
   const isRecoveryMode = useRef(false)
   const router = useRouter()
   const segments = useSegments()
+  const { isAnonymous, clearAnonymous, setPendingMerge } = useSessionStore()
 
   const handleAuthUrl = useCallback(async (url: string) => {
     // PKCE flow: Supabase sends ?code= in query params
@@ -73,16 +108,48 @@ const useAuthSession = () => {
     }
     init()
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, s) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, s) => {
       setSession(s)
+
       if (event === 'SIGNED_OUT') {
         isRecoveryMode.current = false
+        if (_keepAnonymousOnSignOut) {
+          _keepAnonymousOnSignOut = false
+          useSessionStore.getState().setAnonymous()
+        } else {
+          clearAnonymous()
+        }
         resetRevenueCatUser()
         return
       }
-      if (s?.user) {
-        identifyRevenueCatUser(s.user.id)
-        upsertDeviceToken(s.user.id)
+
+      if (event === 'SIGNED_IN' && s?.user) {
+        const userId = s.user.id
+        identifyRevenueCatUser(userId)
+        upsertDeviceToken(userId)
+
+        // Migrate any locally-saved anonymous entries
+        const { entries: localEntries } = useAnonymousJournalStore.getState()
+        clearAnonymous()
+
+        if (localEntries.length > 0) {
+          const serverCount = await getServerEntryCount()
+          const combined = localEntries.length + serverCount
+
+          if (combined <= FREE_ENTRY_LIMIT) {
+            try {
+              await migrateEntriesToServer(localEntries, userId)
+              useAnonymousJournalStore.getState().clearEntries()
+              queryClient.invalidateQueries({ queryKey: ['journal-entries'] })
+            } catch {
+              // Migration failed (network error). Fall back to merge modal so user can retry.
+              setPendingMerge({ localCount: localEntries.length, serverCount })
+            }
+          } else {
+            // Conflict: combined exceeds free limit — let user decide
+            setPendingMerge({ localCount: localEntries.length, serverCount })
+          }
+        }
       }
     })
 
@@ -92,16 +159,16 @@ const useAuthSession = () => {
       subscription.unsubscribe()
       linkingSub.remove()
     }
-  }, [handleAuthUrl])
+  }, [handleAuthUrl, clearAnonymous, setPendingMerge])
 
   useEffect(() => {
     if (session === undefined) return
     const inAuth = segments[0] === 'sign-in' || segments[0] === 'forgot-password' || segments[0] === 'reset-password'
-    if (!session && !inAuth && !isRecoveryMode.current) router.replace('/sign-in')
+    if (!session && !inAuth && !isAnonymous && !isRecoveryMode.current) router.replace('/sign-in')
     else if (session && inAuth && !isRecoveryMode.current) router.replace('/(tabs)')
-  }, [session, segments, router])
+  }, [session, segments, router, isAnonymous])
 
   return { session }
 }
 
-export { useAuthSession }
+export { useAuthSession, migrateEntriesToServer, signOutToAnonymous }

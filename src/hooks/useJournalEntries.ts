@@ -1,12 +1,15 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { supabase } from '@/src/services/supabase'
 import type { JournalEntry } from '@/src/types/journal'
+import { useSessionStore } from '@/src/stores'
 
 const QUERY_KEY = ['journal-entries'] as const
 
-const useJournalEntries = () =>
-  useQuery({
+const useJournalEntries = () => {
+  const isAnonymous = useSessionStore((s) => s.isAnonymous)
+  return useQuery({
     queryKey: QUERY_KEY,
+    enabled: !isAnonymous,
     queryFn: async () => {
       const { data, error } = await supabase
         .from('journal_entries')
@@ -17,6 +20,7 @@ const useJournalEntries = () =>
       return entries
     },
   })
+}
 
 const useCreateJournalEntry = () => {
   const queryClient = useQueryClient()

@@ -2,6 +2,33 @@ import { create } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
 import { createZustandMmkvStorage } from './utils'
 
+type PendingMerge = { localCount: number; serverCount: number }
+
+type SessionStoreState = {
+  isAnonymous: boolean
+  setAnonymous: () => void
+  clearAnonymous: () => void
+  pendingMerge: PendingMerge | null
+  setPendingMerge: (v: PendingMerge | null) => void
+}
+
+const useSessionStore = create<SessionStoreState>()(
+  persist(
+    (set) => ({
+      isAnonymous: false,
+      setAnonymous: () => set({ isAnonymous: true }),
+      clearAnonymous: () => set({ isAnonymous: false }),
+      pendingMerge: null,
+      setPendingMerge: (v) => set({ pendingMerge: v }),
+    }),
+    {
+      name: 'reflect-session',
+      storage: createJSONStorage(() => createZustandMmkvStorage()),
+      partialize: (state) => ({ isAnonymous: state.isAnonymous }),
+    },
+  ),
+)
+
 type UserStoreKey = 'firstName' | 'lastName'
 
 type UserStoreState = {
@@ -54,4 +81,6 @@ const usePreferencesStore = create<PreferencesStoreState>()(
   ),
 )
 
-export { useUserStore, useSwipeableStore, usePreferencesStore }
+export { useUserStore, useSwipeableStore, usePreferencesStore, useSessionStore }
+export type { PendingMerge }
+export { useAnonymousJournalStore } from './anonymousJournal'

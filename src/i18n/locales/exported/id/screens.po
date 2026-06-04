@@ -14,8 +14,16 @@ msgstr ""
 "Plural-Forms: \n"
 
 #: src/screens/JournalScreen/JournalScreen.tsx
+msgid "{remainingFree} free entries left — sign up to keep writing"
+msgstr "{remainingFree} entri gratis tersisa — daftar untuk terus menulis"
+
+#: src/screens/JournalScreen/JournalScreen.tsx
 msgid "{remainingFree} free entries left — upgrade to keep writing"
 msgstr "Sisa {remainingFree} entri gratis — tingkatkan untuk terus menulis"
+
+#: src/screens/JournalScreen/JournalScreen.tsx
+msgid "1 free entry left — sign up to keep writing"
+msgstr "1 entri gratis tersisa — daftar untuk terus menulis"
 
 #: src/screens/JournalScreen/JournalScreen.tsx
 msgid "1 free entry left — upgrade to keep writing"
@@ -80,6 +88,10 @@ msgid "Confirm password"
 msgstr "Konfirmasi kata sandi"
 
 #: src/screens/SignInScreen/SignInScreen.tsx
+msgid "Continue without an account"
+msgstr "Lanjutkan tanpa akun"
+
+#: src/screens/SignInScreen/SignInScreen.tsx
 msgid "Create account"
 msgstr "Buat akun"
 
@@ -134,6 +146,10 @@ msgstr "Aktifkan notifikasi di Pengaturan untuk menggunakan pengingat."
 #: src/screens/ForgotPasswordScreen/ForgotPasswordScreen.tsx
 msgid "Enter your email to receive a reset link."
 msgstr "Masukkan email Anda untuk menerima tautan reset."
+
+#: src/screens/JournalScreen/JournalScreen.tsx
+msgid "Entry limit reached — sign up for Pro to keep writing"
+msgstr "Batas entri tercapai — daftar Pro untuk terus menulis"
 
 #: src/screens/JournalScreen/JournalScreen.tsx
 msgid "Entry limit reached — upgrade to keep writing"
@@ -273,6 +289,14 @@ msgstr "Pengaturan"
 msgid "Sign in"
 msgstr "Masuk"
 
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+msgid "Sign in for Pro ✦"
+msgstr "Masuk untuk Pro ✦"
+
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+msgid "Sign in or create account"
+msgstr "Masuk atau buat akun"
+
 #: src/screens/SignInScreen/SignInScreen.tsx
 msgid "Sign in with Apple"
 msgstr "Masuk dengan Apple"
@@ -357,6 +381,10 @@ msgstr "Apa yang ada di pikiran Anda?"
 #: src/screens/JournalScreen/JournalScreen.tsx
 msgid "What's one thing you want to remember about today?"
 msgstr "Satu hal apa yang ingin kamu ingat dari hari ini?"
+
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+msgid "You're using reflect as a guest. Sign in to sync your journal across devices and unlock Pro."
+msgstr "Anda menggunakan reflect sebagai tamu. Masuk untuk menyinkronkan jurnal di semua perangkat dan membuka Pro."
 
 #: src/screens/JournalScreen/JournalScreen.tsx
 #~ msgid "You've used all free entries. Tap Save to unlock unlimited writing ✦"
