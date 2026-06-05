@@ -55,8 +55,8 @@ supabase/.temp/
 
 # Lingui compiled output is committed — EAS local builds archive via git and cannot regenerate it
 
-# Digital Asset Links — belongs on galagym.com, not in this repo
-assetlinks.json
+# Digital Asset Links — belongs on galagym.com, not in this repo (reference copy lives in docs/android/)
+/assetlinks.json
 
 # Firebase service account key (has admin privileges — never commit)
 *firebase-adminsdk*.json
