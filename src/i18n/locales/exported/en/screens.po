@@ -115,16 +115,6 @@ msgstr ""
 msgid "days streak"
 msgstr ""
 
-#: src/screens/JournalScreen/JournalScreen.tsx
-#: src/screens/ReflectionsScreen/ReflectionsScreen.tsx
-#~ msgid "Delete"
-#~ msgstr ""
-
-#: src/screens/JournalScreen/JournalScreen.tsx
-#: src/screens/ReflectionsScreen/ReflectionsScreen.tsx
-#~ msgid "Delete entry?"
-#~ msgstr ""
-
 #: src/screens/SettingsScreen/SettingsScreen.tsx
 msgid "Denied — tap to open Settings"
 msgstr ""
@@ -227,10 +217,6 @@ msgstr ""
 msgid "No entries yet. Start writing in the Journal tab."
 msgstr ""
 
-#: src/hooks/useMemoryNotification.ts
-msgid "On this day"
-msgstr ""
-
 #: src/screens/SignInScreen/SignInScreen.tsx
 msgid "Password"
 msgstr ""
@@ -288,6 +274,10 @@ msgstr ""
 
 #: src/screens/ReflectionsScreen/ReflectionsScreen.tsx
 msgid "Reflections"
+msgstr ""
+
+#: src/hooks/useMemoryNotification.ts
+msgid "Remember this?"
 msgstr ""
 
 #: src/screens/SettingsScreen/SettingsScreen.tsx
@@ -350,11 +340,6 @@ msgstr ""
 msgid "Subscription"
 msgstr ""
 
-#: src/screens/JournalScreen/JournalScreen.tsx
-#: src/screens/ReflectionsScreen/ReflectionsScreen.tsx
-#~ msgid "This cannot be undone."
-#~ msgstr ""
-
 #: src/screens/SettingsScreen/SettingsScreen.tsx
 msgid "This feature is not available on the simulator."
 msgstr ""
@@ -366,14 +351,6 @@ msgstr ""
 #: src/screens/SettingsScreen/SettingsScreen.tsx
 msgid "Time format"
 msgstr ""
-
-#: src/screens/JournalScreen/JournalScreen.tsx
-#~ msgid "Today · {0, plural, one {# entry} other {# entries}}"
-#~ msgstr ""
-
-#: src/screens/JournalScreen/JournalScreen.tsx
-#~ msgid "Today · {0} {1}"
-#~ msgstr ""
 
 #. placeholder {0}: todayEntries.length
 #: src/screens/JournalScreen/JournalScreen.tsx
@@ -442,7 +419,3 @@ msgstr ""
 #: src/screens/SettingsScreen/SettingsScreen.tsx
 msgid "You're using reflect as a guest. Sign in to sync your journal across devices and unlock Pro."
 msgstr ""
-
-#: src/screens/JournalScreen/JournalScreen.tsx
-#~ msgid "You've used all free entries. Tap Save to unlock unlimited writing ✦"
-#~ msgstr ""
