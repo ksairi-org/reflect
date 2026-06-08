@@ -1,0 +1,122 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2026-05-26 09:48-0300\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: es\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
+#: src/components/molecules/JournalEntry/SwipeableDeleteWrapper.tsx
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
+msgid "Decide later — review local entries first"
+msgstr "Decidir después — revisar primero las entradas locales"
+
+#: src/components/molecules/JournalEntry/SwipeableDeleteWrapper.tsx
+msgid "Delete"
+msgstr "Eliminar"
+
+#: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
+msgid "Delete & keep local"
+msgstr "Eliminar y conservar locales"
+
+#: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
+msgid "Delete account entries?"
+msgstr "¿Eliminar entradas de la cuenta?"
+
+#: src/components/molecules/JournalEntry/SwipeableDeleteWrapper.tsx
+msgid "Delete entry?"
+msgstr "¿Eliminar entrada?"
+
+#. placeholder {0}: serverCount === 1 ? 'entry' : 'entries'
+#. placeholder {1}: localCount === 1 ? 'one' : 'ones'
+#: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
+msgid "Delete your {serverCount} account {0} and keep your {localCount} local {1}."
+msgstr "Elimina tus {serverCount} {0} de la cuenta y conserva tus {localCount} {1} locales."
+
+#: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
+#~ msgid "Discard local"
+#~ msgstr "Descartar locales"
+
+#: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
+#~ msgid "Discard the {localCount} local {0} and continue with your {serverCount} saved {1}."
+#~ msgstr "Descarta las {localCount} {0} locales y continúa con tus {serverCount} {1} guardadas."
+
+#. placeholder {0}: localCount === 1 ? 'entry' : 'entries'
+#. placeholder {1}: serverCount === 1 ? 'one' : 'ones'
+#: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
+msgid "Discard your {localCount} local {0} and continue with your {serverCount} saved {1}."
+msgstr "Descarta tus {localCount} {0} locales y continúa con tus {serverCount} {1} guardadas."
+
+#: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
+msgid "Keep account entries"
+msgstr "Conservar entradas de la cuenta"
+
+#: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
+msgid "Keep everything ✦"
+msgstr "Conservar todo ✦"
+
+#: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
+msgid "Keep local entries"
+msgstr "Conservar entradas locales"
+
+#: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
+#~ msgid "Keep only account entries"
+#~ msgstr "Conservar solo las entradas de la cuenta"
+
+#: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
+msgid "Merge all"
+msgstr "Fusionar todo"
+
+#: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
+msgid "Merge all {combined} entries into your account."
+msgstr "Fusionar las {combined} entradas en tu cuenta."
+
+#: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
+msgid "One more thing"
+msgstr "Una cosa más"
+
+#: src/components/molecules/JournalEntry/SwipeableDeleteWrapper.tsx
+msgid "This cannot be undone."
+msgstr "Esto no se puede deshacer."
+
+#: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
+msgid "Unlimited entries unlocked. Keep writing."
+msgstr "Entradas ilimitadas desbloqueadas. Sigue escribiendo."
+
+#: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
+#~ msgid "Upgrade ✦"
+#~ msgstr "Mejorar plan ✦"
+
+#: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
+msgid "Upgrade to Pro to merge all {combined} entries and write without limits."
+msgstr "Mejora a Pro para fusionar las {combined} entradas y escribir sin límites."
+
+#: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
+msgid "Welcome to Pro ✦"
+msgstr "Bienvenido a Pro ✦"
+
+#: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
+#~ msgid "You have {localCount} {0} saved locally and {serverCount} in your account — {combined} total, which is {overBy} over the free limit of {FREE_ENTRY_LIMIT}."
+#~ msgstr "Tienes {localCount} {0} guardadas localmente y {serverCount} en tu cuenta — {combined} en total, lo que supera en {overBy} el límite gratuito de {FREE_ENTRY_LIMIT}."
+
+#. placeholder {0}: localCount === 1 ? 'entry' : 'entries'
+#: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
+msgid "You have {localCount} local {0} and {serverCount} in your account — {combined} total, {overBy} over the free limit of {FREE_ENTRY_LIMIT}."
+msgstr "Tienes {localCount} {0} locales y {serverCount} en tu cuenta — {combined} en total, {overBy} por encima del límite gratuito de {FREE_ENTRY_LIMIT}."
+
+#. placeholder {0}: serverCount === 1 ? 'entry' : 'entries'
+#. placeholder {1}: localCount === 1 ? 'entry' : 'entries'
+#: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
+msgid "Your {serverCount} account {0} will be permanently deleted and replaced with your {localCount} local {1}."
+msgstr "Tus {serverCount} {0} de la cuenta se eliminarán permanentemente y serán reemplazadas por tus {localCount} {1} locales."

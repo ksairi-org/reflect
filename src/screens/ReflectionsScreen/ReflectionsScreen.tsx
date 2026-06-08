@@ -1,91 +1,142 @@
-import React, { useState, useEffect } from 'react'
-import { useFocusEffect } from 'expo-router'
-import { ScrollView, YStack, XStack, Spinner } from 'tamagui'
+import { useState, useRef, useCallback } from 'react'
+import { View } from 'react-native'
+import { BlurTargetView } from 'expo-blur'
+import { useFocusEffect, useRouter } from 'expo-router'
+import { ScrollView, YStack, XStack, Spinner, Input } from 'tamagui'
 import { DisplayLg, BodySm, LabelMd, LabelLg } from '@fonts'
-import { Trans } from '@lingui/react/macro'
+import { Trans, useLingui } from '@lingui/react/macro'
 import { SizingAnimatedButton } from '@ksairi-org/ui-button-animated'
+import { BaseTouchable } from '@ksairi-org/ui-touchables'
 import { Containers } from '@ksairi-org/ui-containers'
 import { BaseIcon } from '@atoms'
 import { sizes } from '@theme'
+import { format } from 'date-fns'
+import { getDateLocale, formatEntryTime } from '@/src/utils/date'
+import { usePreferencesStore, useSwipeableStore, useSessionStore, useAnonymousJournalStore } from '@/src/stores'
 import type { JournalEntry } from '@/src/types/journal'
-import {
-  requestNotificationPermission,
-  getFCMToken,
-  scheduleLocalNotification,
-} from '@firebase-messaging'
 import { logScreenView } from '@analytics'
-import { useJournalEntries, useRevenueCat } from '@hooks'
+import { useJournalEntries, useToggleBookmark, useRevenueCat, useDeleteJournalEntry } from '@hooks'
+import { HEADING_LETTER_SPACING, LABEL_LETTER_SPACING } from '@constants'
 import { exportJournal } from '@export'
+import { AnimatedEntry, SwipeableDeleteWrapper, EntryPeekModal, type SwipeableDeleteWrapperHandle } from '@molecules'
 
-function formatDayLabel(iso: string) {
+const SEARCH_INPUT_HEIGHT = 44
+
+const formatDayLabel = (iso: string) => {
   const d = new Date(iso)
-  const now = new Date()
-  const isThisYear = d.getFullYear() === now.getFullYear()
-  return d.toLocaleDateString([], {
-    weekday: 'long',
-    month: 'long',
-    day: 'numeric',
-    ...(isThisYear ? {} : { year: 'numeric' }),
-  })
+  const isThisYear = d.getFullYear() === new Date().getFullYear()
+  return format(d, isThisYear ? 'EEEE, MMMM d' : 'EEEE, MMMM d, yyyy', { locale: getDateLocale() })
 }
 
-function formatTime(iso: string) {
-  return new Date(iso).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-}
-
-function dateKey(iso: string) {
+const dateKey = (iso: string) => {
   const d = new Date(iso)
   return `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`
 }
 
-function groupByDay(entries: JournalEntry[]): { label: string; items: JournalEntry[] }[] {
+const groupByDay = (entries: JournalEntry[]): { label: string; items: JournalEntry[] }[] => {
   const map = new Map<string, { label: string; items: JournalEntry[] }>()
   for (const entry of entries) {
     const key = dateKey(entry.created_at)
-    if (!map.has(key)) {
-      map.set(key, { label: formatDayLabel(entry.created_at), items: [] })
+    const existing = map.get(key)
+    if (existing) {
+      existing.items.push(entry)
+    } else {
+      map.set(key, { label: formatDayLabel(entry.created_at), items: [entry] })
     }
-    map.get(key)!.items.push(entry)
   }
   return Array.from(map.values())
 }
 
-export default function ReflectionsScreen() {
-  const { data: entries = [], isLoading: loading, refetch } = useJournalEntries()
-  const { isPro, presentPaywall } = useRevenueCat()
-  const [exporting, setExporting] = useState(false)
-  const [notifPermission, setNotifPermission] = useState<boolean | null>(null)
-  const [fcmToken, setFcmToken] = useState<string | null>(null)
-  const [scheduling, setScheduling] = useState(false)
-  const [scheduled, setScheduled] = useState(false)
+const TRUNCATE_LENGTH = 250
 
-  useEffect(() => {
-    requestNotificationPermission().then(granted => {
-      setNotifPermission(granted)
-      if (granted) getFCMToken().then(setFcmToken)
-    })
-  }, [])
+interface EntryCardProps {
+  entry: JournalEntry
+  index: number
+  onToggleBookmark: (id: string, current: boolean) => void
+  onDelete: (id: string) => void
+  onPeek: (entry: JournalEntry) => void
+  closeKey: number
+}
 
-  useFocusEffect(
-    React.useCallback(() => {
-      refetch()
-      logScreenView('Reflections')
-    }, [refetch])
+const EntryCard = ({ entry, index, onToggleBookmark, onDelete, onPeek, closeKey }: EntryCardProps) => {
+  const timeFormat = usePreferencesStore((s) => s.timeFormat)
+  const swipeRef = useRef<SwipeableDeleteWrapperHandle>(null)
+  const isTruncated = entry.content.length > TRUNCATE_LENGTH
+  const displayContent = isTruncated
+    ? entry.content.slice(0, TRUNCATE_LENGTH) + '…'
+    : entry.content
+
+  return (
+    <SwipeableDeleteWrapper ref={swipeRef} entryId={entry.id} onDelete={onDelete} closeKey={closeKey} index={index}>
+      <BaseTouchable
+        onPress={() => onPeek(entry)}
+        onLongPress={() => swipeRef.current?.open()}
+        bg="$surface-card"
+        rounded="$4"
+        p="$4"
+        mb="$2"
+        borderWidth={1}
+        borderColor="$borderColor">
+        <BodySm color="$text-emphasis">
+          {displayContent}
+        </BodySm>
+        <XStack justify="space-between" items="center" mt="$2">
+          <LabelMd color="$text-disabled">{formatEntryTime(entry.created_at, timeFormat === '24h')}</LabelMd>
+          <BaseTouchable
+            onPress={() => onToggleBookmark(entry.id, entry.is_bookmarked)}
+            hitSlop={{ top: sizes.sm, bottom: sizes.sm, left: sizes.sm, right: sizes.sm }}>
+            <LabelMd color={entry.is_bookmarked ? '$accentBackground' : '$text-disabled'}>
+              {entry.is_bookmarked ? '★' : '☆'}
+            </LabelMd>
+          </BaseTouchable>
+        </XStack>
+      </BaseTouchable>
+    </SwipeableDeleteWrapper>
   )
+}
 
-  async function handleTestNotification() {
-    setScheduling(true)
-    setScheduled(false)
-    await scheduleLocalNotification(
-      'Reflect reminder',
-      "Time to jot down today's thoughts.",
-      5,
-    )
-    setScheduling(false)
-    setScheduled(true)
+const ReflectionsScreen = () => {
+  const { isAnonymous } = useSessionStore()
+  const { entries: localEntries, deleteEntry: deleteLocalEntry, toggleBookmark: toggleLocalBookmark } = useAnonymousJournalStore()
+  const { data: serverEntries = [], isLoading: serverLoading, refetch } = useJournalEntries()
+  const entries = isAnonymous ? localEntries : serverEntries
+  const loading = isAnonymous ? false : serverLoading
+  const { isPro, presentPaywall } = useRevenueCat()
+  const toggleBookmarkMutation = useToggleBookmark()
+  const deleteMutation = useDeleteJournalEntry()
+  const { t } = useLingui()
+  const router = useRouter()
+  const [exporting, setExporting] = useState(false)
+  const [search, setSearch] = useState('')
+  const [showBookmarkedOnly, setShowBookmarkedOnly] = useState(false)
+  const [closeKey, setCloseKey] = useState(0)
+  const [animKey, setAnimKey] = useState(0)
+  const [peekEntry, setPeekEntry] = useState<JournalEntry | null>(null)
+  const blurTargetRef = useRef<View>(null)
+  const hasAnimated = useRef(false)
+
+  const handlePeek = (entry: JournalEntry) => {
+    setCloseKey(k => k + 1)
+    setPeekEntry(entry)
   }
 
-  async function handleExport() {
+  useFocusEffect(
+    useCallback(() => {
+      if (!hasAnimated.current) {
+        hasAnimated.current = true
+        setAnimKey(1)
+      }
+      if (!isAnonymous) refetch()
+      logScreenView('Reflections')
+      return () => setCloseKey(k => k + 1)
+    }, [refetch, isAnonymous])
+  )
+
+  const handleExport = async () => {
+    if (isAnonymous) {
+      router.push('/sign-in')
+      return
+    }
     if (!isPro) {
       await presentPaywall()
       return
@@ -95,23 +146,34 @@ export default function ReflectionsScreen() {
     setExporting(false)
   }
 
-  const groups = groupByDay(entries)
+  const query = search.trim().toLowerCase()
+  const filtered = entries.filter(e => {
+    if (showBookmarkedOnly && !e.is_bookmarked) return false
+    if (query && !e.content.toLowerCase().includes(query)) return false
+    return true
+  })
+
+  const hasOpenCard = useSwipeableStore((s) => s.activeDragCount > 0)
+  const dismissOpenCard = () => { if (hasOpenCard) setCloseKey(k => k + 1) }
+
+  const groups = groupByDay(filtered)
 
   return (
     <Containers.Screen shouldAutoResize={false}>
-      <ScrollView>
+      <BlurTargetView ref={blurTargetRef} style={{ flex: 1 }}>
+      <ScrollView keyboardShouldPersistTaps="handled" onTouchStart={dismissOpenCard}>
         <YStack p="$5">
-          <XStack justify="space-between" items="center" mb="$6">
-            <DisplayLg color="$color12" letterSpacing={-0.5}>
+          <XStack justify="space-between" items="center" mb="$4">
+            <DisplayLg color="$text-emphasis" letterSpacing={HEADING_LETTER_SPACING}>
               <Trans>Reflections</Trans>
             </DisplayLg>
-            {entries.length > 0 && (
+            {entries.length > 0 ? (
               <SizingAnimatedButton
                 onPress={handleExport}
                 disabled={exporting}
                 loading={exporting}
-                backgroundColor="$color2"
-                spinnerBackgroundColor="$color2"
+                backgroundColor="$surface-card"
+                spinnerBackgroundColor="$surface-card"
                 spinnerPieceColor="$accentBackground"
                 height={sizes.xl}>
                 <XStack gap="$2" items="center">
@@ -121,89 +183,98 @@ export default function ReflectionsScreen() {
                   </LabelLg>
                 </XStack>
               </SizingAnimatedButton>
-            )}
+            ) : null}
           </XStack>
 
-          {loading && !entries.length && (
+          {entries.length > 0 ? (
+            <YStack mb="$4" gap="$2">
+              <Input
+                value={search}
+                onChangeText={setSearch}
+                placeholder={t`Search entries…`}
+                bg="$surface-card"
+                borderWidth={1}
+                borderColor="$borderColor"
+                focusStyle={{ outlineWidth: 0 }}
+                fontSize="$3"
+                color="$text-emphasis"
+                rounded="$4"
+                px="$4"
+                height={SEARCH_INPUT_HEIGHT}
+              />
+              <BaseTouchable onPress={() => setShowBookmarkedOnly(v => !v)}>
+                <XStack
+                  bg={showBookmarkedOnly ? '$accentBackground' : '$surface-card'}
+                  rounded="$4"
+                  px="$3"
+                  py="$2"
+                  borderWidth={1}
+                  borderColor={showBookmarkedOnly ? '$accentBackground' : '$borderColor'}
+                  items="center"
+                  gap="$2"
+                  alignSelf="flex-start">
+                  <LabelMd color={showBookmarkedOnly ? '$accentColor' : '$text-disabled'}>
+                    {'★ '}
+                    <Trans>Bookmarked</Trans>
+                  </LabelMd>
+                </XStack>
+              </BaseTouchable>
+            </YStack>
+          ) : null}
+
+          {loading && !entries.length ? (
             <YStack items="center" mt="$10">
               <Spinner color="$accentBackground" />
             </YStack>
-          )}
+          ) : null}
 
-          {!loading && !entries.length && (
-            <BodySm color="$color8" text="center" mt="$14">
+          {!loading && !entries.length ? (
+            <BodySm color="$text-disabled" text="center" mt="$14">
               <Trans>No entries yet. Start writing in the Journal tab.</Trans>
             </BodySm>
-          )}
+          ) : null}
+
+          {!loading && entries.length > 0 && filtered.length === 0 ? (
+            <BodySm color="$text-disabled" text="center" mt="$14">
+              <Trans>No entries match your search.</Trans>
+            </BodySm>
+          ) : null}
 
           {groups.map(group => (
             <YStack key={group.label} mb="$7">
               <LabelMd
-                color="$color8"
+                color="$text-disabled"
                 textTransform="uppercase"
-                letterSpacing={0.9}
+                letterSpacing={LABEL_LETTER_SPACING}
                 mb="$3">
                 {group.label}
               </LabelMd>
-              {group.items.map(entry => (
-                <YStack
-                  key={entry.id}
-                  bg="$color2"
-                  rounded="$4"
-                  p="$4"
-                  mb="$2"
-                  borderWidth={1}
-                  borderColor="$borderColor">
-                  <BodySm color="$color12">
-                    {entry.content}
-                  </BodySm>
-                  <LabelMd color="$color8" mt="$2">
-                    {formatTime(entry.created_at)}
-                  </LabelMd>
-                </YStack>
+              {group.items.map((entry, idx) => (
+                <AnimatedEntry key={entry.id} index={idx} animKey={animKey}>
+                  <EntryCard
+                    entry={entry}
+                    index={idx}
+                    onToggleBookmark={(id, current) => isAnonymous ? toggleLocalBookmark(id) : toggleBookmarkMutation.mutate({ id, is_bookmarked: !current })}
+                    onDelete={(id) => isAnonymous ? deleteLocalEntry(id) : deleteMutation.mutate(id)}
+                    onPeek={handlePeek}
+                    closeKey={closeKey}
+                  />
+                </AnimatedEntry>
               ))}
             </YStack>
           ))}
 
-          {/* Notifications demo */}
-          <YStack mt="$6" bg="$color2" rounded="$4" p="$4" borderWidth={1} borderColor="$borderColor">
-            <LabelMd color="$color8" textTransform="uppercase" letterSpacing={0.9} mb="$3">
-              <Trans>Push notifications</Trans>
-            </LabelMd>
-
-            <XStack items="center" justify="space-between" mb="$3">
-              <BodySm color="$color11">
-                <Trans>Permission</Trans>
-              </BodySm>
-              <LabelMd
-                color={notifPermission === null ? '$color8' : notifPermission ? '$green10' : '$red10'}>
-                {notifPermission === null ? '—' : notifPermission ? 'Granted' : 'Denied'}
-              </LabelMd>
-            </XStack>
-
-            {fcmToken && (
-              <LabelMd color="$color8" mb="$3" numberOfLines={1}>
-                {fcmToken.slice(0, 24)}…
-              </LabelMd>
-            )}
-
-            <SizingAnimatedButton
-              onPress={handleTestNotification}
-              disabled={!notifPermission || scheduling}
-              loading={scheduling}
-              backgroundColor={notifPermission ? '$accentBackground' : '$color3'}
-              spinnerBackgroundColor="$color3"
-              spinnerPieceColor="$accentColor"
-              height={40}>
-              <LabelLg color={notifPermission ? '$accentColor' : '$color8'}>
-                {scheduled
-                  ? <Trans>Scheduled! (5 s)</Trans>
-                  : <Trans>Send test notification</Trans>}
-              </LabelLg>
-            </SizingAnimatedButton>
-          </YStack>
         </YStack>
       </ScrollView>
+      </BlurTargetView>
+      <EntryPeekModal
+        entry={peekEntry}
+        onClose={() => setPeekEntry(null)}
+        onToggleBookmark={(id: string, current: boolean) => isAnonymous ? toggleLocalBookmark(id) : toggleBookmarkMutation.mutate({ id, is_bookmarked: !current })}
+        blurTargetRef={blurTargetRef}
+      />
     </Containers.Screen>
   )
 }
+
+export { ReflectionsScreen }

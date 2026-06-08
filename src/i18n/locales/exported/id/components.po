@@ -1,0 +1,122 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2026-05-26 09:57-0300\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: id\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
+#: src/components/molecules/JournalEntry/SwipeableDeleteWrapper.tsx
+msgid "Cancel"
+msgstr "Batal"
+
+#: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
+msgid "Decide later — review local entries first"
+msgstr "Putuskan nanti — tinjau entri lokal dulu"
+
+#: src/components/molecules/JournalEntry/SwipeableDeleteWrapper.tsx
+msgid "Delete"
+msgstr "Hapus"
+
+#: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
+msgid "Delete & keep local"
+msgstr "Hapus & simpan lokal"
+
+#: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
+msgid "Delete account entries?"
+msgstr "Hapus entri akun?"
+
+#: src/components/molecules/JournalEntry/SwipeableDeleteWrapper.tsx
+msgid "Delete entry?"
+msgstr "Hapus entri?"
+
+#. placeholder {0}: serverCount === 1 ? 'entry' : 'entries'
+#. placeholder {1}: localCount === 1 ? 'one' : 'ones'
+#: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
+msgid "Delete your {serverCount} account {0} and keep your {localCount} local {1}."
+msgstr "Hapus {serverCount} {0} akun Anda dan simpan {localCount} {1} lokal."
+
+#: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
+#~ msgid "Discard local"
+#~ msgstr "Hapus entri lokal"
+
+#: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
+#~ msgid "Discard the {localCount} local {0} and continue with your {serverCount} saved {1}."
+#~ msgstr "Hapus {localCount} {0} lokal dan lanjutkan dengan {serverCount} {1} tersimpan."
+
+#. placeholder {0}: localCount === 1 ? 'entry' : 'entries'
+#. placeholder {1}: serverCount === 1 ? 'one' : 'ones'
+#: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
+msgid "Discard your {localCount} local {0} and continue with your {serverCount} saved {1}."
+msgstr "Buang {localCount} {0} lokal Anda dan lanjutkan dengan {serverCount} {1} tersimpan."
+
+#: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
+msgid "Keep account entries"
+msgstr "Pertahankan entri akun"
+
+#: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
+msgid "Keep everything ✦"
+msgstr "Pertahankan semua ✦"
+
+#: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
+msgid "Keep local entries"
+msgstr "Pertahankan entri lokal"
+
+#: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
+#~ msgid "Keep only account entries"
+#~ msgstr "Pertahankan hanya entri akun"
+
+#: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
+msgid "Merge all"
+msgstr "Gabungkan semua"
+
+#: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
+msgid "Merge all {combined} entries into your account."
+msgstr "Gabungkan semua {combined} entri ke akun Anda."
+
+#: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
+msgid "One more thing"
+msgstr "Satu hal lagi"
+
+#: src/components/molecules/JournalEntry/SwipeableDeleteWrapper.tsx
+msgid "This cannot be undone."
+msgstr "Ini tidak dapat dibatalkan."
+
+#: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
+msgid "Unlimited entries unlocked. Keep writing."
+msgstr "Entri tak terbatas terbuka. Terus menulis."
+
+#: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
+#~ msgid "Upgrade ✦"
+#~ msgstr "Upgrade ✦"
+
+#: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
+msgid "Upgrade to Pro to merge all {combined} entries and write without limits."
+msgstr "Upgrade ke Pro untuk menggabungkan semua {combined} entri dan menulis tanpa batas."
+
+#: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
+msgid "Welcome to Pro ✦"
+msgstr "Selamat datang di Pro ✦"
+
+#: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
+#~ msgid "You have {localCount} {0} saved locally and {serverCount} in your account — {combined} total, which is {overBy} over the free limit of {FREE_ENTRY_LIMIT}."
+#~ msgstr "Anda memiliki {localCount} {0} tersimpan secara lokal dan {serverCount} di akun — total {combined}, yaitu {overBy} melebihi batas gratis {FREE_ENTRY_LIMIT}."
+
+#. placeholder {0}: localCount === 1 ? 'entry' : 'entries'
+#: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
+msgid "You have {localCount} local {0} and {serverCount} in your account — {combined} total, {overBy} over the free limit of {FREE_ENTRY_LIMIT}."
+msgstr "Anda memiliki {localCount} {0} lokal dan {serverCount} di akun — total {combined}, melebihi batas gratis {FREE_ENTRY_LIMIT} sebanyak {overBy}."
+
+#. placeholder {0}: serverCount === 1 ? 'entry' : 'entries'
+#. placeholder {1}: localCount === 1 ? 'entry' : 'entries'
+#: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
+msgid "Your {serverCount} account {0} will be permanently deleted and replaced with your {localCount} local {1}."
+msgstr "{serverCount} {0} akun Anda akan dihapus permanen dan digantikan oleh {localCount} {1} lokal."

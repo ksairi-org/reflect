@@ -1,16 +1,24 @@
 import {
   getMessaging,
-  AuthorizationStatus,
-  requestPermission,
   getToken,
   onMessage,
 } from '@react-native-firebase/messaging'
 import { getApp } from '@react-native-firebase/app'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import * as Device from 'expo-device'
 import * as ExpoNotifications from 'expo-notifications'
+import { Platform } from 'react-native'
+
+if (Platform.OS === 'android') {
+  ExpoNotifications.setNotificationChannelAsync('default', {
+    name: 'Reflect',
+    importance: ExpoNotifications.AndroidImportance.MAX,
+    vibrationPattern: [0, 250, 250, 250],
+  })
+}
 
 ExpoNotifications.setNotificationHandler({
   handleNotification: async () => ({
-    shouldShowAlert: true,
     shouldPlaySound: true,
     shouldSetBadge: false,
     shouldShowBanner: true,
@@ -20,39 +28,88 @@ ExpoNotifications.setNotificationHandler({
 
 const messaging = getMessaging(getApp())
 
-export async function requestNotificationPermission(): Promise<boolean> {
-  const { status } = await ExpoNotifications.requestPermissionsAsync()
-  if (status !== 'granted') return false
+type NotificationPermissionStatus = 'undetermined' | 'granted' | 'denied'
 
-  const authStatus = await requestPermission(messaging)
-  return (
-    authStatus === AuthorizationStatus.AUTHORIZED ||
-    authStatus === AuthorizationStatus.PROVISIONAL
-  )
+const getNotificationPermissionStatus = async (): Promise<NotificationPermissionStatus> => {
+  if (!Device.isDevice) return 'denied'
+  const { status } = await ExpoNotifications.getPermissionsAsync()
+  if (status === 'granted') return 'granted'
+  if (status === 'undetermined') return 'undetermined'
+  return 'denied'
 }
 
-export async function getFCMToken(): Promise<string | null> {
+const requestNotificationPermission = async (): Promise<boolean> => {
+  if (!Device.isDevice) return false
+  const { status } = await ExpoNotifications.requestPermissionsAsync()
+  return status === 'granted'
+}
+
+const getFCMToken = async (): Promise<string | null> => {
+  if (!Device.isDevice) return null
   try {
     return await getToken(messaging)
-  } catch {
+  } catch (e) {
+    console.warn('[FCM token] Failed to get token:', e)
     return null
   }
 }
 
-export function subscribeToForegroundMessages(
+const subscribeToForegroundMessages = (
   onMessageCallback: (title: string, body: string) => void,
-): () => void {
-  return onMessage(messaging, async remoteMessage => {
+): () => void =>
+  onMessage(messaging, async remoteMessage => {
     onMessageCallback(
       remoteMessage.notification?.title ?? 'Reflect',
       remoteMessage.notification?.body ?? '',
     )
   })
-}
 
-export async function scheduleLocalNotification(title: string, body: string, delaySeconds = 3) {
+const scheduleLocalNotification = async (title: string, body: string, delaySeconds = 3) => {
   await ExpoNotifications.scheduleNotificationAsync({
     content: { title, body },
     trigger: { type: ExpoNotifications.SchedulableTriggerInputTypes.TIME_INTERVAL, seconds: delaySeconds },
   })
+}
+
+const REMINDER_NOTIF_ID_KEY = '@reflect/reminder_notif_id'
+
+const scheduleDailyReminder = async (hour: number, minute: number): Promise<void> => {
+  const existingId = await AsyncStorage.getItem(REMINDER_NOTIF_ID_KEY)
+  if (existingId) {
+    await ExpoNotifications.cancelScheduledNotificationAsync(existingId)
+  }
+
+  const id = await ExpoNotifications.scheduleNotificationAsync({
+    content: {
+      title: 'Reflect',
+      body: "Time to jot down today's thoughts.",
+    },
+    trigger: {
+      type: ExpoNotifications.SchedulableTriggerInputTypes.CALENDAR,
+      hour,
+      minute,
+      repeats: true,
+    },
+  })
+
+  await AsyncStorage.setItem(REMINDER_NOTIF_ID_KEY, id)
+}
+
+const cancelDailyReminder = async (): Promise<void> => {
+  const id = await AsyncStorage.getItem(REMINDER_NOTIF_ID_KEY)
+  if (id) {
+    await ExpoNotifications.cancelScheduledNotificationAsync(id)
+    await AsyncStorage.removeItem(REMINDER_NOTIF_ID_KEY)
+  }
+}
+
+export type { NotificationPermissionStatus }
+export {
+  getNotificationPermissionStatus,
+  requestNotificationPermission,
+  getFCMToken,
+  subscribeToForegroundMessages,
+  scheduleLocalNotification,
+  scheduleDailyReminder,
+  cancelDailyReminder,
 }

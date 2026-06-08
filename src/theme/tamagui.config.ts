@@ -14,15 +14,16 @@ const tamaguiConfig = createTamagui({
   },
   tokens: createTokens({
     ...defaultConfig.tokens,
-    color: themes.light,
     size: { ...defaultConfig.tokens.size, ...sizes },
     space: { ...defaultConfig.tokens.space, ...sizes },
     radius: { ...defaultConfig.tokens.radius, ...radius },
   }),
   settings: {
-    allowedStyleValues: 'somewhat-strict',
+    allowedStyleValues: 'strict',
   },
 })
 
-export type AppConfig = typeof tamaguiConfig
-export default tamaguiConfig
+type AppConfig = typeof tamaguiConfig
+
+export type { AppConfig }
+export { tamaguiConfig }

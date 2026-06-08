@@ -1,0 +1,444 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2026-05-26 12:00-0300\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: ar\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#: src/screens/JournalScreen/JournalScreen.tsx
+msgid "{remainingFree} free entries left — sign up to keep writing"
+msgstr "تبقّى {remainingFree} إدخال مجاني — سجّل للاستمرار في الكتابة"
+
+#: src/screens/JournalScreen/JournalScreen.tsx
+msgid "{remainingFree} free entries left — upgrade to keep writing"
+msgstr "تبقّى {remainingFree} تسجيل مجاني — اشترك للاستمرار في الكتابة"
+
+#: src/screens/JournalScreen/JournalScreen.tsx
+msgid "1 free entry left — sign up to keep writing"
+msgstr "تبقّى إدخال مجاني واحد — سجّل للاستمرار في الكتابة"
+
+#: src/screens/JournalScreen/JournalScreen.tsx
+msgid "1 free entry left — upgrade to keep writing"
+msgstr "تبقّى تسجيل مجاني واحد — اشترك للاستمرار في الكتابة"
+
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+msgid "12-hour"
+msgstr "١٢ ساعة"
+
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+msgid "24-hour"
+msgstr "٢٤ ساعة"
+
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+msgid "Account"
+msgstr "الحساب"
+
+#: src/screens/SignInScreen/SignInScreen.tsx
+msgid "Already have an account? Sign in"
+msgstr "لديك حساب بالفعل؟ سجّل الدخول"
+
+#: src/screens/SignInScreen/SignInScreen.tsx
+msgid "An account with this email already exists"
+msgstr "يوجد حساب بهذا البريد الإلكتروني بالفعل"
+
+#: src/screens/SignInScreen/SignInScreen.tsx
+msgid "Apple sign-in failed: no identity token"
+msgstr "فشل تسجيل الدخول بـ Apple: لا يوجد رمز هوية"
+
+#: src/screens/SignInScreen/SignInScreen.tsx
+msgid "Apple sign-in is not configured for Android"
+msgstr "تسجيل الدخول بـ Apple غير متاح على Android"
+
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+msgid "Are you sure you want to sign out?"
+msgstr "هل أنت متأكد من تسجيل الخروج؟"
+
+#: src/screens/ForgotPasswordScreen/ForgotPasswordScreen.tsx
+#: src/screens/ResetPasswordScreen/ResetPasswordScreen.tsx
+msgid "Back to sign in"
+msgstr "العودة إلى تسجيل الدخول"
+
+#: src/screens/ReflectionsScreen/ReflectionsScreen.tsx
+msgid "Bookmarked"
+msgstr "المحفوظات"
+
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+msgid "Cancel"
+msgstr "إلغاء"
+
+#: src/screens/ForgotPasswordScreen/ForgotPasswordScreen.tsx
+#: src/screens/SignInScreen/SignInScreen.tsx
+msgid "Check your email"
+msgstr "تحقّق من بريدك الإلكتروني"
+
+#: src/screens/ResetPasswordScreen/ResetPasswordScreen.tsx
+msgid "Choose a new password."
+msgstr "اختر كلمة مرور جديدة."
+
+#: src/screens/ResetPasswordScreen/ResetPasswordScreen.tsx
+msgid "Confirm new password"
+msgstr "تأكيد كلمة المرور الجديدة"
+
+#: src/screens/SignInScreen/SignInScreen.tsx
+msgid "Confirm password"
+msgstr "تأكيد كلمة المرور"
+
+#: src/screens/SignInScreen/SignInScreen.tsx
+msgid "Continue without an account"
+msgstr "المتابعة بدون حساب"
+
+#: src/screens/SignInScreen/SignInScreen.tsx
+msgid "Create account"
+msgstr "إنشاء حساب"
+
+#: src/screens/SignInScreen/SignInScreen.tsx
+msgid "Create your account."
+msgstr "أنشئ حسابك."
+
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+msgid "Daily reminder"
+msgstr "تذكير يومي"
+
+#: src/screens/JournalScreen/JournalScreen.tsx
+msgid "day streak"
+msgstr "يوم متتالٍ"
+
+#: src/screens/JournalScreen/JournalScreen.tsx
+msgid "days streak"
+msgstr "أيام متتالية"
+
+#: src/screens/JournalScreen/JournalScreen.tsx
+#: src/screens/ReflectionsScreen/ReflectionsScreen.tsx
+#~ msgid "Delete"
+#~ msgstr "حذف"
+
+#: src/screens/JournalScreen/JournalScreen.tsx
+#: src/screens/ReflectionsScreen/ReflectionsScreen.tsx
+#~ msgid "Delete entry?"
+#~ msgstr "حذف التسجيل؟"
+
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+msgid "Denied — tap to open Settings"
+msgstr "مرفوضة — اضغط لفتح الإعدادات"
+
+#: src/screens/SignInScreen/SignInScreen.tsx
+msgid "Don't have an account? Sign up"
+msgstr "ليس لديك حساب؟ سجّل"
+
+#: src/screens/ForgotPasswordScreen/ForgotPasswordScreen.tsx
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+#: src/screens/SignInScreen/SignInScreen.tsx
+msgid "Email"
+msgstr "البريد الإلكتروني"
+
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+msgid "Enable"
+msgstr "تفعيل"
+
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+msgid "Enable notifications in Settings to use reminders."
+msgstr "فعّل الإشعارات في الإعدادات لاستخدام التذكيرات."
+
+#: src/screens/ForgotPasswordScreen/ForgotPasswordScreen.tsx
+msgid "Enter your email to receive a reset link."
+msgstr "أدخل بريدك الإلكتروني لتلقي رابط إعادة التعيين."
+
+#: src/screens/JournalScreen/JournalScreen.tsx
+msgid "Entry limit reached — sign up for Pro to keep writing"
+msgstr "تم الوصول إلى حد الإدخالات — سجّل في Pro للاستمرار في الكتابة"
+
+#: src/screens/JournalScreen/JournalScreen.tsx
+msgid "Entry limit reached — upgrade to keep writing"
+msgstr "تم الوصول إلى حد المدخلات — قم بالترقية للاستمرار في الكتابة"
+
+#: src/screens/ReflectionsScreen/ReflectionsScreen.tsx
+msgid "Export"
+msgstr "تصدير"
+
+#: src/screens/ReflectionsScreen/ReflectionsScreen.tsx
+msgid "Export ✦"
+msgstr "تصدير ✦"
+
+#: src/screens/SignInScreen/SignInScreen.tsx
+msgid "Forgot password?"
+msgstr "نسيت كلمة المرور؟"
+
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+msgid "Free"
+msgstr "مجاني"
+
+#: src/screens/SignInScreen/SignInScreen.tsx
+msgid "Google Play Services not available"
+msgstr "خدمات Google Play غير متاحة"
+
+#: src/screens/SignInScreen/SignInScreen.tsx
+msgid "Google sign-in failed: no identity token"
+msgstr "فشل تسجيل الدخول بـ Google: لا يوجد رمز هوية"
+
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+msgid "Granted"
+msgstr "ممنوحة"
+
+#: src/screens/JournalScreen/JournalScreen.tsx
+msgid "How are you really feeling right now?"
+msgstr "كيف تشعر حقاً الآن؟"
+
+#: src/screens/SignInScreen/SignInScreen.tsx
+msgid "Invalid email or password"
+msgstr "البريد الإلكتروني أو كلمة المرور غير صحيحة"
+
+#: src/screens/JournalScreen/JournalScreen.tsx
+msgid "Journal"
+msgstr "المذكرة"
+
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+msgid "Manage subscription"
+msgstr "إدارة الاشتراك"
+
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+msgid "Name"
+msgstr "الاسم"
+
+#: src/screens/ResetPasswordScreen/ResetPasswordScreen.tsx
+msgid "New password"
+msgstr "كلمة المرور الجديدة"
+
+#: src/screens/ResetPasswordScreen/ResetPasswordScreen.tsx
+msgid "New password must be different from your current password"
+msgstr "يجب أن تكون كلمة المرور الجديدة مختلفة عن كلمة المرور الحالية"
+
+#: src/screens/ForgotPasswordScreen/ForgotPasswordScreen.tsx
+msgid "No account found with this email"
+msgstr "لم يتم العثور على حساب بهذا البريد الإلكتروني"
+
+#: src/screens/ReflectionsScreen/ReflectionsScreen.tsx
+msgid "No entries match your search."
+msgstr "لا توجد تسجيلات تطابق بحثك."
+
+#: src/screens/ReflectionsScreen/ReflectionsScreen.tsx
+msgid "No entries yet. Start writing in the Journal tab."
+msgstr "لا توجد تسجيلات بعد. ابدأ الكتابة في تبويب المذكرة."
+
+#: src/screens/SignInScreen/SignInScreen.tsx
+msgid "Password"
+msgstr "كلمة المرور"
+
+#: src/screens/ResetPasswordScreen/ResetPasswordScreen.tsx
+#: src/screens/SignInScreen/SignInScreen.tsx
+msgid "Password must be at least 6 characters"
+msgstr "يجب أن تتكون كلمة المرور من 6 أحرف على الأقل"
+
+#: src/screens/ResetPasswordScreen/ResetPasswordScreen.tsx
+msgid "Password updated"
+msgstr "تم تحديث كلمة المرور"
+
+#: src/screens/ResetPasswordScreen/ResetPasswordScreen.tsx
+#: src/screens/SignInScreen/SignInScreen.tsx
+msgid "Passwords do not match"
+msgstr "كلمات المرور غير متطابقة"
+
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+msgid "Permission"
+msgstr "الإذن"
+
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+msgid "Physical device only"
+msgstr "الجهاز الفعلي فقط"
+
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+msgid "Plan"
+msgstr "الخطة"
+
+#: src/screens/SignInScreen/SignInScreen.tsx
+msgid "Please confirm your email before signing in"
+msgstr "يرجى تأكيد بريدك الإلكتروني قبل تسجيل الدخول"
+
+#: src/screens/ForgotPasswordScreen/ForgotPasswordScreen.tsx
+#: src/screens/SignInScreen/SignInScreen.tsx
+msgid "Please enter a valid email address"
+msgstr "أدخل عنوان بريد إلكتروني صالحاً"
+
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+msgid "Pro"
+msgstr "برو"
+
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+msgid "Pro Annual"
+msgstr "Pro سنوي"
+
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+msgid "Pro Monthly"
+msgstr "Pro شهري"
+
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+msgid "Push notifications"
+msgstr "الإشعارات الفورية"
+
+#: src/screens/ReflectionsScreen/ReflectionsScreen.tsx
+msgid "Reflections"
+msgstr "التأملات"
+
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+msgid "Remind me to write"
+msgstr "ذكّرني بالكتابة"
+
+#: src/screens/JournalScreen/JournalScreen.tsx
+msgid "Save entry"
+msgstr "حفظ التسجيل"
+
+#: src/screens/JournalScreen/JournalScreen.tsx
+msgid "Save entry ✦"
+msgstr "حفظ التسجيل ✦"
+
+#: src/screens/ReflectionsScreen/ReflectionsScreen.tsx
+msgid "Search entries…"
+msgstr "البحث في التسجيلات…"
+
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+msgid "Select reminder time"
+msgstr "اختر وقت التذكير"
+
+#: src/screens/ForgotPasswordScreen/ForgotPasswordScreen.tsx
+msgid "Send reset link"
+msgstr "إرسال رابط إعادة التعيين"
+
+#: src/screens/ResetPasswordScreen/ResetPasswordScreen.tsx
+msgid "Set new password"
+msgstr "تعيين كلمة مرور جديدة"
+
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+msgid "Settings"
+msgstr "الإعدادات"
+
+#: src/screens/SignInScreen/SignInScreen.tsx
+msgid "Sign in"
+msgstr "تسجيل الدخول"
+
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+msgid "Sign in for Pro ✦"
+msgstr "سجّل الدخول للحصول على Pro ✦"
+
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+msgid "Sign in or create account"
+msgstr "تسجيل الدخول أو إنشاء حساب"
+
+#: src/screens/SignInScreen/SignInScreen.tsx
+msgid "Sign in with Apple"
+msgstr "تسجيل الدخول بـ Apple"
+
+#: src/screens/ResetPasswordScreen/ResetPasswordScreen.tsx
+msgid "Sign in with your new password."
+msgstr "سجّل الدخول بكلمة مرورك الجديدة."
+
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+msgid "Sign out"
+msgstr "تسجيل الخروج"
+
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+msgid "Subscription"
+msgstr "الاشتراك"
+
+#: src/screens/JournalScreen/JournalScreen.tsx
+#: src/screens/ReflectionsScreen/ReflectionsScreen.tsx
+#~ msgid "This cannot be undone."
+#~ msgstr "لا يمكن التراجع عن هذا."
+
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+msgid "This feature is not available on the simulator."
+msgstr "هذه الميزة غير متاحة على المحاكي."
+
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+msgid "Time"
+msgstr "الوقت"
+
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+msgid "Time format"
+msgstr "تنسيق الوقت"
+
+#: src/screens/JournalScreen/JournalScreen.tsx
+#~ msgid "Today · {0, plural, one {# entry} other {# entries}}"
+#~ msgstr "اليوم · {0, plural, one {# إدخال} two {# إدخالان} few {# إدخالات} other {# إدخالات}}"
+
+#: src/screens/JournalScreen/JournalScreen.tsx
+#~ msgid "Today · {0} {1}"
+#~ msgstr "اليوم · {0} {1}"
+
+#. placeholder {0}: todayEntries.length
+#: src/screens/JournalScreen/JournalScreen.tsx
+msgid "Today · {0} entries"
+msgstr ""
+
+#: src/screens/JournalScreen/JournalScreen.tsx
+msgid "Today · 1 entry"
+msgstr ""
+
+#: src/screens/ForgotPasswordScreen/ForgotPasswordScreen.tsx
+#: src/screens/SignInScreen/SignInScreen.tsx
+msgid "Too many attempts. Please try again later"
+msgstr "محاولات كثيرة جداً. يرجى المحاولة مرة أخرى لاحقاً"
+
+#: src/screens/JournalScreen/JournalScreen.tsx
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+msgid "Unlimited entries unlocked. Keep writing."
+msgstr "تسجيلات غير محدودة. تابع الكتابة."
+
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+msgid "Upgrade to Pro ✦"
+msgstr "الترقية إلى Pro ✦"
+
+#: src/screens/SignInScreen/SignInScreen.tsx
+msgid "We sent a confirmation link to {email}."
+msgstr "أرسلنا رابط تأكيد إلى {email}."
+
+#: src/screens/ForgotPasswordScreen/ForgotPasswordScreen.tsx
+msgid "We sent a password reset link to {email}."
+msgstr "أرسلنا رابط إعادة تعيين كلمة المرور إلى {email}."
+
+#: src/screens/SignInScreen/SignInScreen.tsx
+msgid "Welcome back."
+msgstr "مرحباً بعودتك."
+
+#: src/screens/JournalScreen/JournalScreen.tsx
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+msgid "Welcome to Pro ✦"
+msgstr "مرحباً بك في Pro ✦"
+
+#: src/screens/JournalScreen/JournalScreen.tsx
+msgid "What are you avoiding?"
+msgstr "ما الذي تتجنبه؟"
+
+#: src/screens/JournalScreen/JournalScreen.tsx
+msgid "What are you grateful for today?"
+msgstr "على ماذا تشكر اليوم؟"
+
+#: src/screens/JournalScreen/JournalScreen.tsx
+msgid "What made you smile today?"
+msgstr "ما الذي جعلك تبتسم اليوم؟"
+
+#: src/screens/JournalScreen/JournalScreen.tsx
+msgid "What would make today a good day?"
+msgstr "ما الذي سيجعل اليوم يوماً جيداً؟"
+
+#: src/screens/JournalScreen/JournalScreen.tsx
+msgid "What's on your mind?"
+msgstr "ما الذي يدور في ذهنك؟"
+
+#: src/screens/JournalScreen/JournalScreen.tsx
+msgid "What's one thing you want to remember about today?"
+msgstr "ما الشيء الواحد الذي تريد أن تتذكره من اليوم؟"
+
+#: src/screens/SettingsScreen/SettingsScreen.tsx
+msgid "You're using reflect as a guest. Sign in to sync your journal across devices and unlock Pro."
+msgstr "أنت تستخدم reflect كضيف. سجّل الدخول لمزامنة يومياتك عبر أجهزتك وفتح Pro."
+
+#: src/screens/JournalScreen/JournalScreen.tsx
+#~ msgid "You've used all free entries. Tap Save to unlock unlimited writing ✦"
+#~ msgstr "لقد استخدمت جميع تسجيلاتك المجانية. اضغط حفظ لفتح الكتابة غير المحدودة ✦"

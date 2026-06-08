@@ -20,6 +20,7 @@ expo-env.d.ts
 
 # Metro
 .metro-health-check*
+.watchmanconfig
 
 # debug
 npm-debug.*
@@ -36,7 +37,13 @@ yarn-error.*
 # typescript
 *.tsbuildinfo
 
+# Tamagui extraction cache (disableExtraction: true — this file is unused)
+.tamagui/
+
 app-example
+
+# Supabase CLI temp files
+supabase/.temp/
 
 # generated native folders
 /ios
@@ -48,14 +55,18 @@ app-example
 
 # Lingui compiled output is committed — EAS local builds archive via git and cannot regenerate it
 
+# Digital Asset Links — belongs on galagym.com, not in this repo (reference copy lives in docs/android/)
+/assetlinks.json
+
 # Firebase service account key (has admin privileges — never commit)
 *firebase-adminsdk*.json
+firebase-service-account.json
 # Google Play service account key (sensitive — store in CI secrets, never commit)
 eas-service-account.json
 
 # EAS local build artifacts
-build-*.tar.gz
-build-*.apk
-app-build.ipa
-app-build.aab
+*.tar.gz
+*.apk
+*.ipa
+*.aab
 *.app

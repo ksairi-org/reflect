@@ -1,0 +1,178 @@
+// @openapi-internal — admin-only, not callable from app clients
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
+import * as jose from 'https://esm.sh/jose@5'
+
+const FIREBASE_PROJECT_ID = Deno.env.get('FIREBASE_PROJECT_ID')!
+const FIREBASE_CLIENT_EMAIL = Deno.env.get('FIREBASE_CLIENT_EMAIL')!
+const FIREBASE_PRIVATE_KEY = Deno.env.get('FIREBASE_PRIVATE_KEY')!.replace(/\\n/g, '\n')
+const ADMIN_SECRET = Deno.env.get('ADMIN_PUSH_SECRET')!
+
+async function getFirebaseAccessToken(): Promise<string> {
+  const privateKey = await jose.importPKCS8(FIREBASE_PRIVATE_KEY, 'RS256')
+  const now = Math.floor(Date.now() / 1000)
+  const jwt = await new jose.SignJWT({
+    scope: 'https://www.googleapis.com/auth/firebase.messaging',
+  })
+    .setProtectedHeader({ alg: 'RS256' })
+    .setIssuedAt(now)
+    .setExpirationTime(now + 3600)
+    .setIssuer(FIREBASE_CLIENT_EMAIL)
+    .setAudience('https://oauth2.googleapis.com/token')
+    .sign(privateKey)
+
+  const res = await fetch('https://oauth2.googleapis.com/token', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({
+      grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
+      assertion: jwt,
+    }),
+  })
+  const { access_token } = await res.json()
+  return access_token
+}
+
+async function sendPush(
+  fcmToken: string,
+  accessToken: string,
+  title: string,
+  body: string,
+): Promise<{ ok: boolean; unregistered?: boolean; error?: string }> {
+  const res = await fetch(
+    `https://fcm.googleapis.com/v1/projects/${FIREBASE_PROJECT_ID}/messages:send`,
+    {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        message: {
+          token: fcmToken,
+          notification: { title, body },
+          android: { notification: { channel_id: 'default', sound: 'default' } },
+          apns: { payload: { aps: { sound: 'default' } } },
+        },
+      }),
+    },
+  )
+  if (!res.ok) {
+    const err = await res.text()
+    const unregistered = err.includes('UNREGISTERED') || res.status === 404
+    return { ok: false, unregistered, error: err }
+  }
+  return { ok: true }
+}
+
+const CORS_HEADERS = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers': 'Content-Type, X-Admin-Secret',
+  'Access-Control-Allow-Methods': 'POST, OPTIONS',
+}
+
+Deno.serve(async (req) => {
+  if (req.method === 'OPTIONS') {
+    return new Response(null, { status: 204, headers: CORS_HEADERS })
+  }
+
+  if (req.method !== 'POST') {
+    return new Response('Method not allowed', { status: 405 })
+  }
+
+  const secret = req.headers.get('X-Admin-Secret')
+  if (!ADMIN_SECRET || secret !== ADMIN_SECRET) {
+    return new Response('Unauthorized', { status: 403, headers: CORS_HEADERS })
+  }
+
+  const body = await req.json() as {
+    action?: string
+    title?: string
+    body?: string
+    user_id?: string
+  }
+
+  const supabase = createClient(
+    Deno.env.get('SUPABASE_URL')!,
+    Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!,
+    { db: { schema: 'api' } },
+  )
+
+  if (body.action === 'list') {
+    const { data: devices, error } = await supabase
+      .from('device_tokens')
+      .select('user_id, fcm_token, updated_at')
+      .order('updated_at', { ascending: false })
+
+    if (error) return new Response(error.message, { status: 500, headers: CORS_HEADERS })
+    if (!devices?.length) return Response.json([], { headers: CORS_HEADERS })
+
+    const { data: { users }, error: authError } = await supabase.auth.admin.listUsers({
+      perPage: 1000,
+    })
+    if (authError) return new Response(authError.message, { status: 500, headers: CORS_HEADERS })
+
+    const emailById = Object.fromEntries(users.map((u) => [u.id, u.email ?? u.id]))
+
+    const result = devices.map((d) => ({
+      user_id: d.user_id,
+      email: emailById[d.user_id] ?? d.user_id,
+      fcm_token: d.fcm_token,
+      updated_at: d.updated_at,
+    }))
+
+    return Response.json(result, { headers: CORS_HEADERS })
+  }
+
+  const { title, body: msgBody, user_id } = body as { title: string; body: string; user_id?: string }
+
+  if (!title || !msgBody) {
+    return new Response('title and body are required', { status: 400, headers: CORS_HEADERS })
+  }
+
+  const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
+  let query = supabase.from('device_tokens').select('fcm_token, user_id')
+  if (user_id) {
+    if (user_id.includes('@')) {
+      const { data: { users: authUsers }, error: authError } = await supabase.auth.admin.listUsers({ perPage: 1000 })
+      if (authError) return new Response(authError.message, { status: 500, headers: CORS_HEADERS })
+      const match = authUsers.find((u) => u.email === user_id)
+      if (!match) return new Response(`No user found with email ${user_id}`, { status: 404, headers: CORS_HEADERS })
+      query = query.eq('user_id', match.id)
+    } else if (UUID_RE.test(user_id)) {
+      query = query.eq('user_id', user_id)
+    } else {
+      query = query.eq('fcm_token', user_id)
+    }
+  }
+
+  const { data: devices, error } = await query
+  if (error) return new Response(error.message, { status: 500, headers: CORS_HEADERS })
+  if (!devices?.length) {
+    return new Response('No matching devices found', { status: 200, headers: CORS_HEADERS })
+  }
+
+  const accessToken = await getFirebaseAccessToken()
+  const results = await Promise.allSettled(
+    devices.map((d) => sendPush(d.fcm_token, accessToken, title, msgBody)),
+  )
+
+  const staleTokens = devices
+    .filter((_, i) => results[i].status === 'fulfilled' && (results[i] as PromiseFulfilledResult<{ ok: boolean; unregistered?: boolean }>).value.unregistered)
+    .map((d) => d.fcm_token)
+  if (staleTokens.length > 0) {
+    await supabase.from('device_tokens').delete().in('fcm_token', staleTokens)
+  }
+
+  const sent = results.filter((r) => r.status === 'fulfilled' && r.value.ok).length
+  const errors = results.flatMap((r, i) => {
+    if (r.status === 'fulfilled' && !r.value.ok && !r.value.unregistered) return [`${devices[i].user_id}: ${r.value.error}`]
+    if (r.status === 'rejected') return [`${devices[i].user_id}: ${r.reason}`]
+    return []
+  })
+
+  const message = errors.length > 0
+    ? `Sent ${sent}/${devices.length} (${errors.length} failed)\n${errors.join('\n')}`
+    : `Sent to ${sent} device${sent !== 1 ? 's' : ''}`
+
+  return new Response(message, { status: 200, headers: CORS_HEADERS })
+})

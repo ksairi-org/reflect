@@ -11,12 +11,34 @@
         "simulator": true
       }
     },
+    "development-device": {
+      "extends": "development",
+      "ios": {
+        "simulator": false
+      }
+    },
     "preview": {
       "distribution": "internal",
       "ios": {
         "simulator": false
       }
     },
+    "preview-simulator": {
+      "extends": "preview",
+      "ios": {
+        "simulator": true
+      }
+    },
+    "preview-apk": {
+      "extends": "preview",
+      "android": {
+        "buildType": "apk"
+      }
+    },
+    "stg": {
+      "autoIncrement": true
+    },
+
     "prd": {
       "autoIncrement": true
     }
@@ -30,18 +52,7 @@
       "android": {
         "serviceAccountKeyPath": "./eas-service-account.json",
         "track": "internal",
-        "releaseStatus": "draft"
-      }
-    },
-    "prd-internal": {
-      "ios": {
-        "appleId": "marianoksairi@gmail.com",
-        "ascAppId": "6767607183"
-      },
-      "android": {
-        "serviceAccountKeyPath": "./eas-service-account.json",
-        "track": "internal",
-        "releaseStatus": "draft"
+        "releaseStatus": "completed"
       }
     },
     "prd": {
@@ -51,9 +62,9 @@
       },
       "android": {
         "serviceAccountKeyPath": "./eas-service-account.json",
-        "track": "production",
-        "releaseStatus": "draft"
+        "track": "alpha",
+        "releaseStatus": "completed"
       }
-    }
+    },
   }
 }
