@@ -64,10 +64,11 @@ const useAuthSession = () => {
     const code = queryParams.get('code')
     const queryType = queryParams.get('type')
     if (code) {
-      // Set recovery flag BEFORE exchange so the SIGNED_IN nav effect sees it
-      if (queryType === 'recovery') isRecoveryMode.current = true
+      if (queryType === 'recovery') {
+        isRecoveryMode.current = true
+        router.replace('/reset-password')
+      }
       await supabase.auth.exchangeCodeForSession(code)
-      if (queryType === 'recovery') router.replace('/reset-password')
       return
     }
     // Implicit flow: tokens in hash fragment
@@ -76,10 +77,11 @@ const useAuthSession = () => {
     const refreshToken = hashParams.get('refresh_token')
     const type = hashParams.get('type')
     if (accessToken && refreshToken) {
-      // Set recovery flag BEFORE setSession so the SIGNED_IN nav effect sees it
-      if (type === 'recovery') isRecoveryMode.current = true
+      if (type === 'recovery') {
+        isRecoveryMode.current = true
+        router.replace('/reset-password')
+      }
       await supabase.auth.setSession({ access_token: accessToken, refresh_token: refreshToken })
-      if (type === 'recovery') router.replace('/reset-password')
     }
   }, [router])
 
@@ -94,7 +96,12 @@ const useAuthSession = () => {
         new URLSearchParams(initialUrl.split('?')[1] ?? '').get('type') === 'recovery'
       )
 
-      if (isRecoveryUrl) isRecoveryMode.current = true
+      if (isRecoveryUrl) {
+        isRecoveryMode.current = true
+        // Navigate immediately so the reset-password screen shows before the async
+        // code exchange — prevents the journal from flashing during cold start
+        router.replace('/reset-password')
+      }
 
       // Skip on recovery links: clearStaleKeychainOnFreshInstall fires SIGNED_OUT
       // asynchronously which resets isRecoveryMode even after we re-assert it.
