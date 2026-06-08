@@ -10,6 +10,10 @@ on:
       - 'yarn.lock'
       - 'app.config.ts'
       - 'eas.json'
+      - 'google-services-prd.json'
+      - 'google-services-stg.json'
+      - 'GoogleService-Info-prd.plist'
+      - 'GoogleService-Info-stg.plist'
   workflow_dispatch:
     inputs:
       environment:
