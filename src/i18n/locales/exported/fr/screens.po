@@ -115,16 +115,6 @@ msgstr "jour consécutif"
 msgid "days streak"
 msgstr "jours consécutifs"
 
-#: src/screens/JournalScreen/JournalScreen.tsx
-#: src/screens/ReflectionsScreen/ReflectionsScreen.tsx
-#~ msgid "Delete"
-#~ msgstr "Supprimer"
-
-#: src/screens/JournalScreen/JournalScreen.tsx
-#: src/screens/ReflectionsScreen/ReflectionsScreen.tsx
-#~ msgid "Delete entry?"
-#~ msgstr "Supprimer l'entrée ?"
-
 #: src/screens/SettingsScreen/SettingsScreen.tsx
 msgid "Denied — tap to open Settings"
 msgstr "Refusée — appuyez pour ouvrir Réglages"
@@ -227,10 +217,6 @@ msgstr "Aucune entrée ne correspond à votre recherche."
 msgid "No entries yet. Start writing in the Journal tab."
 msgstr "Aucune entrée pour l'instant. Commencez à écrire dans l'onglet Journal."
 
-#: src/hooks/useMemoryNotification.ts
-msgid "On this day"
-msgstr "En ce jour"
-
 #: src/screens/SignInScreen/SignInScreen.tsx
 msgid "Password"
 msgstr "Mot de passe"
@@ -289,6 +275,10 @@ msgstr "Notifications push"
 #: src/screens/ReflectionsScreen/ReflectionsScreen.tsx
 msgid "Reflections"
 msgstr "Réflexions"
+
+#: src/hooks/useMemoryNotification.ts
+msgid "Remember this?"
+msgstr "Tu te souviens de ça ?"
 
 #: src/screens/SettingsScreen/SettingsScreen.tsx
 msgid "Remind me to write"
@@ -350,11 +340,6 @@ msgstr "Se déconnecter"
 msgid "Subscription"
 msgstr "Abonnement"
 
-#: src/screens/JournalScreen/JournalScreen.tsx
-#: src/screens/ReflectionsScreen/ReflectionsScreen.tsx
-#~ msgid "This cannot be undone."
-#~ msgstr "Cette action est irréversible."
-
 #: src/screens/SettingsScreen/SettingsScreen.tsx
 msgid "This feature is not available on the simulator."
 msgstr "Cette fonctionnalité n'est pas disponible sur le simulateur."
@@ -366,14 +351,6 @@ msgstr "Heure"
 #: src/screens/SettingsScreen/SettingsScreen.tsx
 msgid "Time format"
 msgstr "Format de l'heure"
-
-#: src/screens/JournalScreen/JournalScreen.tsx
-#~ msgid "Today · {0, plural, one {# entry} other {# entries}}"
-#~ msgstr "Aujourd'hui · {0, plural, one {# entrée} other {# entrées}}"
-
-#: src/screens/JournalScreen/JournalScreen.tsx
-#~ msgid "Today · {0} {1}"
-#~ msgstr "Aujourd'hui · {0} {1}"
 
 #. placeholder {0}: todayEntries.length
 #: src/screens/JournalScreen/JournalScreen.tsx
@@ -442,7 +419,3 @@ msgstr "Quelle est la chose que vous voulez retenir de cette journée ?"
 #: src/screens/SettingsScreen/SettingsScreen.tsx
 msgid "You're using reflect as a guest. Sign in to sync your journal across devices and unlock Pro."
 msgstr "Vous utilisez reflect en tant qu'invité. Connectez-vous pour synchroniser votre journal sur tous vos appareils et débloquer Pro."
-
-#: src/screens/JournalScreen/JournalScreen.tsx
-#~ msgid "You've used all free entries. Tap Save to unlock unlimited writing ✦"
-#~ msgstr "Vous avez utilisé toutes vos entrées gratuites. Appuyez sur Enregistrer pour débloquer l'écriture illimitée ✦"

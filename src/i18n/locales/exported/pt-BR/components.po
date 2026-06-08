@@ -44,14 +44,6 @@ msgstr "Excluir entrada?"
 msgid "Delete your {serverCount} account {0} and keep your {localCount} local {1}."
 msgstr "Exclua suas {serverCount} {0} da conta e mantenha suas {localCount} {1} locais."
 
-#: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
-#~ msgid "Discard local"
-#~ msgstr "Descartar locais"
-
-#: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
-#~ msgid "Discard the {localCount} local {0} and continue with your {serverCount} saved {1}."
-#~ msgstr "Descarte as {localCount} {0} locais e continue com as suas {serverCount} {1} salvas."
-
 #. placeholder {0}: localCount === 1 ? 'entry' : 'entries'
 #. placeholder {1}: serverCount === 1 ? 'one' : 'ones'
 #: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
@@ -69,10 +61,6 @@ msgstr "Manter tudo ✦"
 #: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
 msgid "Keep local entries"
 msgstr "Manter entradas locais"
-
-#: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
-#~ msgid "Keep only account entries"
-#~ msgstr "Manter apenas entradas da conta"
 
 #: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
 msgid "Merge all"
@@ -95,20 +83,12 @@ msgid "Unlimited entries unlocked. Keep writing."
 msgstr "Entradas ilimitadas desbloqueadas. Continue escrevendo."
 
 #: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
-#~ msgid "Upgrade ✦"
-#~ msgstr "Fazer upgrade ✦"
-
-#: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
 msgid "Upgrade to Pro to merge all {combined} entries and write without limits."
 msgstr "Faça upgrade para o Pro para mesclar todas as {combined} entradas e escrever sem limites."
 
 #: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
 msgid "Welcome to Pro ✦"
 msgstr "Bem-vindo ao Pro ✦"
-
-#: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
-#~ msgid "You have {localCount} {0} saved locally and {serverCount} in your account — {combined} total, which is {overBy} over the free limit of {FREE_ENTRY_LIMIT}."
-#~ msgstr "Você tem {localCount} {0} salvas localmente e {serverCount} na sua conta — {combined} no total, o que é {overBy} acima do limite gratuito de {FREE_ENTRY_LIMIT}."
 
 #. placeholder {0}: localCount === 1 ? 'entry' : 'entries'
 #: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx

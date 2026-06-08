@@ -115,16 +115,6 @@ msgstr "hari berturut-turut"
 msgid "days streak"
 msgstr "hari berturut-turut"
 
-#: src/screens/JournalScreen/JournalScreen.tsx
-#: src/screens/ReflectionsScreen/ReflectionsScreen.tsx
-#~ msgid "Delete"
-#~ msgstr "Hapus"
-
-#: src/screens/JournalScreen/JournalScreen.tsx
-#: src/screens/ReflectionsScreen/ReflectionsScreen.tsx
-#~ msgid "Delete entry?"
-#~ msgstr "Hapus entri?"
-
 #: src/screens/SettingsScreen/SettingsScreen.tsx
 msgid "Denied — tap to open Settings"
 msgstr "Ditolak — ketuk untuk membuka Pengaturan"
@@ -227,10 +217,6 @@ msgstr "Tidak ada entri yang cocok dengan pencarian Anda."
 msgid "No entries yet. Start writing in the Journal tab."
 msgstr "Belum ada entri. Mulai menulis di tab Jurnal."
 
-#: src/hooks/useMemoryNotification.ts
-msgid "On this day"
-msgstr "Pada hari ini"
-
 #: src/screens/SignInScreen/SignInScreen.tsx
 msgid "Password"
 msgstr "Kata sandi"
@@ -289,6 +275,10 @@ msgstr "Notifikasi push"
 #: src/screens/ReflectionsScreen/ReflectionsScreen.tsx
 msgid "Reflections"
 msgstr "Refleksi"
+
+#: src/hooks/useMemoryNotification.ts
+msgid "Remember this?"
+msgstr "Masih ingat ini?"
 
 #: src/screens/SettingsScreen/SettingsScreen.tsx
 msgid "Remind me to write"
@@ -350,11 +340,6 @@ msgstr "Keluar"
 msgid "Subscription"
 msgstr "Langganan"
 
-#: src/screens/JournalScreen/JournalScreen.tsx
-#: src/screens/ReflectionsScreen/ReflectionsScreen.tsx
-#~ msgid "This cannot be undone."
-#~ msgstr "Tindakan ini tidak dapat dibatalkan."
-
 #: src/screens/SettingsScreen/SettingsScreen.tsx
 msgid "This feature is not available on the simulator."
 msgstr "Fitur ini tidak tersedia di simulator."
@@ -366,14 +351,6 @@ msgstr "Waktu"
 #: src/screens/SettingsScreen/SettingsScreen.tsx
 msgid "Time format"
 msgstr "Format waktu"
-
-#: src/screens/JournalScreen/JournalScreen.tsx
-#~ msgid "Today · {0, plural, one {# entry} other {# entries}}"
-#~ msgstr "Hari ini · {0, plural, one {# entri} other {# entri}}"
-
-#: src/screens/JournalScreen/JournalScreen.tsx
-#~ msgid "Today · {0} {1}"
-#~ msgstr "Hari ini · {0} {1}"
 
 #. placeholder {0}: todayEntries.length
 #: src/screens/JournalScreen/JournalScreen.tsx
@@ -442,7 +419,3 @@ msgstr "Satu hal apa yang ingin kamu ingat dari hari ini?"
 #: src/screens/SettingsScreen/SettingsScreen.tsx
 msgid "You're using reflect as a guest. Sign in to sync your journal across devices and unlock Pro."
 msgstr "Anda menggunakan reflect sebagai tamu. Masuk untuk menyinkronkan jurnal di semua perangkat dan membuka Pro."
-
-#: src/screens/JournalScreen/JournalScreen.tsx
-#~ msgid "You've used all free entries. Tap Save to unlock unlimited writing ✦"
-#~ msgstr "Anda telah menggunakan semua entri gratis. Ketuk Simpan untuk membuka penulisan tak terbatas ✦"

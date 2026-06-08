@@ -115,16 +115,6 @@ msgstr "يوم متتالٍ"
 msgid "days streak"
 msgstr "أيام متتالية"
 
-#: src/screens/JournalScreen/JournalScreen.tsx
-#: src/screens/ReflectionsScreen/ReflectionsScreen.tsx
-#~ msgid "Delete"
-#~ msgstr "حذف"
-
-#: src/screens/JournalScreen/JournalScreen.tsx
-#: src/screens/ReflectionsScreen/ReflectionsScreen.tsx
-#~ msgid "Delete entry?"
-#~ msgstr "حذف التسجيل؟"
-
 #: src/screens/SettingsScreen/SettingsScreen.tsx
 msgid "Denied — tap to open Settings"
 msgstr "مرفوضة — اضغط لفتح الإعدادات"
@@ -227,10 +217,6 @@ msgstr "لا توجد تسجيلات تطابق بحثك."
 msgid "No entries yet. Start writing in the Journal tab."
 msgstr "لا توجد تسجيلات بعد. ابدأ الكتابة في تبويب المذكرة."
 
-#: src/hooks/useMemoryNotification.ts
-msgid "On this day"
-msgstr "في مثل هذا اليوم"
-
 #: src/screens/SignInScreen/SignInScreen.tsx
 msgid "Password"
 msgstr "كلمة المرور"
@@ -289,6 +275,10 @@ msgstr "الإشعارات الفورية"
 #: src/screens/ReflectionsScreen/ReflectionsScreen.tsx
 msgid "Reflections"
 msgstr "التأملات"
+
+#: src/hooks/useMemoryNotification.ts
+msgid "Remember this?"
+msgstr "هل تتذكر هذا؟"
 
 #: src/screens/SettingsScreen/SettingsScreen.tsx
 msgid "Remind me to write"
@@ -350,11 +340,6 @@ msgstr "تسجيل الخروج"
 msgid "Subscription"
 msgstr "الاشتراك"
 
-#: src/screens/JournalScreen/JournalScreen.tsx
-#: src/screens/ReflectionsScreen/ReflectionsScreen.tsx
-#~ msgid "This cannot be undone."
-#~ msgstr "لا يمكن التراجع عن هذا."
-
 #: src/screens/SettingsScreen/SettingsScreen.tsx
 msgid "This feature is not available on the simulator."
 msgstr "هذه الميزة غير متاحة على المحاكي."
@@ -366,14 +351,6 @@ msgstr "الوقت"
 #: src/screens/SettingsScreen/SettingsScreen.tsx
 msgid "Time format"
 msgstr "تنسيق الوقت"
-
-#: src/screens/JournalScreen/JournalScreen.tsx
-#~ msgid "Today · {0, plural, one {# entry} other {# entries}}"
-#~ msgstr "اليوم · {0, plural, one {# إدخال} two {# إدخالان} few {# إدخالات} other {# إدخالات}}"
-
-#: src/screens/JournalScreen/JournalScreen.tsx
-#~ msgid "Today · {0} {1}"
-#~ msgstr "اليوم · {0} {1}"
 
 #. placeholder {0}: todayEntries.length
 #: src/screens/JournalScreen/JournalScreen.tsx
@@ -442,7 +419,3 @@ msgstr "ما الشيء الواحد الذي تريد أن تتذكره من ا
 #: src/screens/SettingsScreen/SettingsScreen.tsx
 msgid "You're using reflect as a guest. Sign in to sync your journal across devices and unlock Pro."
 msgstr "أنت تستخدم reflect كضيف. سجّل الدخول لمزامنة يومياتك عبر أجهزتك وفتح Pro."
-
-#: src/screens/JournalScreen/JournalScreen.tsx
-#~ msgid "You've used all free entries. Tap Save to unlock unlimited writing ✦"
-#~ msgstr "لقد استخدمت جميع تسجيلاتك المجانية. اضغط حفظ لفتح الكتابة غير المحدودة ✦"

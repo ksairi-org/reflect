@@ -44,14 +44,6 @@ msgstr "Hapus entri?"
 msgid "Delete your {serverCount} account {0} and keep your {localCount} local {1}."
 msgstr "Hapus {serverCount} {0} akun Anda dan simpan {localCount} {1} lokal."
 
-#: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
-#~ msgid "Discard local"
-#~ msgstr "Hapus entri lokal"
-
-#: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
-#~ msgid "Discard the {localCount} local {0} and continue with your {serverCount} saved {1}."
-#~ msgstr "Hapus {localCount} {0} lokal dan lanjutkan dengan {serverCount} {1} tersimpan."
-
 #. placeholder {0}: localCount === 1 ? 'entry' : 'entries'
 #. placeholder {1}: serverCount === 1 ? 'one' : 'ones'
 #: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
@@ -69,10 +61,6 @@ msgstr "Pertahankan semua ✦"
 #: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
 msgid "Keep local entries"
 msgstr "Pertahankan entri lokal"
-
-#: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
-#~ msgid "Keep only account entries"
-#~ msgstr "Pertahankan hanya entri akun"
 
 #: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
 msgid "Merge all"
@@ -95,20 +83,12 @@ msgid "Unlimited entries unlocked. Keep writing."
 msgstr "Entri tak terbatas terbuka. Terus menulis."
 
 #: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
-#~ msgid "Upgrade ✦"
-#~ msgstr "Upgrade ✦"
-
-#: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
 msgid "Upgrade to Pro to merge all {combined} entries and write without limits."
 msgstr "Upgrade ke Pro untuk menggabungkan semua {combined} entri dan menulis tanpa batas."
 
 #: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
 msgid "Welcome to Pro ✦"
 msgstr "Selamat datang di Pro ✦"
-
-#: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
-#~ msgid "You have {localCount} {0} saved locally and {serverCount} in your account — {combined} total, which is {overBy} over the free limit of {FREE_ENTRY_LIMIT}."
-#~ msgstr "Anda memiliki {localCount} {0} tersimpan secara lokal dan {serverCount} di akun — total {combined}, yaitu {overBy} melebihi batas gratis {FREE_ENTRY_LIMIT}."
 
 #. placeholder {0}: localCount === 1 ? 'entry' : 'entries'
 #: src/components/molecules/AnonMergeModal/AnonMergeModal.tsx
