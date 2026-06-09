@@ -81,16 +81,6 @@ const usePreferencesStore = create<PreferencesStoreState>()(
   ),
 )
 
-type PeekStoreState = {
-  pendingPeekEntryId: string | null
-  setPendingPeekEntryId: (id: string | null) => void
-}
-
-const usePeekStore = create<PeekStoreState>((set) => ({
-  pendingPeekEntryId: null,
-  setPendingPeekEntryId: (id) => set({ pendingPeekEntryId: id }),
-}))
-
-export { useUserStore, useSwipeableStore, usePreferencesStore, useSessionStore, usePeekStore }
+export { useUserStore, useSwipeableStore, usePreferencesStore, useSessionStore }
 export type { PendingMerge }
 export { useAnonymousJournalStore } from './anonymousJournal'

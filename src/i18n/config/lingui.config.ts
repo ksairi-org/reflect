@@ -16,7 +16,7 @@ const linguiConfig: LinguiConfig = {
     },
     {
       path: `${rootPath}/i18n/locales/exported/{locale}/screens`,
-      include: [`${rootPath}/screens`, `${rootPath}/hooks`],
+      include: [`${rootPath}/screens`],
     },
     {
       path: `${rootPath}/i18n/locales/exported/{locale}/components`,
