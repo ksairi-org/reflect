@@ -375,6 +375,10 @@ msgstr "Entradas ilimitadas desbloqueadas. Continue escrevendo."
 msgid "Upgrade to Pro ✦"
 msgstr "Assinar Pro ✦"
 
+#: src/screens/JournalScreen/JournalScreen.tsx
+msgid "Voice recognition failed"
+msgstr ""
+
 #: src/screens/SignInScreen/SignInScreen.tsx
 msgid "We sent a confirmation link to {email}."
 msgstr "Enviamos um link de confirmação para {email}."
