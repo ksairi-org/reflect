@@ -375,6 +375,10 @@ msgstr "تسجيلات غير محدودة. تابع الكتابة."
 msgid "Upgrade to Pro ✦"
 msgstr "الترقية إلى Pro ✦"
 
+#: src/screens/JournalScreen/JournalScreen.tsx
+msgid "Voice recognition failed"
+msgstr ""
+
 #: src/screens/SignInScreen/SignInScreen.tsx
 msgid "We sent a confirmation link to {email}."
 msgstr "أرسلنا رابط تأكيد إلى {email}."

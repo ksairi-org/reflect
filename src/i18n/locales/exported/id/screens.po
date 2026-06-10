@@ -375,6 +375,10 @@ msgstr "Entri tak terbatas telah dibuka. Teruslah menulis."
 msgid "Upgrade to Pro ✦"
 msgstr "Tingkatkan ke Pro ✦"
 
+#: src/screens/JournalScreen/JournalScreen.tsx
+msgid "Voice recognition failed"
+msgstr ""
+
 #: src/screens/SignInScreen/SignInScreen.tsx
 msgid "We sent a confirmation link to {email}."
 msgstr "Kami mengirim tautan konfirmasi ke {email}."
