@@ -71,7 +71,7 @@ const SettingsScreen = () => {
   const { alert } = useToast()
   const router = useRouter()
   const { isAnonymous } = useSessionStore()
-  const { enabled: reminderEnabled, hour: reminderHour, loading: reminderLoading, toggle: toggleReminder, updateTime } = useReminder()
+  const { enabled: reminderEnabled, hour: reminderHour, loading: reminderLoading, toggle: toggleReminder, disable: disableReminder, updateTime } = useReminder()
   const timeFormat = usePreferencesStore((s) => s.timeFormat)
   const setTimeFormat = usePreferencesStore((s) => s.setTimeFormat)
   const [hasGlass] = useState(() => isGlassEffectAPIAvailable())
@@ -106,6 +106,8 @@ const SettingsScreen = () => {
     if (status === 'granted') {
       const { data: { user } } = await supabase.auth.getUser()
       if (user) upsertDeviceToken(user.id)
+    } else {
+      disableReminder()
     }
   }
 
@@ -276,7 +278,10 @@ const SettingsScreen = () => {
                 <SizingAnimatedButton
                   onPress={async () => {
                     const purchased = await presentPaywall()
-                    if (purchased) alert({ title: t`Welcome to Pro ✦`, message: t`Unlimited entries unlocked. Keep writing.`, duration: PAYWALL_SUCCESS_ALERT_DURATION })
+                    if (purchased) {
+                      alert({ title: t`Welcome to Pro ✦`, message: t`Unlimited entries unlocked. Keep writing.`, duration: PAYWALL_SUCCESS_ALERT_DURATION })
+                      router.replace('/(tabs)/index' as never)
+                    }
                   }}
                   backgroundColor="$accentBackground"
                   spinnerBackgroundColor="$accentBackground"
