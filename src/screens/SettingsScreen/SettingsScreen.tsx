@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { Alert, AppState, InteractionManager, Linking, Modal } from 'react-native'
+import { Alert, AppState, Linking, Modal } from 'react-native'
 import { useRouter, useFocusEffect } from 'expo-router'
 import { ScrollView, YStack, XStack, Spinner, type YStackProps } from 'tamagui'
 import type { User } from '@supabase/supabase-js'
@@ -81,6 +81,14 @@ const SettingsScreen = () => {
   const [showTimePicker, setShowTimePicker] = useState(false)
   const [currentUser, setCurrentUser] = useState<User | null>(null)
   const openedSettings = useRef(false)
+  const prevIsProRef = useRef(isPro)
+
+  useEffect(() => {
+    if (!prevIsProRef.current && isPro) {
+      router.replace('/')
+    }
+    prevIsProRef.current = isPro
+  }, [isPro])
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data: { user } }) => setCurrentUser(user))
@@ -280,7 +288,6 @@ const SettingsScreen = () => {
                     const purchased = await presentPaywall()
                     if (purchased) {
                       alert({ title: t`Welcome to Pro ✦`, message: t`Unlimited entries unlocked. Keep writing.`, duration: PAYWALL_SUCCESS_ALERT_DURATION })
-                      InteractionManager.runAfterInteractions(() => router.replace('/'))
                     }
                   }}
                   backgroundColor="$accentBackground"
