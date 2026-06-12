@@ -123,6 +123,7 @@ const JournalScreen = () => {
     t`What are you avoiding?`,
     t`What would make today a good day?`,
     t`How are you really feeling right now?`,
+    t`What would you tell your past self today?`,
   ]
   const prompt = prompts[getDailyPromptIndex(prompts.length)]
   const hasContent = draft.trim().length > 0

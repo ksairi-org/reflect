@@ -421,6 +421,10 @@ msgid "What would make today a good day?"
 msgstr "O que faria de hoje um bom dia?"
 
 #: src/screens/JournalScreen/JournalScreen.tsx
+msgid "What would you tell your past self today?"
+msgstr "O que você diria ao seu eu do passado hoje?"
+
+#: src/screens/JournalScreen/JournalScreen.tsx
 msgid "What's on your mind?"
 msgstr "O que está pensando?"
 

@@ -421,6 +421,10 @@ msgid "What would make today a good day?"
 msgstr "Apa yang akan membuat hari ini menjadi hari yang baik?"
 
 #: src/screens/JournalScreen/JournalScreen.tsx
+msgid "What would you tell your past self today?"
+msgstr "Apa yang ingin kamu katakan kepada dirimu di masa lalu hari ini?"
+
+#: src/screens/JournalScreen/JournalScreen.tsx
 msgid "What's on your mind?"
 msgstr "Apa yang ada di pikiran Anda?"
 

@@ -421,6 +421,10 @@ msgid "What would make today a good day?"
 msgstr ""
 
 #: src/screens/JournalScreen/JournalScreen.tsx
+msgid "What would you tell your past self today?"
+msgstr ""
+
+#: src/screens/JournalScreen/JournalScreen.tsx
 msgid "What's on your mind?"
 msgstr ""
 
