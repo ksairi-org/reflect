@@ -385,7 +385,7 @@ msgstr "Passer à Pro ✦"
 
 #: src/screens/JournalScreen/JournalScreen.tsx
 #~ msgid "Voice recognition failed"
-#~ msgstr ""
+#~ msgstr "Échec de la reconnaissance vocale"
 
 #: src/screens/SignInScreen/SignInScreen.tsx
 msgid "We sent a confirmation link to {email}."

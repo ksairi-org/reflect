@@ -385,7 +385,7 @@ msgstr "Actualizar a Pro ✦"
 
 #: src/screens/JournalScreen/JournalScreen.tsx
 #~ msgid "Voice recognition failed"
-#~ msgstr ""
+#~ msgstr "Error en el reconocimiento de voz"
 
 #: src/screens/SignInScreen/SignInScreen.tsx
 msgid "We sent a confirmation link to {email}."
