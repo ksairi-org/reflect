@@ -962,6 +962,50 @@
         setDay(iso);
       }
 
+      // Longest billing period first, so the plans worth the most read first, with
+      // 'unknown' last where it looks like the caveat it is: entitlement rows written
+      // before period_type existed, plus Pro grants with no backing subscription.
+      const PERIOD_ORDER = [
+        'lifetime',
+        'annual',
+        'six_month',
+        'three_month',
+        'two_month',
+        'monthly',
+        'two_week',
+        'weekly',
+        'other',
+        'unknown',
+      ];
+      const PERIOD_LABEL = {
+        lifetime: 'lifetime',
+        annual: 'annual',
+        six_month: '6-month',
+        three_month: '3-month',
+        two_month: '2-month',
+        monthly: 'monthly',
+        two_week: '2-week',
+        weekly: 'weekly',
+        other: 'other',
+        unknown: 'unknown',
+      };
+
+      // "(2 monthly · 1 annual)". Empty string when the API predates pro_by_period,
+      // so an older deployment degrades to the bare Pro count rather than "undefined".
+      function proBreakdown(byPeriod) {
+        if (!byPeriod) return '';
+        const present = (k) => byPeriod[k];
+        // A period this page doesn't know about still renders, rather than vanishing
+        // from a breakdown that would then fail to add up to the Pro total beside it.
+        const keys = PERIOD_ORDER.filter(present).concat(
+          Object.keys(byPeriod)
+            .filter((k) => !PERIOD_ORDER.includes(k))
+            .filter(present),
+        );
+        if (!keys.length) return '';
+        return ` (${keys.map((k) => `${byPeriod[k]} ${PERIOD_LABEL[k] || esc(k)}`).join(' · ')})`;
+      }
+
       function renderTotals(t) {
         if (!t) return;
         document.getElementById('totals').innerHTML =
@@ -969,7 +1013,8 @@
           `<b>${t.entries}</b> entries · <b>${t.devices}</b> devices` +
           (t.guests === undefined ? '' : ` (<b>${t.guests}</b> with no account)`) +
           `<br>` +
-          `<b>${t.pro}</b> Pro · <b>${t.ai_opted_in}</b> opted into AI reflections · ` +
+          `<b>${t.pro}</b> Pro${proBreakdown(t.pro_by_period)} · ` +
+          `<b>${t.ai_opted_in}</b> opted into AI reflections · ` +
           `<b>${t.reflections}</b> reflections generated`;
         document.getElementById('totals-card').style.display = '';
       }

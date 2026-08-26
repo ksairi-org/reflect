@@ -1,6 +1,6 @@
 // @openapi-internal — called only by RevenueCat's webhook, not by app clients
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
-import { fetchProState } from '../_shared/revenuecat.ts';
+import { entitlementRow, fetchProState } from '../_shared/revenuecat.ts';
 
 // Mirrors RevenueCat entitlement state into api.entitlements so the database can
 // enforce the free-entry limit (see the enforce_free_entry_limit trigger).
@@ -101,16 +101,9 @@ Deno.serve(async (req) => {
     // half-applied transfer is worse than a late one.
     if (!state) return new Response('RevenueCat unavailable', { status: 502 });
 
-    const { error } = await admin.from('entitlements').upsert(
-      {
-        user_id: userId,
-        is_pro: state.isPro,
-        expires_at: state.expiresAt,
-        event_type: event.type ?? null,
-        updated_at: now,
-      },
-      { onConflict: 'user_id' },
-    );
+    const { error } = await admin
+      .from('entitlements')
+      .upsert(entitlementRow(userId, state, event.type ?? null, now), { onConflict: 'user_id' });
     if (error) {
       console.error('[revenuecat-webhook] upsert failed for', userId, error.message);
       return new Response('Internal error', { status: 500 });
