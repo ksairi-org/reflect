@@ -86,6 +86,34 @@ const EntryEchoCards = ({
                 </Trans>
               )}
             </BodySm>
+            {/* Show the artifact before the ask. 45% of writers accept this card; the
+                other 55% decline something they've never seen, and consenting is the
+                strongest predictor of a second entry (50% vs 15%). A static, labelled
+                example costs nothing privacy-wise — nothing is sent — and lets the
+                decline be about the thing itself rather than the idea of it. */}
+            <YStack
+              bg="$surface-subtle"
+              rounded="$3"
+              px="$3"
+              py="$2"
+              mt="$1"
+              gap="$1"
+              borderWidth={1}
+              borderColor="$borderColor"
+            >
+              <LabelMd color="$text-disabled">
+                <Trans>Example</Trans>
+              </LabelMd>
+              <BodySm color="$text-secondary" style={{ fontStyle: 'italic' }}>
+                <Trans>“Long day. Didn’t call Mom back again.”</Trans>
+              </BodySm>
+              <BodySm color="$text-emphasis" style={{ lineHeight: 18 }}>
+                🍂{' '}
+                <Trans>
+                  The call you keep putting off is taking up more room than the long day.
+                </Trans>
+              </BodySm>
+            </YStack>
             <BodySm color="$text-disabled" style={{ lineHeight: 16 }}>
               <Trans>Never shown to another person, never sold, never used to train AI.</Trans>
             </BodySm>

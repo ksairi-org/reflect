@@ -295,12 +295,16 @@ const useEntryEcho = () => {
   // NOT on their first entry: guest-first exists so that one is never interrupted,
   // and it bought ~20 points of activation.
   //
-  // Moved off save 2 for the same reason as ASK_ON_SAVES above — it was blocking the
-  // reminder prompt at the earliest slot it could ever occupy. The trade is clearly
-  // right for guests: this card cannot show a real echo (guest entries are on-device,
-  // so there's no server row to read), it only advertises the feature, whereas the
-  // reminder is what actually brings them back to write.
-  const GUEST_ASK_ON_SAVES = [3, 6];
+  // Asked on save 2, not 3. It sat at 3 for a while to keep save 2 free for the
+  // reminder prompt ("the reminder is what actually brings them back to write") —
+  // a reasonable guess that six weeks of data refuted: the reminder prompt converts
+  // ~3% of new users (1 of 31 post-1.3.0) and pushes get ~6% opens, while this card
+  // is the door to everything downstream (consent, echo, Sunday, the wall). And
+  // guests are now the majority of new users and write ~1.3 entries each (GA4 minus
+  // Postgres, 2026-08-25), so a save-3 ask reached almost nobody. Save 2 reaches
+  // exactly the guests who came back once — the ones worth asking. Save 1 stays
+  // untouched: guest-first bought ~20 points of activation by leaving it alone.
+  const GUEST_ASK_ON_SAVES = [2, 5];
   // Returns true when it shows the card, so the caller holds back the reminder modal.
   const onGuestSaved = useCallback((entryNumber: number): boolean => {
     setLine(null);
