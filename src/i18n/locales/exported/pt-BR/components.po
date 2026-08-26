@@ -13,6 +13,10 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+#: src/components/molecules/EntryEcho/index.tsx
+msgid "“Long day. Didn’t call Mom back again.”"
+msgstr "“Dia longo. De novo não retornei a ligação da mãe.”"
+
 #. placeholder {0}: reflection.entry_count
 #: src/components/molecules/WeeklyReflection/ReflectionReadModal.tsx
 msgid "{0} entries"
@@ -107,6 +111,10 @@ msgstr "Descarte suas {localCount} {0} locais e continue com suas {serverCount} 
 #: src/components/molecules/WeeklyReflection/index.tsx
 msgid "Every Sunday, a look back at your week — in your own words."
 msgstr "Todo domingo, uma retrospectiva da sua semana — nas suas próprias palavras."
+
+#: src/components/molecules/EntryEcho/index.tsx
+msgid "Example"
+msgstr "Exemplo"
 
 #: src/components/molecules/WeeklyReflection/index.tsx
 msgid "Get your first reflection"
@@ -238,6 +246,10 @@ msgstr "Já são {entriesSoFar} entradas — quer ver no que dão?"
 #: src/components/molecules/EntryEcho/index.tsx
 #~ msgid "That’s 2 entries — see what they add up to?"
 #~ msgstr "Já são 2 entradas — quer ver no que elas dão?"
+
+#: src/components/molecules/EntryEcho/index.tsx
+msgid "The call you keep putting off is taking up more room than the long day."
+msgstr "A ligação que você continua adiando ocupa mais espaço do que o dia longo."
 
 #: src/components/molecules/JournalEntry/SwipeableDeleteWrapper.tsx
 msgid "This cannot be undone."
